@@ -28,14 +28,6 @@ if (!$_SESSION["TeacherID"]){
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
     <?php include '../dateth.php';?>
-    <style>
-        .avatar {
-            vertical-align: middle;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-        }
-    </style>
 </head>
 
 <body>
@@ -83,8 +75,7 @@ if (!$_SESSION["TeacherID"]){
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
                     <h1 class="h4">หัวข้อ</h1>
-                    <p class="mb-0">อธิบายหัวข้อ
-                    </p>
+
                 </div>
 
             </div>
@@ -92,52 +83,33 @@ if (!$_SESSION["TeacherID"]){
 
         <div class="card border-light shadow-sm mb-4">
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead class=" table table-dark table-hover">
+            <script>
+            var triggerEl = document.querySelector('#myTab a[href="#profile"]')
+bootstrap.Tab.getInstance(triggerEl).show() // Select tab by name
 
-                            <tr>
-                                
-                                <td>รหัสโครงงาน</td>
-                                <td>ชื่อโครงงาน</td>
-                                <td>เพิ่มเติม</td>
+var triggerFirstTabEl = document.querySelector('#myTab li:first-child a')
+bootstrap.Tab.getInstance(triggerFirstTabEl).show() // Select first tab
+            
+            </script>
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+  </li>
+  <li class="nav-item" role="presentation">
+    <a class="nav-link" id="contact-tab" data-bs-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+</div>
+              
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-           include '../../conn.php';
-           $id_teacher =$_SESSION["TeacherID"];
-               
-					$sql = "SELECT
-                    project.project_id,
-                    project.project_name,
-                    project.project_adviser1
-                    FROM
-                    project
-                    WHERE
-                    project.project_adviser1 = '$id_teacher'
-                    ORDER BY
-                    project.project_id DESC";
-					$result = $con->query($sql);
-					if ($result->num_rows > 0) {
 
-						while($row = $result->fetch_assoc()) {
-                            echo '
-                            <tr>                                
-                                <td>'. $row["project_id"].'</td>
-                                <td>'. mb_substr($row["project_name"],0,80,'UTF-8').'</td>
-                                <td><a class="btn btn-warning btn-sm" type="button" href="project_adviser.php"><span class="fas fa-eye mr-2" herf="#"></span>เพิ่มเติม</a></td>
-                            </tr>';       
-                        }
-                        }
-                        $con->close();
-                        ?> 
-
-                        </tbody>
-                    </table>
-
-                </div>
             </div>
         </div>
 

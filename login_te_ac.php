@@ -23,11 +23,11 @@ session_start();
 
                      
 
-                      if ($_SESSION["Teacherlevel"]==2){  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
+                     /*  if ($_SESSION["Teacherlevel"]==2){ */  //ถ้าเป็น member ให้กระโดดไปหน้า user_page.php
 
                         Header("Location: pages/teacher");
 
-                      }
+                     /*  } */
 
                   }else{
                     echo "<script>";
