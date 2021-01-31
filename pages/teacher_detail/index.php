@@ -105,14 +105,14 @@ extract($row);
                 <div class="col-12 col-xl-8">
                     <div class="card card-body bg-white border-light shadow-sm mb-4">
                         <h2 class="h5 mb-4">แก้ไขข้อมูลผู้ใช้งาน</h2>
-                        <form action="info_edit.php" method="post">
+                        <form action="info_edit_te.php" method="post">
                             
 
                         <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
                                         <label for="teacher_name">ชื่อ - นามสกุล </label>
-                                        <input class="form-control" id="teacher_name" name="teacher_name" type="text" placeholder="กรอกชื่อ-นามสกุล" value="<?php echo $teacher_email?>" required>
+                                        <input class="form-control" id="teacher_name" name="teacher_name" type="text" placeholder="กรอกชื่อ-นามสกุล" value="<?php echo $teacher_name?>" required>
                                     </div>
                                 </div>
 

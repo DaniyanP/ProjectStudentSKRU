@@ -5,23 +5,22 @@
 
 
 
-$student_id = $_REQUEST["student_id"];
-$email = $_REQUEST["email"];
-$phone = $_REQUEST["phone"];
-$photo_student = $_REQUEST["photo_student"];
+$teacher_id = $_REQUEST["teacher_id"];
+$teacher_name = $_REQUEST["teacher_name"];
+$teacher_email = $_REQUEST["teacher_email"];
+$teacher_photo = $_REQUEST["teacher_photo"];
 
 
   
-  $sql = "UPDATE student SET
+  $sql = "UPDATE teacher SET
 
-student_phone ='$phone',
-student_email ='$email',
-student_photo ='$photo_student'
+teacher_name ='$teacher_name',
+teacher_email ='$teacher_email',
+teacher_photo ='$teacher_photo'
 
 
 
-      WHERE student_id='$student_id' 
-      ";
+      WHERE teacher_id='$teacher_id'";
 
 
 
@@ -29,6 +28,7 @@ student_photo ='$photo_student'
 
 $result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
 mysqli_close($con); 
+  
   
   if($result){
   echo "<script type='text/javascript'>";

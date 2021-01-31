@@ -5,22 +5,19 @@
 
 
 
-$student_id = $_REQUEST["student_id"];
-$email = $_REQUEST["email"];
-$phone = $_REQUEST["phone"];
-$photo_student = $_REQUEST["photo_student"];
-
+$teacher_id = $_REQUEST["teacher_id"];
+$password = $_REQUEST["password"];
+$set_password = md5($password);
 
   
-  $sql = "UPDATE student SET
+  $sql = "UPDATE teacher SET
 
-student_phone ='$phone',
-student_email ='$email',
-student_photo ='$photo_student'
+teacher_password ='$set_password'
 
 
 
-      WHERE student_id='$student_id' 
+
+      WHERE teacher_id='$teacher_id' 
       ";
 
 
@@ -32,7 +29,7 @@ mysqli_close($con);
   
   if($result){
   echo "<script type='text/javascript'>";
-  echo "alert('แก้ไขข้อมูลเรียบร้อยแล้ว');";
+  echo "alert('แก้ไขรหัสผ่านเรียบร้อยแล้ว');";
   echo "window.location = 'index.php'; ";
   echo "</script>";
   }
