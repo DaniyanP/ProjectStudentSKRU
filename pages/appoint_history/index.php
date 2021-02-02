@@ -258,8 +258,7 @@ if (!$_SESSION["UserID"]){  //check session
                                     </div>
                                 </td>
                             </tr>';
-                                }
-                                
+                                }                         
 
                                 
 							 

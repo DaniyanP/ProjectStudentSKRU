@@ -127,7 +127,7 @@ if (!$_SESSION["TeacherID"]){
                             <tr>                                
                                 <td>'. $row["project_id"].'</td>
                                 <td>'. mb_substr($row["project_name"],0,80,'UTF-8').'</td>
-                                <td><a class="btn btn-warning btn-sm" type="button" href="project_adviser.php"><span class="fas fa-eye mr-2" herf="#"></span>เพิ่มเติม</a></td>
+                                <td><a class="btn btn-warning btn-sm" type="button" href="project_adviser.php?act=show&ID=' . $row["project_id"].'"><span class="fas fa-eye mr-2" herf="#"></span>เพิ่มเติม</a></td>
                             </tr>';       
                         }
                         }

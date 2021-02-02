@@ -119,7 +119,7 @@ if (!$_SESSION["UserID"]){
 
 						while($row = $result->fetch_assoc()) {
                             echo '<p>รหัสโครงงาน : ' . $row["project_id"].'</p>
-                <p>ชื่อโครงงานโครงงาน : ' . $row["project_name"].'</p>
+                <p>ชื่อโครงงาน : ' . $row["project_name"].'</p>
                 <p>ประเภทโครงงาน : ' . $row["project_type_name"].'</p>
                 <p>สถานะ : ' . $row["project_status_name"].'</p>';       
             }

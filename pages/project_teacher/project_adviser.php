@@ -6,7 +6,9 @@ if (!$_SESSION["TeacherID"]){
 	  Header("Location: ../../login_te.php"); 
 
 }else{?>
-<?php include '../../conn.php';?>
+<?php include '../../conn.php';
+
+$id_project = $_REQUEST["ID"];?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,7 +30,11 @@ if (!$_SESSION["TeacherID"]){
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
     <?php include '../dateth.php';?>
-    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+    </script>
+
 
 </head>
 
@@ -72,7 +78,7 @@ if (!$_SESSION["TeacherID"]){
             </div>
         </nav>
 
-        <div class="py-0">
+        <!-- <div class="py-0">
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
@@ -81,141 +87,554 @@ if (!$_SESSION["TeacherID"]){
                 </div>
 
             </div>
+        </div> -->
+
+        <div class="row">
+
+            <div class="col-12 col-xl-8">
+                <div class="card border-light shadow-sm mb-4 lg-8">
+                    <div class="card-body">
+
+                    <?php
+           
+               
+					$sql = "SELECT
+                    project.project_id,
+                    project.project_name,
+                    project.project_type,
+                    project_type.project_type_name
+                    FROM
+                    project
+                    INNER JOIN project_type ON project.project_type = project_type.project_type_id
+                    WHERE
+                    project.project_id = '$id_project'";
+					$result = $con->query($sql);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            echo '<p>รหัสโครงงาน : '. $row["project_id"].'</p>
+                        <p>ชื่อโครงงาน : '. $row["project_name"].'</p>
+                        <p>ประเภทโครงงาน : '. $row["project_type_name"].'</p>';       
+                    }
+                    }
+                    $con->close();
+                    ?> 
+                        <p>ผู้จัดทำ :  <?php
+           include '../../conn.php';
+           $id_project = $_REQUEST["ID"];
+               
+					$sql = "SELECT
+                    student.student_project,
+                    student.student_id,
+                    student.student_name
+                    FROM
+                    student
+                    WHERE
+                    student.student_project ='$id_project'";
+					$result = $con->query($sql);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            echo '' . $row["student_id"].' ' . $row["student_name"].' , ';       
+            }
+            }
+            $con->close();
+            ?> </p>
+                        <p>อาจารย์ที่ปรึกษาโครงงาน :
+
+                        <?php
+           include '../../conn.php';
+           $id_ptojrct = $_REQUEST["ID"];
+               
+					$sql = "SELECT
+                    project.project_id,
+                    project.project_adviser1,
+                    teacher.teacher_name
+                    FROM
+                    project
+                    INNER JOIN teacher ON project.project_adviser1 = teacher.teacher_id 
+                    WHERE
+                    project.project_id ='$id_ptojrct'";
+					$result = $con->query($sql);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            echo '' . $row["teacher_name"].',';       
+                        }
+                        }
+                        $con->close();
+                        ?> 
+
+
+
+<?php
+           include '../../conn.php';
+           $id_ptojrct = $_REQUEST["ID"];
+               
+					$sql = "SELECT
+                    project.project_id,
+                    project.project_adviser2,
+                    teacher.teacher_name
+                    FROM
+                    project
+                    INNER JOIN teacher ON project.project_adviser2 = teacher.teacher_id 
+                    WHERE
+                    project.project_id ='$id_ptojrct'";
+					$result = $con->query($sql);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            
+                            
+                            if ($row["project_adviser2"]==3){
+                                echo '';    
+                            }else{
+                                echo '' . $row["teacher_name"].''; 
+                            };
+                            
+                               
+                        }
+                        }
+                        $con->close();
+                        ?> 
+
+</p>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- start sec3 -->
+            <div class="col-12 px-0 mb-4 col-xl-4">
+                <div class="card border-light shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center justify-content-between border-bottom border-light pb-3">
+                            <div>
+                                <h6 class="mb-0"><span class="icon icon-xs mr-3"><span
+                                            class="fas fa-bookmark"></span></span>จำนวนนัดหมาย</h6>
+                            </div>
+                            <div>
+                            <a href="#" class="text-primary font-weight-bold">
+                            <?php
+           include '../../conn.php';
+           $id_project = $_REQUEST["ID"];
+               
+					$sql = "SELECT
+                    Count(appoint.appoint_id) as C_appoint,
+                    appoint.project_id
+                    FROM
+                    appoint
+                    WHERE
+                    appoint.project_id = '$id_project'
+                    GROUP BY
+                    appoint.project_id";
+					$result = $con->query($sql);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            echo $row["C_appoint"];       
+                        }
+                        }
+                        $con->close();
+                        ?> 
+                            <span class="fas fa-chart-line ml-2"></span></a>
+                                
+                                    
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between border-bottom border-light py-3">
+                            <div>
+                                <h6 class="mb-0"><span class="icon icon-xs mr-3"><span
+                                            class="fas fa-calendar-check"></span></span>สำเร็จ</h6>
+
+                            </div>
+                            <div>
+                            <a href="#" class="text-primary font-weight-bold">
+                            <?php
+           include '../../conn.php';
+           $id_project = $_REQUEST["ID"];
+               
+					$sql2 = "SELECT
+                    Count(appoint.appoint_id) AS C_appoint01,
+                    appoint.project_id
+                    FROM
+                    appoint
+                    WHERE
+                    appoint.project_id = '$id_project' AND
+                    appoint.appoint_status = 4
+                    GROUP BY
+                    appoint.project_id";
+					$result = $con->query($sql2);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            echo $row["C_appoint01"];       
+                        }
+                        }
+                        $con->close();
+                        ?> 
+                            <span class="fas fa-chart-line ml-2"></span></a>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between border-bottom border-light py-3">
+                            <div>
+                                <h6 class="mb-0"><span class="icon icon-xs mr-3"><span
+                                            class="fas fa-star"></span></span>คะแนน</h6>
+
+                            </div>
+                            <div>
+                            <a href="#" class="text-primary font-weight-bold">
+                            <?php
+           include '../../conn.php';
+           $id_project = $_REQUEST["ID"];
+               
+					$sql2 = "SELECT
+                    com05.com05_id,
+                    com05.project_id,
+                    Sum(score.score_score) as s_sum
+                    FROM
+                    com05
+                    INNER JOIN score ON com05.score = score.score_id
+                    WHERE
+                    com05.project_id
+                    GROUP BY
+                    com05.com05_id,
+                    com05.project_id
+                    ";
+					$result = $con->query($sql2);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            echo $row["s_sum"];       
+                        }
+                        }
+                        $con->close();
+                        ?> 
+                            <span class="fas fa-chart-line ml-2"></span></a>
+                            </div>
+                        </div>
+
+                        <div class="d-flex align-items-center justify-content-between pt-3">
+                            <div>
+                                <h6 class="mb-0"><span class="icon icon-xs mr-3"><span
+                                            class="fas fa-calendar-times"></span></span>มาสาย</h6>
+
+                            </div>
+                            <div>
+                                <a href="#" class="text-primary font-weight-bold">16<span
+                                        class="fas fa-chart-line ml-2"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end sec3 -->
+
+
+
+
+
+
         </div>
 
-<style>
-.demo{ background: #ffded7; }
-a:hover,a:focus{
-    outline: none;
-    text-decoration: none;
-}
-.tab .nav-tabs{
-    padding-left: 15px;
-    border-bottom: 4px solid #692f6c;
-}
-.tab .nav-tabs li a{
-    color: #fff;
-    padding: 10px 20px;
-    margin-right: 10px;
-    background: #692f6c;
-    text-shadow: 1px 1px 2px #000;
-    border: none;
-    border-radius: 0;
-    opacity: 0.5;
-    position: relative;
-    transition: all 0.3s ease 0s;
-}
-.tab .nav-tabs li a:hover{
-    background: #692f6c;
-    opacity: 0.8;
-}
-.tab .nav-tabs li.active a{
-    opacity: 1;
-}
-.tab .nav-tabs li.active a,
-.tab .nav-tabs li.active a:hover,
-.tab .nav-tabs li.active a:focus{
-    color: #fff;
-    background: #692f6c;
-    border: none;
-    border-radius: 0;
-}
-.tab .nav-tabs li a:before,
-.tab .nav-tabs li a:after{
-    content: "";
-    border-top: 42px solid transparent;
-    position: absolute;
-    top: -2px;
-}
-.tab .nav-tabs li a:before{
-    border-right: 15px solid #692f6c;
-    left: -15px;
-}
-.tab .nav-tabs li a:after{
-    border-left: 15px solid #692f6c;
-    right: -15px;
-}
-.tab .nav-tabs li a i,
-.tab .nav-tabs li.active a i{
-    display: inline-block;
-    padding-right: 5px;
-    font-size: 15px;
-    text-shadow: none;
-}
-.tab .nav-tabs li a span{
-    display: inline-block;
-    font-size: 14px;
-    letter-spacing: -9px;
-    opacity: 0;
-    transition: all 0.3s ease 0s;
-}
-.tab .nav-tabs li a:hover span,
-.tab .nav-tabs li.active a span{
-    letter-spacing: 1px;
-    opacity: 1;
-    transition: all 0.3s ease 0s;
-}
-.tab .tab-content{
-    padding: 30px;
-    background: #fff;
-    font-size: 16px;
-    color: #6c6c6c;
-    line-height: 25px;
-}
-.tab .tab-content h3{
-    font-size: 24px;
-    margin-top: 0;
-}
-@media only screen and (max-width: 479px){
-    .tab .nav-tabs li{
-        width: 100%;
-        margin-bottom: 5px;
-        text-align: center;
-    }
-    .tab .nav-tabs li a span{
-        letter-spacing: 1px;
-        opacity: 1;
-    }
-}
-</style>
-        
-            
-              <!-- nav start -->
-              <div class="demo">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="tab" role="tabpanel">
-                    <!-- Nav tabs -->
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab"><i class="fa fa-home"></i><span>SECTION-1</span></a></li>
-                        <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-globe"></i><span>SECTION-2</span></a></li>
-                        <li role="presentation"><a href="#Section3" aria-controls="messages" role="tab" data-toggle="tab"><i class="fa fa-briefcase"></i><span>SECTION-3</span></a></li>
-                    </ul>
-                    <!-- Tab panes -->
-                    <div class="tab-content tabs">
-                        <div role="tabpanel" class="tab-pane fade in active" id="Section1">
-                            <h3>Section 1</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="Section2">
-                            <h3>Section 2</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="Section3">
-                            <h3>Section 3</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras nec urna aliquam, ornare eros vel, malesuada lorem. Nullam faucibus lorem at eros consectetur lobortis. Maecenas nec nibh congue, placerat sem id, rutrum velit. Phasellus porta enim at facilisis condimentum. Maecenas pharetra dolor vel elit tempor pellentesque sed sed eros. Aenean vitae mauris tincidunt, imperdiet orci semper, rhoncus ligula. Vivamus scelerisque.</p>
+
+
+        <style>
+            a:hover,
+            a:focus {
+                outline: none;
+                text-decoration: none;
+            }
+
+            .tab .nav-tabs {
+                position: relative;
+                border-bottom: none;
+            }
+
+            .tab .nav-tabs li {
+                text-align: center;
+                margin-right: 3px;
+            }
+
+            .tab .nav-tabs li a {
+                display: block;
+                font-size: 15px;
+                font-weight: 600;
+                color: #231123;
+                text-transform: uppercase;
+                padding: 15px;
+                background: #fff;
+                margin-right: 0;
+                border-radius: 0;
+                border: none;
+                position: relative;
+                transition: all 0.5s ease 0s;
+            }
+
+            .tab .nav-tabs li a:before {
+                content: "";
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                background: transparent;
+                position: absolute;
+                margin-left: -20px;
+                bottom: 0;
+                left: 50%;
+                transition: all 0.2s ease 0s;
+            }
+
+            .tab .nav-tabs li a:hover:before,
+            .tab .nav-tabs li.active a:before {
+                background: #00cad5;
+            }
+
+            .tab .nav-tabs li a:after {
+                content: "";
+                width: 0;
+                height: 1px;
+                background: #00cad5;
+                margin-left: -15px;
+                position: absolute;
+                bottom: 6%;
+                left: 50%;
+                transition: all 0.2s ease 0s;
+            }
+
+            .tab .nav-tabs li a:hover:after,
+            .tab .nav-tabs li.active a:after {
+                width: 35px;
+            }
+
+            .nav-tabs li.active a,
+            .nav-tabs li.active a:focus,
+            .nav-tabs li.active a:hover,
+            .nav-tabs li a:hover {
+                border: none;
+                color: blue;
+            }
+
+            .tab .tab-content {
+                font-size: 14px;
+                color: #6f6c6c;
+                line-height: 26px;
+                padding: 20px 20px 20px 15px;
+            }
+
+            .tab .tab-content h3 {
+                font-size: 24px;
+                margin-top: 0;
+            }
+
+            @media only screen and (max-width: 479px) {
+                .tab .nav-tabs li {
+                    width: 100%;
+                    margin-bottom: 5px;
+                }
+            }
+        </style>
+
+
+        <!-- nav start -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="tab" role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" ><a href="#Section1" aria-controls="home" role="tab"
+                                    data-toggle="tab">ประวัติการนัดพบ</a></li>
+                            <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab"
+                                    data-toggle="tab">COM-05</a></li>
+                            <li role="presentation"><a href="#Section3" aria-controls="messages" role="tab"
+                                    data-toggle="tab">เอกสารที่เกี่ยวข้อง</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs">
+                            <div role="tabpanel" class="tab-pane fade in active" id="Section1">
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" table table-dark table-hover">
+
+                                            <tr>
+
+                                                <td>#</td>
+                                                <td>วันที่เข้าพบ</td>
+                                                <td>เวลา</td>
+                                                <td>นัดพบอาจารย์</td>
+                                                <td>สถานะ</td>
+                                                <td>เพิ่มเติม</td>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                        <?php
+           include '../../conn.php';
+           $id_ptojrct = $_REQUEST["ID"];
+               
+					$sql = "SELECT
+                    appoint.appoint_id,
+appoint.project_id,
+appoint.appoint_date_start,
+appoint.appoint_date_end,
+appoint.apooint_minute,
+appoint.appoint_comment,
+appoint.teacher_id,
+appoint.appoint_status,
+appoint.recorder,
+teacher.teacher_name,
+appoint_status.appoint_status_name,
+appoint_status.appoint_status_class,
+                    appoint.project_id
+FROM
+appoint
+INNER JOIN project ON appoint.project_id = project.project_id
+INNER JOIN teacher ON appoint.teacher_id = teacher.teacher_id
+INNER JOIN appoint_status ON appoint.appoint_status = appoint_status.appoint_status_id
+WHERE
+appoint.project_id = '$id_ptojrct'
+ORDER BY
+appoint.appoint_id DESC";
+					$result = $con->query($sql);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            $strDate = $row["appoint_date_start"];
+                            $strDatetoHourMinute = $row["appoint_date_start"];
+                            $strDatetoHourMinute1 = $row["appoint_date_end"];
+                            $newDate = date('Y-m-d\TH:i', strtotime($strDatetoHourMinute));
+                            echo '<tr>                                                
+                                            <td>' . $row["appoint_id"].'</td>
+                                                <td>'.DateThai($strDate).'</td>
+                                                <td>'. HourMinute($strDatetoHourMinute).'  - '. HourMinute1($strDatetoHourMinute1).' น.</td>
+                                                <td>' . $row["teacher_name"].'</td>
+                                                <td><h6><span class="badge bg-'. $row["appoint_status_class"].'">'. $row["appoint_status_name"].'</span></h6></td>
+                                                <td><a class="btn btn-warning btn-sm" type="button"
+                                                data-toggle="modal" data-target="#myModal'. $row["appoint_id"].'"><span class="fas fa-eye mr-2"
+                                                            herf="#"></span>เพิ่มเติม</a></td>
+                                            </tr>
+
+                                            <div class="modal fade" id="myModal'. $row["appoint_id"].'" role="dialog">
+                                        <div class="modal-dialog">
+                                          <!-- Modal content-->
+                                          <div class="modal-content">
+                                            <div class="modal-header">';
+                                            
+                                            $ider = $row["appoint_id"]; 
+                                            $query2 = mysqli_query($con, "SELECT
+                                            appoint.appoint_id,
+                                            appoint.appoint_date_start,
+                                            appoint.apooint_minute
+                                            FROM
+                                            appoint
+                                            INNER JOIN project ON appoint.project_id = project.project_id
+                                            WHERE
+                                            appoint.appoint_id = '$ider'");
+                                            while ($row1 = mysqli_fetch_array($query2)) { 
+
+                                              
+                                           
+                                              echo'<h5 class="modal-title">หมายเลขการนัดพบ : ' . $row["appoint_id"].' </h5>
+                                              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                            
+                                               
+                                            <p>ต้องการเข้าพบ : '.DateThai($strDate).'   เวลา '. HourMinute($strDatetoHourMinute).'  - '. HourMinute1($strDatetoHourMinute1).' น.
+                                            <p> อาจารย์ที่ปรึกษาโครงงาน : ' . $row["teacher_name"].'
+                                            <p> รายละเอียด : ' . $row["appoint_comment"].'
+                                           
+                                            
+                                            
+                                            ';
+                                            }
+                                           
+                                              echo'
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>'; 
+                                        };
+                                        
+                                           
+                                    }
+                                    
+                                    $con->close();
+                                    ?> 
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="Section2">
+
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" table table-dark table-hover">
+
+                                            <tr>
+
+                                                <td>#</td>
+                                                <td>วันที่เข้าพบ</td>
+                                                <td>นัดหมายอาจารย์</td>
+                                                <td>ตรงต่อเวลา</td>
+                                                <td>คะแนน</td>
+                                                <td>เพิ่มเติม</td>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+
+                                                <td>#</td>
+                                                <td>วันที่เข้าพบ</td>
+                                                <td>นัดหมายอาจารย์</td>
+                                                <td>ตรงต่อเวลา</td>
+                                                <td>คะแนน</td>
+                                                <td><a class="btn btn-warning btn-sm" type="button"
+                                                        href="project_adviser.php"><span class="fas fa-eye mr-2"
+                                                            herf="#"></span>เพิ่มเติม</a></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="Section3">
+
+                                <div class="btn-group mr-2 mb-2">
+                                    <a href="' . $row[" file_link"].'" type="button" class="btn btn-primary"><span
+                                            class="' . $row[" file_type_icon"].' mr-2"></span> ' .
+                                        $row["file_type_name"].'</a>
+                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <span class="fas fa-angle-down dropdown-arrow"></span>
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="file_edit.php?act=edit&ID=' . $row["
+                                            file_id"].'"><span class="fas fa-edit mr-2"></span>แก้ไขไฟล์</a>
+                                        <a class="dropdown-item" href="file_del.php?act=edit&ID=' . $row["
+                                            file_id"].'"><span class="fas fa-trash-alt mr-2"></span>ลบ</a>
+
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-             <!--  nav end -->
-
-
-        
+        <!--  nav end -->
 
 
 
