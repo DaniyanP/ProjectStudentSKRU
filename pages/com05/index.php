@@ -161,7 +161,8 @@ if (!$_SESSION["TeacherID"]){
                     project.project_name,
                     appoint.appoint_date_start,
                     com05.score,
-                    com05.teacher_id
+                    com05.teacher_id,
+                    com05.appoint_id
                     FROM
                     com05
                     INNER JOIN appoint ON com05.appoint_id = appoint.appoint_id
@@ -195,7 +196,7 @@ if (!$_SESSION["TeacherID"]){
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="show.php?act=show&ID='. $row["com05_id"].'"><span
                                                     class="fas fa-eye mr-2"></span>ดูรายละเอียด</a>
-                                            <a class="dropdown-item" href="appoint_edit.php?act=edit&ID=' . $row["com05_id"].'"><span
+                                            <a class="dropdown-item" href="com05_edit.php?act=edit&ID=' . $row["com05_id"].'"><span
                                                     class="fas fa-edit mr-2"></span>แก้ไข</a>
                                             <a class="dropdown-item text-danger" href="com05_del.php?ID=' . $row["com05_id"].'"><span
                                                     class="fas fa-trash-alt mr-2"></span>ลบ</a>

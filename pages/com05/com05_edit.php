@@ -9,7 +9,9 @@ if (!$_SESSION["TeacherID"]){
 }else{?>
 <?php 
 include '../../conn.php';
-$appoint_id = $_REQUEST["ID"];
+/* $appoint_id = $_REQUEST["IDAP"]; */
+$com_id = $_REQUEST["ID"];
+
 ?>
 
 <!DOCTYPE html>
@@ -78,23 +80,46 @@ $appoint_id = $_REQUEST["ID"];
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">บันทึกการเข้าพบอาจารย์ที่ปรึกษาโครงงาน</h1>
+                    <h1 class="h4">แก้ไขการเข้าพบอาจารย์ที่ปรึกษาโครงงาน</h1>
                     <!-- <p class="mb-0">อธิบายหัวข้อ
                     </p> -->
                 </div>
                 
             </div>
         </div>
+        <?php
 
+$com05 = $_REQUEST["ID"];
+
+
+
+$sql = "SELECT
+com05.com05_id,
+com05.appoint_id,
+com05.project_id,
+com05.comment_teacher,
+com05.comment_assign,
+com05.score,
+com05.meet_check,
+com05.teacher_id
+FROM
+com05
+
+WHERE
+com05.com05_id = '$com05'";
+$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
+$row = mysqli_fetch_array($result);
+extract($row);
+?>
         <div class="row">
                 <div class="col-12 col-xl-6">
                     <div class="card card-body bg-white border-light shadow-sm mb-4">
-                    <form action="com05_add_ac.php" method="post">
+                    <form action="com05_edit_ac.php" method="post">
                 <!-- Form -->
                 <div class="mb-2">
                     <label for="comment_teacher">ความคิดเห็นอาจารย์ที่ปรึกษาโครงงาน</label>
                     <textarea  class="form-control" id="comment_teacher" name="comment_teacher"
-                        aria-describedby="present-describ" maxlength="255"></textarea>
+                        aria-describedby="present-describ" maxlength="255"><?php echo $comment_teacher; ?></textarea>
                     <small id="present-describ"
                         class="form-text text-muted">กรอกรายละเอียดความคิดเห็นอาจารย์ที่ปรึกษาโครงงาน</small>
                 </div>
@@ -102,7 +127,7 @@ $appoint_id = $_REQUEST["ID"];
                 <div class="mb-2">
                     <label for="comment_assign">งานที่มอบหมายครั้งถัดไป</label>
                     <textarea  class="form-control" id="comment_assign" name="comment_assign"
-                        aria-describedby="present-describ" maxlength="255"></textarea>
+                        aria-describedby="present-describ" maxlength="255"><?php echo $comment_assign; ?></textarea>
                     <small id="present-describ"
                         class="form-text text-muted">กรอกรายละเอียดงานที่มอบหมายครั้งถัดไป</small>
                 </div>
@@ -123,12 +148,18 @@ $result = mysqli_query($con, $query);
                     <label class="my-1 mr-2" for="score">คะแนน</label>
                     <select class="form-select" id="score" name="score" aria-label="Default select example">
                         <option selected>เลือกคะแนน</option>
+
+                       <?php foreach($result as $results){
+                                            if( $results["s_id"] == $score ){
+                                               echo' <option value="'.$results["s_s"].'" selected="true">[[ '.$results["s_s"].' คะแนน ]] '.$results["s_detail"].'</option>';
+                                            }else{
+                                                echo' <option value="'.$results["s_s"].'" >[[ '.$results["s_s"].' คะแนน ]] '.$results["s_detail"].'</option>';
+                                            }
+                                        }
+                                        ?>
+
                        
-                        <?php foreach($result as $results){?>
-    <option value="<?php echo $results["s_id"];?>">
-      <?php echo '[[ '.$results["s_s"].' คะแนน ]] '.$results["s_detail"].'' ?>
-      </option>
-    <?php } ?>
+                        
                     </select>
                 </div>
 
@@ -136,7 +167,7 @@ $result = mysqli_query($con, $query);
                 <?php 
 $query2 = "SELECT
 meet_check.meet_check_id as m_id,
-meet_check.meet_check_name m_name
+meet_check.meet_check_name as m_name
 FROM
 meet_check
 ORDER BY
@@ -148,18 +179,23 @@ $result2 = mysqli_query($con, $query2);
                     <label class="my-1 mr-2" for="meet_check">การตรงต่อเวลา</label>
                     <select class="form-select" id="meet_check" name="meet_check" aria-label="Default select example">
                         <option selected>---เลือก---</option>
-                        <?php foreach($result2 as $results2){?>
-    <option value="<?php echo $results2["m_id"];?>">
-      <?php echo $results2["m_name"]; ?>
-      </option>
-    <?php } ?>
+                       
+                        <?php foreach($result2 as $results2){
+                                            if( $results2["m_id"] == $meet_check ){
+                                               echo' <option value="'.$results2["m_id"].'" selected="true">'.$results2["m_name"].'</option>';
+                                            }else{
+                                                echo' <option value="'.$results2["m_id"].'" >'.$results2["m_name"].'</option>';
+                                            }
+                                        }
+                                        ?>
+
                     </select>
                 </div>
 
 
 
                 <input type="text" name="appoint_id" id="appoint_id" value="<?php echo $appoint_id ?>" hidden>
-                
+                <input type="text" name="com05_id" id="com05_id" value="<?php echo $com05_id ?>" hidden>
                 <input type="text" name="teacher_id" id="teacher_id" value="<?php echo $_SESSION["TeacherID"] ?>" hidden>
                
                
@@ -193,7 +229,8 @@ extract($row);
                                 
 <!-- ข้อมูลเริ่ม -->
 <?php
-            
+
+
 					$sql = "SELECT
                     appoint.appoint_id,
                     appoint.project_id,

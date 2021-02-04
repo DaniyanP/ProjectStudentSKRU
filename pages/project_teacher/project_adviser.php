@@ -307,6 +307,9 @@ com05.project_id
 						while($row = $result->fetch_assoc()) {
                             echo $row["s_sum"];       
                         }
+                        }else{
+
+                            echo '0';
                         }
                         $con->close();
                         ?> 
@@ -327,31 +330,24 @@ com05.project_id
            include '../../conn.php';
            $id_project = $_REQUEST["ID"];
                
-					$sql2 = "SELECT
-                    Count(com05.com05_id) as C_Com_2,
-                    com05.appoint_id,
-                    com05.meet_check,
-                    com05.project_id
+					$sql3 = "SELECT
+                    com05.project_id,
+                    Count(com05.com05_id) as C_Com_21,
+                    com05.meet_check
                     FROM
                     com05
                     WHERE
-                    com05.meet_check = 2 AND
-                    com05.project_id = '$id_project'
+                    com05.project_id = '$id_project' AND
+                    com05.meet_check = 2
                     GROUP BY
-com05.appoint_id,
-com05.meet_check,
-com05.project_id
-                    ";
-					$result = $con->query($sql2);
+                    com05.meet_check,
+                    com05.project_id ";
+					$result3 = $con->query($sql3);
 					if ($result->num_rows > 0) {
 
-						
-                                echo $row["C_Com_2"]; 
-                          
-                               
-                            
-                            
-                       
+						while($row = $result3->fetch_assoc()) {
+                            echo $row["C_Com_21"];       
+                        }
                         }else{
 
                             echo '0';
