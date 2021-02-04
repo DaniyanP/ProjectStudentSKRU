@@ -135,7 +135,7 @@ $id_project = $_REQUEST["ID"];?>
 					if ($result->num_rows > 0) {
 
 						while($row = $result->fetch_assoc()) {
-                            echo '' . $row["student_id"].' ' . $row["student_name"].' , ';       
+                            echo '' . $row["student_name"].' , ';       
             }
             }
             $con->close();
@@ -213,7 +213,7 @@ $id_project = $_REQUEST["ID"];?>
                         <div class="d-flex align-items-center justify-content-between border-bottom border-light pb-3">
                             <div>
                                 <h6 class="mb-0"><span class="icon icon-xs mr-3"><span
-                                            class="fas fa-bookmark"></span></span>จำนวนนัดหมาย</h6>
+                                            class="fas fa-bookmark"></span></span>จำนวนนัดพบ</h6>
                             </div>
                             <div>
                             <a href="#" class="text-primary font-weight-bold">
@@ -291,17 +291,15 @@ $id_project = $_REQUEST["ID"];?>
            $id_project = $_REQUEST["ID"];
                
 					$sql2 = "SELECT
-                    com05.com05_id,
                     com05.project_id,
                     Sum(score.score_score) as s_sum
                     FROM
                     com05
                     INNER JOIN score ON com05.score = score.score_id
                     WHERE
-                    com05.project_id
+                    com05.project_id = '$id_project'
                     GROUP BY
-                    com05.com05_id,
-                    com05.project_id
+com05.project_id
                     ";
 					$result = $con->query($sql2);
 					if ($result->num_rows > 0) {
@@ -323,7 +321,43 @@ $id_project = $_REQUEST["ID"];?>
 
                             </div>
                             <div>
-                                <a href="#" class="text-primary font-weight-bold">16<span
+                                <a href="#" class="text-primary font-weight-bold">
+                                <a href="#" class="text-primary font-weight-bold">
+                            <?php
+           include '../../conn.php';
+           $id_project = $_REQUEST["ID"];
+               
+					$sql2 = "SELECT
+                    Count(com05.com05_id) as C_Com_2,
+                    com05.appoint_id,
+                    com05.meet_check,
+                    com05.project_id
+                    FROM
+                    com05
+                    WHERE
+                    com05.meet_check = 2 AND
+                    com05.project_id = '$id_project'
+                    GROUP BY
+com05.appoint_id,
+com05.meet_check,
+com05.project_id
+                    ";
+					$result = $con->query($sql2);
+					if ($result->num_rows > 0) {
+
+						
+                                echo $row["C_Com_2"]; 
+                          
+                               
+                            
+                            
+                       
+                        }else{
+
+                            echo '0';
+                        }
+                        $con->close();
+                        ?> <span
                                         class="fas fa-chart-line ml-2"></span></a>
                             </div>
                         </div>
@@ -450,6 +484,8 @@ $id_project = $_REQUEST["ID"];?>
                                     data-toggle="tab">COM-05</a></li>
                             <li role="presentation"><a href="#Section3" aria-controls="messages" role="tab"
                                     data-toggle="tab">เอกสารที่เกี่ยวข้อง</a></li>
+                                    <li role="presentation"><a href="#Section4" aria-controls="messages" role="tab"
+                                    data-toggle="tab">ข้อมูลผู้จัดทำ</a></li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content tabs">
@@ -539,7 +575,7 @@ appoint.appoint_id DESC";
 
                                               
                                            
-                                              echo'<h5 class="modal-title">หมายเลขการนัดพบ : ' . $row["appoint_id"].' </h5>
+                                              echo'<h5 class="modal-title">พบเลขการนัดพบ : ' . $row["appoint_id"].' </h5>
                                               <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             </div>
                                             <div class="modal-body">
@@ -583,7 +619,7 @@ appoint.appoint_id DESC";
 
                                                 <td>#</td>
                                                 <td>วันที่เข้าพบ</td>
-                                                <td>นัดหมายอาจารย์</td>
+                                                <td>นัดพบอาจารย์</td>
                                                 <td>ตรงต่อเวลา</td>
                                                 <td>คะแนน</td>
                                                 <td>เพิ่มเติม</td>
@@ -592,42 +628,343 @@ appoint.appoint_id DESC";
                                         </thead>
                                         <tbody>
 
-                                            <tr>
+                                        <?php
+           include '../../conn.php';
+           $id_ptojrct = $_REQUEST["ID"];
+               
+					$sql = "SELECT
+                    com05.com05_id,
+                    com05.appoint_id,
+                    appoint.appoint_comment,
+                    com05.project_id,
+                    com05.comment_teacher,
+                    com05.comment_assign,
+                    score.score_score,
+                    meet_check.meet_check_name,
+                    teacher.teacher_name,
+appoint.appoint_date_start
+                    FROM
+                    com05
+                    INNER JOIN appoint ON com05.appoint_id = appoint.appoint_id
+                    INNER JOIN score ON com05.score = score.score_id
+                    INNER JOIN meet_check ON com05.meet_check = meet_check.meet_check_id
+                    INNER JOIN teacher ON com05.teacher_id = teacher.teacher_id AND appoint.teacher_id = teacher.teacher_id
+                    WHERE
+                    com05.project_id = '$id_ptojrct'
+                    ORDER BY
+                    com05.com05_id DESC
+                    ";
+					$result = $con->query($sql);
+					if ($result->num_rows > 0) {
 
-                                                <td>#</td>
-                                                <td>วันที่เข้าพบ</td>
-                                                <td>นัดหมายอาจารย์</td>
-                                                <td>ตรงต่อเวลา</td>
-                                                <td>คะแนน</td>
+						while($row = $result->fetch_assoc()) {
+                            $strDate = $row["appoint_date_start"];
+                            
+                            echo '<tr>
+
+                                                <td>' . $row["com05_id"].'</td>
+                                                <td>'.DateThai($strDate).'</td>
+                                                <td>' . $row["teacher_name"].'</td>
+                                                <td>' . $row["meet_check_name"].'</td>
+                                                <td>' . $row["score_score"].'</td>
                                                 <td><a class="btn btn-warning btn-sm" type="button"
-                                                        href="project_adviser.php"><span class="fas fa-eye mr-2"
+                                                data-toggle="modal" data-target="#myModal2'. $row["com05_id"].'""><span class="fas fa-eye mr-2"
                                                             herf="#"></span>เพิ่มเติม</a></td>
-                                            </tr>
+                                            </tr> 
+                                            
+                                            <div class="modal fade" id="myModal2'. $row["com05_id"].'" role="dialog">
+                                            <div class="modal-dialog modal-xl">
+                                              <!-- Modal content-->
+                                              <div class="modal-content">
+                                                <div class="modal-header">';
+                                                
+                                                $ider = $row["com05_id"]; 
+                                                $query2 = mysqli_query($con, "SELECT
+                                                com05.com05_id,
+                                                com05.appoint_id,
+                                                appoint.appoint_comment,
+                                                com05.project_id,
+                                                com05.comment_teacher,
+                                                com05.comment_assign,
+                                                score.score_score,
+                                                meet_check.meet_check_name,
+                                                teacher.teacher_name,
+                                                appoint.appoint_date_start
+                                                FROM
+                                                com05
+                                                INNER JOIN appoint ON com05.appoint_id = appoint.appoint_id
+                                                INNER JOIN score ON com05.score = score.score_id
+                                                INNER JOIN meet_check ON com05.meet_check = meet_check.meet_check_id
+                                                INNER JOIN teacher ON com05.teacher_id = teacher.teacher_id AND appoint.teacher_id = teacher.teacher_id
+                                                WHERE
+                                                com05.com05_id ='$ider'");
+                                                
+                                                while ($row1 = mysqli_fetch_array($query2)) { 
+    
+                                                  
+                                               
+                                                  echo'<h5 class="modal-title">COM-05 หมายเลข : ' . $row["com05_id"].' </h5>
+                                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+    
+                                                
+                                                   
+                                                <p>สิ่งที่นำเสนอ :'. $row["appoint_comment"].'</p>
+                                                <p>ความเห็นของอาจารย์ที่ปรึกษา : '. $row["comment_teacher"].'</p>
+                                                <p>งานที่อาจารย์ที่ปรึกษามอบหมายครั้งต่อไป :  '. $row["comment_assign"].'</p>
+                                                <p>คะแนนความก้าวหน้า :  '. $row["score_score"].'</p>
+                                                <p>การตรงต่อเวลา :  '. $row["meet_check_name"].'</p>
+                                               
+                                                
+                                                
+                                                ';
+                                                }
+                                               
+                                                  echo'
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>'; 
+                                            };
+                                            
+                                               
+                                        }
+                                        
+                                        $con->close();
+                                        ?> 
 
                                         </tbody>
                                     </table>
 
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="Section3">
 
-                                <div class="btn-group mr-2 mb-2">
-                                    <a href="' . $row[" file_link"].'" type="button" class="btn btn-primary"><span
-                                            class="' . $row[" file_type_icon"].' mr-2"></span> ' .
-                                        $row["file_type_name"].'</a>
-                                    <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <span class="fas fa-angle-down dropdown-arrow"></span>
-                                        <span class="sr-only">Toggle Dropdown</span>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="file_edit.php?act=edit&ID=' . $row["
-                                            file_id"].'"><span class="fas fa-edit mr-2"></span>แก้ไขไฟล์</a>
-                                        <a class="dropdown-item" href="file_del.php?act=edit&ID=' . $row["
-                                            file_id"].'"><span class="fas fa-trash-alt mr-2"></span>ลบ</a>
+                            <div role="tabpanel" class="tab-pane fade" id="Section4">
+<style>
+    body {
+    
+    border-radius: 10px
+}
 
+.card {
+   
+    border: none;
+    border-radius: 10px;
+    background-color: #fff
+}
+
+.stats {
+    background: #f2f5f8 !important;
+    color: #000 !important
+}
+
+.articles {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.number1 {
+    font-weight: 500
+}
+
+.followers {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.number2 {
+    font-weight: 500
+}
+
+.rating {
+    font-size: 10px;
+    color: #a1aab9
+}
+
+.number3 {
+    font-weight: 500
+}
+</style>
+<div class="container">
+  <div class="row">
+                            <?php
+           include '../../conn.php';
+           $id_ptojrct = $_REQUEST["ID"];
+               
+					$sql = "SELECT
+                    student.student_id,
+                    student.student_name,
+                    major.student_major_name,
+                    student.student_phone,
+                    student.student_email,
+student.student_photo,
+student.student_project
+                    FROM
+                    student
+                    INNER JOIN major ON student.student_major = major.student_major_id
+                    WHERE
+                    student.student_project ='$id_ptojrct'
+                    ORDER BY
+student.student_id ASC";
+					$result = $con->query($sql);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            echo '
+                            
+                            <div class="col-lg-6 col-md-6">
+                            <div class="card p-3">
+                                <div class="d-flex align-items-center">
+                                    <div class="image"> <img src="'. $row["student_photo"].'" class="rounded" width="155"> </div>
+                                    <div class="ml-3 w-100">
+                                        <h4 class="mb-0 mt-0">'. $row["student_name"].'</h4> <span>รหัสนักศึกษา :'. $row["student_id"].'</span>
+                                        <br><span>สาขาวิชา'. $row["student_major_name"].'</span>
+                                        <br><span>เบอร์ติดต่อ :'. $row["student_phone"].'</span>
+                                        <br><span>อีเมลล์ :'. $row["student_email"].'</span>
+                                        
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        ';       
+            }
+            }
+            $con->close();
+            ?> 
+            </div>
+                        </div>
+                            </div> 
+
+
+                            <div role="tabpanel" class="tab-pane fade" id="Section3">
+                          
+                            <div class="btn-group mr-2 mb-2">
+<a class="btn btn-warning" type="button" data-toggle="modal" data-target="#exampleModalCenter"><span class="fas fa-plus mr-2"> เพิ่มเอกสาร</a>
+</div>
+
+
+
+<!-- ฟอร์มเพิ่มไฟล์ เริ่ม -->
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มไฟล์เอกสารที่เกียวข้อง</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+<!-- frm_add str -->
+<form action="file_add_ac.php" method="post">
+
+
+    <div class="row">
+
+        <div class="form-group">
+            <label for="filee">ประเภทไฟล์</label>
+            <select class="form-select" id="filee" name="filee">
+                <option selected>เลือกประเภทไฟล์</option>
+
+                <?php
+                 include '../../conn.php';
+					$sql = "SELECT
+                    file_type.file_type_id,
+                    file_type.file_type_name
+                    
+                    FROM
+                    file_type
+                    ORDER BY
+                    file_type.file_type_id ASC";
+					$result = $con->query($sql);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            echo '<option value="'. $row["file_type_id"].'">'. $row["file_type_name"].'</option>';
+                            
+                          
+							 
+						}
+					}
+					$con->close();
+					?>
+
+            </select>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="form-group">
+            <label for="filee_url">URL ไฟล์เอกสาร</label>
+            <input class="form-control" id="filee_url" name="filee_url" type="url" placeholder="กรอกลิงค์เอกสาร"
+                required>
+        </div>
+        <input type="text" name="project_id" id="project_id" value="<?php echo  $id_ptojrct; ?>" hidden>
+
+    </div>
+
+<!-- frm_add end -->
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+        <button type="submit" class="btn btn-primary">บันทึก</button>
+      </div>
+                </form>
+    </div>
+  </div>
+</div>
+<!-- ฟอร์มเพิ่มไฟล์ สิ้นสุด -->
+
+                            <?php
+           include '../../conn.php';
+           $id_ptojrct =$_REQUEST["ID"];
+               
+					$sql = "SELECT
+                    filee.file_id,
+                    filee.project_id,
+                    file_type.file_type_name,
+                    filee.file_link,
+                    file_type.file_type_icon
+                    FROM
+                    filee
+                    INNER JOIN file_type ON filee.file_type = file_type.file_type_id
+                    WHERE
+                    filee.project_id = '$id_ptojrct'
+                    ORDER BY
+                    file_type.file_type_id ASC";
+					$result = $con->query($sql);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            echo '<div class="btn-group mr-2 mb-2"> 
+                            <a href="' . $row["file_link"].'" type="button" class="btn btn-primary"><span class="' . $row["file_type_icon"].' mr-2"></span> ' . $row["file_type_name"].'</a>
+                            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="fas fa-angle-down dropdown-arrow"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="file_edit.php?act=edit&ID=' . $row["file_id"].'"><span class="fas fa-edit mr-2"></span>แก้ไขไฟล์</a>
+                                <a class="dropdown-item" href="file_del.php?act=edit&ID=' . $row["file_id"].'"><span class="fas fa-trash-alt mr-2"></span>ลบ</a>
+                               
+                            </div>
+                        </div>';       
+                        }
+                        }
+                        $con->close();
+                        ?>     
+                                   
                             </div>
                         </div>
                     </div>

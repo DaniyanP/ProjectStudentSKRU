@@ -140,7 +140,7 @@ if (!$_SESSION["UserID"]){
                             <div class="form-group">
                                 <label for="filee_url">URL ไฟล์เอกสาร</label>
                                 <input class="form-control" id="filee_url" name="filee_url" type="url"
-                                    placeholder="กรอกลิงค์รูปภาพ" required>
+                                    placeholder="กรอกลิงค์เอกสาร" required>
                             </div>
                         </div>
                         <input type="text" name="project_id" id="project_id"

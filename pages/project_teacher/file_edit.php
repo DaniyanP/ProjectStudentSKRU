@@ -17,9 +17,9 @@
 <?php session_start();?>
 <?php 
 
-if (!$_SESSION["UserID"]){  
+if (!$_SESSION["TeacherID"]){  
 
-	  Header("Location: ../../login.php"); 
+    Header("Location: ../../login_te.php"); 
 
 }else{?>
 <?php include '../../conn.php';?>
@@ -62,7 +62,7 @@ if (!$_SESSION["UserID"]){
         </div>
     </nav>
 
-    <?php include '../menu_stu.php';?>
+    <?php include '../menu_te.php';?>
 
 
     <main class="content">
@@ -81,7 +81,7 @@ if (!$_SESSION["UserID"]){
                         </nav>
                     </div>
                     <!-- Navbar links -->
-                    <?php include '../navbar.php';?>
+                    <?php include '../navbar_te.php';?>
                 </div>
             </div>
         </nav>
@@ -163,13 +163,15 @@ extract($row);
                                     placeholder="กรอกลิงค์เอกสาร" value="<?php echo $file_link; ?>" required>
                             </div>
                         </div>
-                        <input type="text" name="project_id" id="project_id"
-                            value="<?php echo  $_SESSION["ProjectID"]; ?>" hidden>
+                        
                             <input type="text" name="file_id" id="file_id"
                             value="<?php echo  $file_id; ?>" hidden>
                     </div>
                     <div class="mt-3">
                                 <button type="submit" class="btn btn-primary">บันทึก</button>
+                            
+                                
+                                <a type="button" class="btn btn-warning" href=javascript:history.back(1)>ย้อนกลับ</a>
                             </div>
                 </form>
             </div>

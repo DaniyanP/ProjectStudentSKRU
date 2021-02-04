@@ -249,7 +249,10 @@ if (!$_SESSION["TeacherID"]){
                                                   echo''. $row["s"].' รายการ';
 
                                           }
-                                      }
+                                      }else{
+
+                                        echo '0 รายการ';
+                                    }
 
                                       $con->close(); ?>
                                     </span></a>

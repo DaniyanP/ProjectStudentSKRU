@@ -6,13 +6,13 @@
 $file_id = $_POST['file_id'];
 $filee  = $_POST['filee'];
 $filee_url  = $_POST['filee_url'];
-$project_id  = $_POST['project_id'];
+
 
 
   
   $sql = "UPDATE filee SET
 
-project_id ='$project_id',
+
 file_type='$filee',
 file_link='$filee_url'
 
@@ -33,7 +33,7 @@ mysqli_close($con); //ปิดการเชื่อมต่อ database
   if($result){
   echo "<script type='text/javascript'>";
   echo "alert('แก้ไขไฟล์เสร็จแล้ว');";
-  echo "window.location = 'index.php'; ";
+  echo "window.location = history.back(1); ";
   echo "</script>";
   }
   else{

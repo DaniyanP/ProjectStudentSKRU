@@ -17,18 +17,21 @@
 <?php session_start();?>
 <?php 
 
-if (!$_SESSION["UserID"]){  
+if (!$_SESSION["TeacherID"]){  
 
-	  Header("Location: ../../login.php"); 
+    Header("Location: ../../login_te.php"); 
 
 }else{?>
-<?php include '../../conn.php';?>
+<?php 
+include '../../conn.php';
+$id_ptojrct =$_REQUEST["ID"];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  
+    
     <?php include '../title.php';?>
 
     <?php include '../../meta.php';?>
@@ -62,7 +65,7 @@ if (!$_SESSION["UserID"]){
         </div>
     </nav>
 
-    <?php include '../menu_stu.php';?>
+    <?php include '../menu_te.php';?>
 
 
     <main class="content">
@@ -76,12 +79,12 @@ if (!$_SESSION["UserID"]){
                                 <li class="breadcrumb-item"><a href="../student_index"><span
                                             class="fas fa-home"></span></a></li>
                                 <li class="breadcrumb-item"><a href="index.php">ข้อมูลโครงงาน</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">แก้ไขไฟล์เอกสารที่เกี่ยวข้อง</li>
+                                <li class="breadcrumb-item active" aria-current="page">เพิ่มไฟล์เอกสารที่เกี่ยวข้อง</li>
                             </ol>
                         </nav>
                     </div>
                     <!-- Navbar links -->
-                    <?php include '../navbar.php';?>
+                    <?php include '../navbar_te.php';?>
                 </div>
             </div>
         </nav>
@@ -90,7 +93,7 @@ if (!$_SESSION["UserID"]){
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">แก้ไขไฟล์เอกสารที่เกี่ยวข้อง</h1>
+                    <h1 class="h4">เพิ่มไฟล์เอกสารที่เกี่ยวข้อง</h1>
                     <p class="mb-0">เอกสารที่เกี่ยวข้องกับโครงงาน
                     </p>
                 </div>
@@ -100,40 +103,21 @@ if (!$_SESSION["UserID"]){
 
         <div class="card border-light shadow-sm mb-4">
             <div class="card-body">
-            <?php
-
-$file_idd = $_REQUEST["ID"];
+                <form action="file_add_ac.php" method="post">
 
 
-
-$sql = "SELECT
-filee.file_id,
-filee.project_id,
-filee.file_type,
-file_type.file_type_name,
-filee.file_link
-FROM
-filee
-INNER JOIN file_type ON filee.file_type = file_type.file_type_id
-WHERE
-filee.file_id = '$file_idd'";
-$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
-$row = mysqli_fetch_array($result);
-extract($row);
-?>
-                <form action="file_edit_ac.php" method="post">
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
                                 <label for="filee">ประเภทไฟล์</label>
                                 <select class="form-select" id="filee" name="filee">
-                                    <option value="<?php echo $file_type; ?>"><?php echo $file_type_name; ?></option>
+                                    <option selected>เลือกประเภทไฟล์</option>
 
                                    <?php
-                                   
 					$sql = "SELECT
                     file_type.file_type_id,
                     file_type.file_type_name
+                    
                     FROM
                     file_type
                     ORDER BY
@@ -160,14 +144,15 @@ extract($row);
                             <div class="form-group">
                                 <label for="filee_url">URL ไฟล์เอกสาร</label>
                                 <input class="form-control" id="filee_url" name="filee_url" type="url"
-                                    placeholder="กรอกลิงค์เอกสาร" value="<?php echo $file_link; ?>" required>
+                                    placeholder="กรอกลิงค์เอกสาร" required>
                             </div>
                         </div>
-                        <input type="text" name="project_id" id="project_id"
-                            value="<?php echo  $_SESSION["ProjectID"]; ?>" hidden>
-                            <input type="text" name="file_id" id="file_id"
-                            value="<?php echo  $file_id; ?>" hidden>
+                        
                     </div>
+
+                    <input type="text" name="project_id" id="project_id"
+                            value="<?php echo  $id_ptojrct; ?>" hidden>
+
                     <div class="mt-3">
                                 <button type="submit" class="btn btn-primary">บันทึก</button>
                             </div>
