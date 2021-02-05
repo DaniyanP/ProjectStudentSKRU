@@ -199,7 +199,7 @@ if (!$_SESSION["TeacherID"]){
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                                 <li class="breadcrumb-item"><a href="../teacher"><span class="fas fa-home"></span></a></li>
-                               
+                                <li class="breadcrumb-item active" aria-current="page">หน้าหลัก</li>
                             </ol>
                         </nav>
                     </div>

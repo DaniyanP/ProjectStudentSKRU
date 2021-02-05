@@ -49,7 +49,7 @@
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="../../pages/teacher" class="nav-link">
+                <a href="../../pages/teacher_dashboard" class="nav-link">
                     <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
                     <span>ภาพรวม</span>
                 </a>
