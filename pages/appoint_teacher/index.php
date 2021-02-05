@@ -105,7 +105,7 @@ if (!$_SESSION["TeacherID"]){
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span
+                                <li class="breadcrumb-item"><a href="../teacher"><span
                                             class="fas fa-home"></span></a></li>
 
                                 <li class="breadcrumb-item active" aria-current="page">ประวัติการนัดพบ</li>

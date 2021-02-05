@@ -64,9 +64,9 @@ $com_id = $_REQUEST["ID"];
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Bootstrap tables</li>
+                            <li class="breadcrumb-item"><a href="../teacher"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="../com05">ข้อมูลการเข้าพบ</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">แก้ไขข้อมูลการเข้าพบ</li>
                             </ol>
                         </nav>
                     </div>

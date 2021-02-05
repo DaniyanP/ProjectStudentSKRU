@@ -26,7 +26,7 @@
 
             <li class="nav-item ">
                 <a href="../../pages/student_index" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-chart-pie"></span></span>
+                    <span class="sidebar-icon"><span class="fas fa-home"></span></span>
                     <span>หน้าหลัก</span>
                 </a>
             </li>

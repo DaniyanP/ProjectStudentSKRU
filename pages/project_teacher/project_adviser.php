@@ -67,8 +67,8 @@ $id_project = $_REQUEST["ID"];?>
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                                 <li class="breadcrumb-item"><a href="../student_index"><span
                                             class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Bootstrap tables</li>
+                                <li class="breadcrumb-item"><a href="../project_teacher">ข้อมูลโครงงานที่ดูแล</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">รายละเอียดโครงงาน</li>
                             </ol>
                         </nav>
                     </div>

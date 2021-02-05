@@ -88,9 +88,9 @@ if (!$_SESSION["TeacherID"]){
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="../score">ข้อมูลคะแนน</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">ข้อมูลCOM-05</li>
+                                <li class="breadcrumb-item"><a href="../teacher"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="../com05">ข้อมูลการเข้าพบ</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">รายละเอียดการเข้าพบ</li>
                             </ol>
                         </nav>
                     </div>
@@ -104,9 +104,8 @@ if (!$_SESSION["TeacherID"]){
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">หัวข้อ</h1>
-                    <p class="mb-0">อธิบายหัวข้อ
-                    </p>
+                    <h1 class="h4">รายละเอียดการเข้าพบอาจารย์ที่ปรึกษาโครงงาน</h1>
+                    
                 </div>
 
             </div>
