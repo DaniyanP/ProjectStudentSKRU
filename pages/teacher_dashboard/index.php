@@ -84,7 +84,24 @@ if (!$_SESSION["TeacherID"]){
 
         <div class="card border-light shadow-sm mb-4">
             <div class="card-body">
-            ssssssssssssssssssssssss
+           <?php
+           function random_password($len)
+           {
+               srand((double)microtime()*10000000);
+               $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+               $ret_str = "";
+               $num = strlen($chars);
+               for($i = 0; $i < $len; $i++)
+               {
+                   $ret_str.= $chars[rand()%$num];
+                   $ret_str.=""; 
+               }
+               return $ret_str; 
+           }
+           // echo random_password(8); 
+           $passw = random_password(6); 
+           echo $passw;
+           ?>
                
             </div>
         </div>

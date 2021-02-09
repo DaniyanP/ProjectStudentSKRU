@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2021 at 05:15 PM
+-- Generation Time: Feb 09, 2021 at 04:37 PM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -54,15 +54,16 @@ INSERT INTO `appoint` (`appoint_id`, `project_id`, `appoint_date_start`, `appoin
 (9, 2222, '2021-01-14 14:50:00', '2021-01-14 15:00:00', 0, 'rrwrwrwrwrrw', 1, 3, 11221, '2021-01-23 19:45:54'),
 (10, 2222, '2021-01-30 12:50:00', '2021-01-30 13:00:00', 0, 'wewewewe', 2, 2, 11221, '2021-01-23 19:47:31'),
 (11, 2222, '2021-01-29 02:25:00', '2021-01-29 03:24:00', 59, 'xxxxxxxxxxxxx', 2, 2, 11221, '2021-01-24 08:14:19'),
-(12, 2222, '2021-01-09 04:54:00', '2021-01-09 05:00:00', 8, 'Oooooo', 1, 1, 11221, '2021-01-24 10:36:35'),
+(12, 2222, '2021-01-09 04:54:00', '2021-01-09 05:27:00', 33, 'Oooooo', 1, 2, 11221, '2021-01-24 10:36:35'),
 (13, 2222, '2021-01-29 19:02:00', '2021-01-29 19:22:00', 20, 'หหดหดหด', 1, 1, 11221, '2021-01-24 15:57:34'),
 (14, 2222, '2021-01-29 19:02:00', '2021-01-29 19:22:00', 20, 'หหดหดหด', 1, 2, 11221, '2021-01-24 15:57:34'),
 (15, 59033031, '2021-01-28 19:30:00', '2021-01-28 20:29:00', 59, 'หหหหหห', 2, 4, 594235001, '2021-01-24 20:30:35'),
 (16, 59033031, '2021-01-16 22:20:00', '2021-01-16 22:50:00', 20, 'ok', 2, 5, 594235001, '2021-01-25 21:06:43'),
 (17, 2222, '2021-01-24 14:52:00', '2021-01-24 15:00:00', 8, 'Oooooo', 1, 3, 11221, '2021-01-24 10:36:35'),
-(18, 2222, '2021-01-24 14:52:00', '2021-01-24 15:00:00', 8, 'Oooooo', 1, 2, 11221, '2021-01-24 10:36:35'),
+(18, 2222, '2021-01-24 14:52:00', '2021-01-24 15:00:00', 8, 'Oooooo', 1, 4, 11221, '2021-01-24 10:36:35'),
 (19, 2222, '2021-01-24 14:52:00', '2021-01-24 15:12:00', 8, 'Oooooo', 1, 4, 11221, '2021-01-24 10:36:35'),
-(20, 59033031, '2021-01-30 09:30:00', '2021-01-30 10:00:00', 15, 'zszszszss', 2, 4, 594235001, '2021-01-29 10:25:22');
+(20, 59033031, '2021-01-30 09:30:00', '2021-01-30 10:00:00', 15, 'zszszszss', 2, 4, 594235001, '2021-01-29 10:25:22'),
+(21, 59033031, '2021-02-27 14:28:00', '2021-02-27 14:48:00', 20, 'aaaa', 2, 2, 594235001, '2021-02-02 22:28:19');
 
 -- --------------------------------------------------------
 
@@ -110,8 +111,10 @@ CREATE TABLE `com05` (
 --
 
 INSERT INTO `com05` (`com05_id`, `appoint_id`, `project_id`, `comment_teacher`, `comment_assign`, `score`, `meet_check`, `teacher_id`) VALUES
-(1, 3, 2222, 'comment_teacher	varchar(255)', 'comment_assign	varchar(255)', 2, 1, 1),
-(2, 3, 2222, 'comment_teacher	varchar(255) comment_teacher	varchar(255)comment_teacher	varchar(255)', 'comment_assign	varchar(255) comment_assign	varchar(255) comment_assign	varchar(255) comment_assign	varchar(255)', 2, 1, 1);
+(1, 3, 2222, 'comment_teacher	varchar(255)', 'comment_assign	varchar(255)', 2, 2, 1),
+(2, 3, 59033031, 'comment_teacher	varchar(255) comment_teacher	varchar(255)comment_teacher	varchar(255)', 'comment_assign	varchar(255) comment_assign	varchar(255) comment_assign	varchar(255) comment_assign	varchar(255)', 2, 1, 1),
+(6, 3, 59033031, 'comment_teacher	varchar(255) comment_teacher	varchar(255)comment_teacher	varchar(255)', 'comment_assign	varchar(255) comment_assign	varchar(255) comment_assign	varchar(255) comment_assign	varchar(255)', 4, 2, 1),
+(7, 18, 2222, '111', '222', 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -131,9 +134,13 @@ CREATE TABLE `filee` (
 --
 
 INSERT INTO `filee` (`file_id`, `project_id`, `file_type`, `file_link`) VALUES
-(7, 2222, 3, 'https://www.google.com/'),
-(11, 2222, 1, 'https://www.google.com/'),
-(13, 59033031, 3, 'https://i.ibb.co/1fcKRpT/594235033001.jpg');
+(23, 2222, 1, 'https://www.google.com/'),
+(24, 2222, 1, 'https://www.google.com/'),
+(25, 2222, 3, 'https://www.google.com/2233'),
+(26, 2222, 3, 'https://www.google.com/22'),
+(28, 2222, 3, 'https://www.google.com/22'),
+(30, 2222, 3, 'https://www.youtube.com/'),
+(32, 59033031, 1, 'https://www.google.com/');
 
 -- --------------------------------------------------------
 
@@ -171,7 +178,7 @@ CREATE TABLE `major` (
 --
 
 INSERT INTO `major` (`student_major_id`, `student_major_name`) VALUES
-(1, 'it'),
+(1, 'เทคโนโลยีสารสนเทศ'),
 (2, 'cs');
 
 -- --------------------------------------------------------
@@ -191,8 +198,7 @@ CREATE TABLE `meet_check` (
 
 INSERT INTO `meet_check` (`meet_check_id`, `meet_check_name`) VALUES
 (1, 'มาตามนัด'),
-(2, 'มาสาย'),
-(3, 'ไม่มาตามนัด');
+(2, 'มาสาย');
 
 -- --------------------------------------------------------
 
@@ -234,17 +240,19 @@ CREATE TABLE `project` (
   `project_type` int(2) NOT NULL,
   `project_adviser1` int(15) NOT NULL,
   `project_adviser2` int(15) NOT NULL,
-  `project_status` int(2) NOT NULL
+  `project_status` int(2) NOT NULL,
+  `project_record` int(10) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`project_id`, `project_name`, `project_type`, `project_adviser1`, `project_adviser2`, `project_status`) VALUES
-(1111, 'dddddddddddddddddddd dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 2, 1, 2, 1),
-(2222, 'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 2, 1, 2, 1),
-(59033031, 'ระบบค้นหาช่างภาพ', 1, 2, 3, 1);
+INSERT INTO `project` (`project_id`, `project_name`, `project_type`, `project_adviser1`, `project_adviser2`, `project_status`, `project_record`) VALUES
+(1111, 'dddddddddddddddddddd dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 2, 1, 2, 1, 1),
+(2222, 'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 2, 1, 3, 1, 1),
+(59033031, 'ระบบค้นหาช่างภาพ', 1, 1, 2, 1, 1),
+(59033032, 'ระบบค้นหาช่างภาพ', 1, 4, 3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -263,7 +271,9 @@ CREATE TABLE `project_status` (
 --
 
 INSERT INTO `project_status` (`project_status_id`, `project_status_name`, `project_status_class`) VALUES
-(1, 'ดำาเนินการ', 'kkk');
+(1, 'ดำเนินการ', 'warning text-dark'),
+(2, 'เสร็จสิ้น', 'success'),
+(3, 'ยกเลิก', 'danger');
 
 -- --------------------------------------------------------
 
@@ -333,13 +343,85 @@ CREATE TABLE `student` (
 
 INSERT INTO `student` (`student_id`, `student_name`, `student_major`, `student_phone`, `student_email`, `student_password`, `student_photo`, `student_project`, `student_type`) VALUES
 (12, '', 1, '1414141', '594235052@parichat.skru.ac.th', '', 'student_photo', 1111, 'A'),
-(59, 'ดานิยาน  พร้อมมูล', 1, '0821414145', '594235008@hhhh.ccc', '08f8e0260c64418510cefb2b06eee5cd', '', 2222, 'A'),
+(59, 'ดานิยาน  พร้อมมูล', 1, '0821414145', '594235008@hhhh.ccc', '08f8e0260c64418510cefb2b06eee5cd', '', 1111, 'A'),
 (1111, 'somsak lettakun', 1, '74747474', '594235008@parichat.skru.ac.th', 'aaa', 'student_photo', 1111, 'A'),
 (9999, 'อาจารย์ที่ปรึกษาโครงงาน', 1, '11111111', '1sss@ddd', 'c8c605999f3d8352d7bb792cf3fdb25b', 'student_photo', 1111, 'A'),
 (11221, 'somsak lettakun', 1, '44144qq', '59000@parichat.skru.ac.thqq', '698d51a19d8a121ce581499d7b701668', 'https://i.ibb.co/BVcPqGJ/profile-picture-2qq.jpg', 2222, 'A'),
 (594235001, 'กชกร จ่าวิสูตร', 1, '0811555532', '594235001@parichat.skru.ac.th', '698d51a19d8a121ce581499d7b701668', 'https://i.ibb.co/ZJHGHvx/594235001.jpg', 59033031, 'A'),
 (594235008, 'ดานิยาน พร้อมมูล', 1, '0869624129', '594235008@parichat.skru.ac.th', 'b0baee9d279d34fa1dfd71aadb908c3f', 'https://i.ibb.co/HFB65Yz/asa.png', 2222, 'A'),
 (594235033, 'สุพิชญา  เส้งหวัด', 1, '081154417117', '594235033@parichat.skru.ac.th', '698d51a19d8a121ce581499d7b701668', 'https://i.ibb.co/1fcKRpT/594235033001.jpg', 59033031, 'A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject_hash_project`
+--
+
+CREATE TABLE `subject_hash_project` (
+  `sp_id` int(20) NOT NULL,
+  `sp_subject_id` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `sp_project_id` int(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `subject_hash_project`
+--
+
+INSERT INTO `subject_hash_project` (`sp_id`, `sp_subject_id`, `sp_project_id`) VALUES
+(40, '7ZxTlc', 59033032),
+(41, '7ZxTlc', 59033031),
+(42, '7ZxTlc', 2222),
+(43, 'u3BDNX', 59033032),
+(44, 'u3BDNX', 59033031),
+(45, 'u3BDNX', 2222);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject_hash_student`
+--
+
+CREATE TABLE `subject_hash_student` (
+  `ss_id` int(20) NOT NULL,
+  `ss_subject_id` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `ss_student_id` int(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `subject_hash_student`
+--
+
+INSERT INTO `subject_hash_student` (`ss_id`, `ss_subject_id`, `ss_student_id`) VALUES
+(3, 'u3BDNX', 594235001),
+(11, '7ZxTlc', 594235001),
+(12, '7ZxTlc', 594235033);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subject_project`
+--
+
+CREATE TABLE `subject_project` (
+  `subject_id` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `subject_id2` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `subject_classroom` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `subject_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `subject_semester` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `subject_year` int(5) NOT NULL,
+  `subject_sec` int(5) NOT NULL,
+  `subject_time` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `subject_teacher` int(10) NOT NULL,
+  `subject_record` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `subject_project`
+--
+
+INSERT INTO `subject_project` (`subject_id`, `subject_id2`, `subject_classroom`, `subject_name`, `subject_semester`, `subject_year`, `subject_sec`, `subject_time`, `subject_teacher`, `subject_record`) VALUES
+('7ZxTlc', 'ada22', '222', 'ddd', '262', 226, 2, 'สส', 1, '2021-02-07 11:39:29'),
+('u3BDNX', 'ada22', 'sdsdxssxa', 'ddd', '', 2564, 1, 'จัน ศุก 22', 1, '2021-02-07 11:37:33');
 
 -- --------------------------------------------------------
 
@@ -371,7 +453,7 @@ INSERT INTO `tbl_info` (`id`, `names`, `descriptionf`, `email`, `date`) VALUES
 --
 
 CREATE TABLE `teacher` (
-  `teacher_id` int(255) NOT NULL,
+  `teacher_id` int(10) NOT NULL,
   `teacher_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `teacher_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `teacher_password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -384,9 +466,31 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`teacher_id`, `teacher_name`, `teacher_email`, `teacher_password`, `teacher_photo`, `teacher_type`) VALUES
-(1, 'ผศ.ดินาถ หลำสุบ', 'bbbbbb', '698d51a19d8a121ce581499d7b701668', 'https://i.ibb.co/HFB65Yz/asa.png', 2),
-(2, 'ผศ.นลินี อินทมะโน', 'bbbbbb', '698d51a19d8a121ce581499d7b701668', 'https://i.ibb.co/HFB65Yz/asa.png', 2),
-(3, 'ไม่มีอาจารย์ที่ปรึกษาร่วม', 'bbbbbb', '', '', 2);
+(1, 'ผศ.ดินาถ หลำสุบ', 'bbbbbb11@ee', 'f3abb86bd34cf4d52698f14c0da1dc60', 'https://i.ibb.co/HFB65Yz/asa.png', 2),
+(2, 'ผศ.นลินี อินทมะโน', 'bbbbbb', '698d51a19d8a121ce581499d7b701668', 'https://i.ibb.co/HFB65Yz/asa.png', 1),
+(3, 'ไม่มีอาจารย์ที่ปรึกษาร่วม', 'bbbbbb', '', '', 2),
+(4, 'ผศ.แสงดาว ฉายแสง', 'bbbbbb', '698d51a19d8a121ce581499d7b701668', 'https://i.ibb.co/HFB65Yz/asa.png', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher_type`
+--
+
+CREATE TABLE `teacher_type` (
+  `teacher_type_id` int(5) NOT NULL,
+  `teacher_type_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `teacher_type_class` varchar(255) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `teacher_type`
+--
+
+INSERT INTO `teacher_type` (`teacher_type_id`, `teacher_type_name`, `teacher_type_class`) VALUES
+(1, 'อาจารย์', ''),
+(2, 'อาจารย์ประจำวิชา', ''),
+(3, 'ผู้ดูแลระบบ', '');
 
 --
 -- Indexes for dumped tables
@@ -469,7 +573,8 @@ ALTER TABLE `project`
   ADD KEY `project_type` (`project_type`),
   ADD KEY `project_status` (`project_status`),
   ADD KEY `project_adviser1` (`project_adviser1`),
-  ADD KEY `project_adviser2` (`project_adviser2`);
+  ADD KEY `project_adviser2` (`project_adviser2`),
+  ADD KEY `project_record` (`project_record`);
 
 --
 -- Indexes for table `project_status`
@@ -498,6 +603,29 @@ ALTER TABLE `student`
   ADD KEY `student_project` (`student_project`);
 
 --
+-- Indexes for table `subject_hash_project`
+--
+ALTER TABLE `subject_hash_project`
+  ADD PRIMARY KEY (`sp_id`),
+  ADD KEY `sp_project_id` (`sp_project_id`),
+  ADD KEY `sp_subject_id` (`sp_subject_id`);
+
+--
+-- Indexes for table `subject_hash_student`
+--
+ALTER TABLE `subject_hash_student`
+  ADD PRIMARY KEY (`ss_id`),
+  ADD KEY `ss_subject_id` (`ss_subject_id`),
+  ADD KEY `ss_student_id` (`ss_student_id`);
+
+--
+-- Indexes for table `subject_project`
+--
+ALTER TABLE `subject_project`
+  ADD PRIMARY KEY (`subject_id`),
+  ADD KEY `subject_teacher` (`subject_teacher`);
+
+--
 -- Indexes for table `tbl_info`
 --
 ALTER TABLE `tbl_info`
@@ -507,7 +635,14 @@ ALTER TABLE `tbl_info`
 -- Indexes for table `teacher`
 --
 ALTER TABLE `teacher`
-  ADD PRIMARY KEY (`teacher_id`);
+  ADD PRIMARY KEY (`teacher_id`),
+  ADD KEY `teacher_type` (`teacher_type`);
+
+--
+-- Indexes for table `teacher_type`
+--
+ALTER TABLE `teacher_type`
+  ADD PRIMARY KEY (`teacher_type_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -517,19 +652,19 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `appoint`
 --
 ALTER TABLE `appoint`
-  MODIFY `appoint_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `appoint_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `com05`
 --
 ALTER TABLE `com05`
-  MODIFY `com05_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `com05_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `filee`
 --
 ALTER TABLE `filee`
-  MODIFY `file_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `file_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `notifications_student`
@@ -542,6 +677,18 @@ ALTER TABLE `notifications_student`
 --
 ALTER TABLE `notifications_teacher`
   MODIFY `notifications_id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `subject_hash_project`
+--
+ALTER TABLE `subject_hash_project`
+  MODIFY `sp_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+
+--
+-- AUTO_INCREMENT for table `subject_hash_student`
+--
+ALTER TABLE `subject_hash_student`
+  MODIFY `ss_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_info`
@@ -600,7 +747,8 @@ ALTER TABLE `project`
   ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`project_type`) REFERENCES `project_type` (`project_type_id`),
   ADD CONSTRAINT `project_ibfk_2` FOREIGN KEY (`project_status`) REFERENCES `project_status` (`project_status_id`),
   ADD CONSTRAINT `project_ibfk_3` FOREIGN KEY (`project_adviser1`) REFERENCES `teacher` (`teacher_id`),
-  ADD CONSTRAINT `project_ibfk_4` FOREIGN KEY (`project_adviser2`) REFERENCES `teacher` (`teacher_id`);
+  ADD CONSTRAINT `project_ibfk_4` FOREIGN KEY (`project_adviser2`) REFERENCES `teacher` (`teacher_id`),
+  ADD CONSTRAINT `project_ibfk_5` FOREIGN KEY (`project_record`) REFERENCES `teacher` (`teacher_id`);
 
 --
 -- Constraints for table `student`
@@ -608,6 +756,32 @@ ALTER TABLE `project`
 ALTER TABLE `student`
   ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`student_major`) REFERENCES `major` (`student_major_id`),
   ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`student_project`) REFERENCES `project` (`project_id`);
+
+--
+-- Constraints for table `subject_hash_project`
+--
+ALTER TABLE `subject_hash_project`
+  ADD CONSTRAINT `subject_hash_project_ibfk_1` FOREIGN KEY (`sp_project_id`) REFERENCES `project` (`project_id`),
+  ADD CONSTRAINT `subject_hash_project_ibfk_2` FOREIGN KEY (`sp_subject_id`) REFERENCES `subject_project` (`subject_id`);
+
+--
+-- Constraints for table `subject_hash_student`
+--
+ALTER TABLE `subject_hash_student`
+  ADD CONSTRAINT `subject_hash_student_ibfk_1` FOREIGN KEY (`ss_subject_id`) REFERENCES `subject_project` (`subject_id`),
+  ADD CONSTRAINT `subject_hash_student_ibfk_2` FOREIGN KEY (`ss_student_id`) REFERENCES `student` (`student_id`);
+
+--
+-- Constraints for table `subject_project`
+--
+ALTER TABLE `subject_project`
+  ADD CONSTRAINT `subject_project_ibfk_1` FOREIGN KEY (`subject_teacher`) REFERENCES `teacher` (`teacher_id`);
+
+--
+-- Constraints for table `teacher`
+--
+ALTER TABLE `teacher`
+  ADD CONSTRAINT `teacher_ibfk_1` FOREIGN KEY (`teacher_type`) REFERENCES `teacher_type` (`teacher_type_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

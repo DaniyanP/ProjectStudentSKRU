@@ -57,75 +57,40 @@
             
 
 
-            <!-- <li class="nav-item">
-                    <span class="nav-link  d-flex justify-content-between align-items-center" data-toggle="collapse"
-                        data-target="#submenu-app">
-                        <span>
-                            <span class="sidebar-icon"><span class="fas fa-table"></span></span>
-                            Tables
-                        </span>
-                        <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
-                    </span>
-                    <div class="multi-level collapse  show " role="list" id="submenu-app" aria-expanded="false">
-                        <ul class="flex-column nav">
-                            <li class="nav-item  active "><a class="nav-link"
-                                    href="../../pages/tables/bootstrap-tables.html"><span>Bootstrap Tables</span></a>
-                            </li>
-                        </ul>
-                    </div>
-                </li> -->
-
-            <!-- <li class="nav-item">
-                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-                    data-toggle="collapse" data-target="#submenu-components">
-                    <span>
-                        <span class="sidebar-icon"><span class="fas fa-box-open"></span></span>
-                        Components
-                    </span>
-                    <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
-                </span>
-                <div class="multi-level collapse " role="list" id="submenu-components" aria-expanded="false">
-                    <ul class="flex-column nav">
-                        <li class="nav-item "><a class="nav-link"
-                                href="../../pages/components/buttons.html"><span>Buttons</span></a></li>
-                        <li class="nav-item "><a class="nav-link"
-                                href="../../pages/components/notifications.html"><span>Notifications</span></a></li>
-                        <li class="nav-item "><a class="nav-link"
-                                href="../../pages/components/forms.html"><span>Forms</span></a></li>
-                        <li class="nav-item "><a class="nav-link"
-                                href="../../pages/components/modals.html"><span>Modals</span></a></li>
-                        <li class="nav-item "><a class="nav-link"
-                                href="../../pages/components/typography.html"><span>Typography</span></a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-                    data-toggle="collapse" data-target="#test">
-                    <span>
-                        <span class="sidebar-icon"><span class="fas fa-box-open"></span></span>
-                        test
-                    </span>
-                    <span class="link-arrow"><span class="fas fa-chevron-right"></span></span>
-                </span>
-                <div class="multi-level collapse " role="list" id="test" aria-expanded="false">
-                    <ul class="flex-column nav">
-                        <li class="nav-item "><a class="nav-link"
-                                href="../../pages/test/ex.php"><span>FullCalendar</span></a></li>
-                        <li class="nav-item "><a class="nav-link"
-                                href="datatable.php"><span>datatable</span></a></li>
-                                <li class="nav-item "><a class="nav-link"
-                                href="../../pages/test/excel.php"><span>Excel</span></a></li>
-                        <li class="nav-item "><a class="nav-link"
-                                href="../../pages/test/index.php"><span>blank</span></a></li>
-
-                    </ul>
-                </div>
-            </li> -->
+           
+            </li> 
 
             <li role="separator" class="dropdown-divider mt-4 mb-3 border-black"></li>
-            
 
+            
+            <?php 
+        
+        if($_SESSION["Teacherlevel"]==2){
+echo'<li class="nav-item ">
+<a href="../../pages/subject" class="nav-link">
+    <span class="sidebar-icon"><span class="fas fa-file"></span></span>
+    <span>รายวิชา</span>
+</a>
+</li>
+<li class="nav-item ">
+<a href="../../pages/subject" class="nav-link">
+    <span class="sidebar-icon"><span class="fas fa-file"></span></span>
+    <span>จัดการข้อมูลอาจารย์</span>
+</a>
+</li>
+<li class="nav-item ">
+<a href="../../pages/subject" class="nav-link">
+    <span class="sidebar-icon"><span class="fas fa-file"></span></span>
+    <span>จัดการข้อมูลโครงงาน</span>
+</a>
+</li>
+';
+        }
+        
+     
+        
+        
+        ?>
         </ul>
     </div>
 </nav>

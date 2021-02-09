@@ -26,6 +26,7 @@ if (!$_SESSION["UserID"]){  //check session
 <!DOCTYPE html>
 <html lang="en">
 <?php require_once '../../phpexcel/PHPExcel/IOFactory.php'; ?>
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!-- Primary Meta Tags -->
@@ -127,41 +128,41 @@ if (!$_SESSION["UserID"]){  //check session
                     <p class="mb-0">อธิบายหัวข้อ
                     </p>
                 </div>
-                
+
             </div>
         </div>
 
         <div class="card border-light shadow-sm mb-4">
             <div class="card-body">
-            <form method="post" action="excel-ac.php" enctype="multipart/form-data" class="form-horizontal">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="row">
-                <label class="col-sm-3 label-on-left" style="margin-top: -16px;">Upload Excel</label>          
-                <div class="col-md-6">
-                    <input name="result_file"  required=""  type="file">
-                    <input name="idd"   type="text"  value="ddddd" hidden>
-                </div>
+                <form method="post" action="excel-ac.php" enctype="multipart/form-data" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <label class="col-sm-3 label-on-left" style="margin-top: -16px;">Upload Excel</label>
+                                <div class="col-md-6">
+                                    <input name="result_file" required="" type="file">
+                                    <input name="idd" type="text" value="ddddd" hidden>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3" style="width: 31%;margin-top: 15px;">
+                            <div class="pull-right hidden-print">
+                                <button type="submit" name="upload_excel" class="btn btn-primary"> Upload Excel</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
             </div>
         </div>
-    </div>
-    
-    <div class="row" >
-        <div class="col-sm-3" style="width: 31%;margin-top: 15px;"> 
-            <div class="pull-right hidden-print">
-                <button type="submit" name="upload_excel" class="btn btn-primary"> Upload Excel</button>
-            </div>
-        </div>
-    </div>   
-</form>
-               
-            </div>
-        </div>
-        
+
 
 
         <?php include '../footer.php';?>
-        
+
     </main>
 
     <!-- Core -->

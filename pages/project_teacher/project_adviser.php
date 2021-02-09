@@ -236,6 +236,9 @@ $id_project = $_REQUEST["ID"];?>
 						while($row = $result->fetch_assoc()) {
                             echo $row["C_appoint"];       
                         }
+                        }else{
+
+                            echo '0';
                         }
                         $con->close();
                         ?> 
@@ -272,6 +275,9 @@ $id_project = $_REQUEST["ID"];?>
 						while($row = $result->fetch_assoc()) {
                             echo $row["C_appoint01"];       
                         }
+                        }else{
+
+                            echo '0';
                         }
                         $con->close();
                         ?> 
@@ -814,7 +820,7 @@ student.student_id ASC";
                                 <div class="d-flex align-items-center">
                                     <div class="image"> <img src="'. $row["student_photo"].'" class="rounded" width="155"> </div>
                                     <div class="ml-3 w-100">
-                                        <h4 class="mb-0 mt-0">'. $row["student_name"].'</h4> <span>รหัสนักศึกษา :'. $row["student_id"].'</span>
+                                        <h6 class="mb-0 mt-0">'. $row["student_name"].'</h6> <span>รหัสนักศึกษา :'. $row["student_id"].'</span>
                                         <br><span>สาขาวิชา'. $row["student_major_name"].'</span>
                                         <br><span>เบอร์ติดต่อ :'. $row["student_phone"].'</span>
                                         <br><span>อีเมลล์ :'. $row["student_email"].'</span>

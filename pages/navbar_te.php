@@ -15,18 +15,7 @@
         <div class="dropdown-menu dashboard-dropdown dropdown-menu-right mt-2">
             <a class="dropdown-item font-weight-bold" href="../teacher_detail"><span class="far fa-user-circle"></span>ข้อมูลของฉัน</a>
         
-        <?php 
-        
-        if($_SESSION["Teacherlevel"]==2){
-echo'<div role="separator" class="dropdown-divider"></div>
-<a class="dropdown-item font-weight-bold" href="../subject"><span class="far fa-user-circle"></span>อาจารย์ประจำวิชา</a>
-';
-        }
-        
-     
-        
-        
-        ?>
+       
             <div role="separator" class="dropdown-divider"></div>
             
             <a class="dropdown-item font-weight-bold" href="../../logout.php"><span
