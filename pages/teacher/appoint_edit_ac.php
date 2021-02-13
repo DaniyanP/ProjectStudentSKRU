@@ -42,26 +42,3 @@ mysqli_close($con);
   echo "</script>";
 }
 ?>
-      ";
-
-
-
-
-
-$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
-mysqli_close($con); //ปิดการเชื่อมต่อ database 
-
-//จาวาสคริปแสดงข้อความเมื่อบันทึกเสร็จและกระโดดกลับไปหน้าแรก
-  
-  if($result){
-  echo "<script type='text/javascript'>";
-  echo "alert('แก้ไขการนัดหมายเสร็จแล้ว');";
-  echo "window.location = 'index.php'; ";
-  echo "</script>";
-  }
-  else{
-  echo "<script type='text/javascript'>";
-  echo "alert('Error back to Update again');";
-  echo "</script>";
-}
-?>

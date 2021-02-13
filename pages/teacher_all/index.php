@@ -5,7 +5,7 @@
 if ($_SESSION["Teacherlevel"]=="2"){?>
 
 <?php include '../../conn.php';
-$id_section_room =$_REQUEST["ID"];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,9 +61,9 @@ $id_section_room =$_REQUEST["ID"];
 
 
     <script type="text/javascript">
-        function delete_project(project_id) {
-            if (confirm('ต้องการลบโครงงานนี้ออกจากกลุ่มนี้ใช่ไหม')) {
-                window.location.href = 'project_del.php?&ID=' + project_id;
+        function delete_teacher(teacher_id) {
+            if (confirm('คุณต้องการลบใช่ไหม')) {
+                window.location.href = 'teacher_del.php?&ID=' + teacher_id;
             }
         }
     </script>
@@ -129,19 +129,14 @@ $id_section_room =$_REQUEST["ID"];
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
-                            <form action="project_add.php" method="post">
-                                <label for="projec_id">เพิ่มโครงงาน</label>
-                                <input type="text" name="projec_id" id="projec_id" placeholder="กรอกรหัสโครงงาน"
-                                    required>
-                                <input type="text" name="id_class" id="id_class" value="<?php echo $id_section_room ?>"
-                                    hidden>
-                                <button type="submit" class="btn btn-primary btn-sm">บันทึก</button>
-                            </form>
+                        <a class="btn btn-info btn-sm " href="teacher_add.php"
+                                role="button">เพิ่มอาจารย์</a>
+                                <a class="btn btn-success btn-sm " data-toggle="modal" data-target="#exampleModalCenter"
+                                role="button">เพิ่มด้วย Excel</a>
                         </div>
 
                         <div class="col-lg-6 col-md-6">
-                            <a class="btn btn-success btn-sm " data-toggle="modal" data-target="#exampleModalCenter"
-                                role="button">เพิ่มด้วย Excel</a>
+                           ------
 
                         </div>
                     </div>
@@ -153,7 +148,7 @@ $id_section_room =$_REQUEST["ID"];
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มโครงงานเข้ากลุ่มเรียน</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มอาจารย์</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -168,7 +163,7 @@ $id_section_room =$_REQUEST["ID"];
                                
                                 <div class="col-md-6">
                                     <input name="result_file" required="" type="file">
-                                    <input name="id_room" type="text" value="<?php echo $id_section_room ?>" hidden>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -199,19 +194,20 @@ $id_section_room =$_REQUEST["ID"];
 
             <div class="table-responsive">
                 <table id="example" class="table table-striped table-bordered" width="100%"
-                    data-order="[[ 0, &quot;desc&quot; ]]" id="tableId">
+                    >
                     <col style="width:5%">
-                    <col style="width:7%">
-                    <col style="width:7%">
-                    <col style="width:71%">
+                    <col style="width:17%">
+                    <col style="width:18%">
+                    <col style="width:50%">
                     <col style="width:5%">
                     <col style="width:5%">
 
                     <thead>
                         <tr>
-                            <th scope="col">รหัสโครงงาน</th>
-                            <th scope="col">ชื่อโครงงาน</th>
-                            <th scope="col">สถานะ</th>
+                            <th scope="col">รหัสอาจารย์</th>
+                            <th scope="col">ชื่อ - นามสกุล</th>
+                            <th scope="col">อีเมลล์</th>
+                            <th scope="col">บทบาท</th>
                             <th scope="col">เพิ่มเติม</th>
 
 
@@ -225,43 +221,35 @@ $id_section_room =$_REQUEST["ID"];
                        
                         
 					$sql = "SELECT
-                    subject_hash_project.sp_id,
-                    subject_hash_project.sp_subject_id,
-                    subject_hash_project.sp_project_id,
-                    project.project_name,
-                    project_status.project_status_name,
-                    project_status.project_status_class
+                    teacher.teacher_id,
+                    teacher.teacher_name,
+                    teacher.teacher_email,
+                    teacher.teacher_password,
+                    teacher.teacher_photo,
+                    teacher.teacher_type,
+                    teacher_type.teacher_type_name
                     FROM
-                    subject_hash_project
-                    INNER JOIN project ON subject_hash_project.sp_project_id = project.project_id
-                    INNER JOIN project_status ON project.project_status = project_status.project_status_id
+                    teacher
+                    INNER JOIN teacher_type ON teacher.teacher_type = teacher_type.teacher_type_id
                     WHERE
-                    subject_hash_project.sp_subject_id = '$id_section_room'
-                    ORDER BY
-                    subject_hash_project.sp_project_id ASC";
+                    teacher.teacher_type NOT IN(3);
+                    ";
 					$result = $con->query($sql);
 					if ($result->num_rows > 0) {
 
 						while($row = $result->fetch_assoc()) {
                          
                             echo '<tr>
-                                <td>'. $row["sp_project_id"].'</td>
-                                <td>'. mb_substr($row["project_name"],0,65,'UTF-8').'</td>
+                                <td>'. $row["teacher_id"].'</td>
+                                <td>'. $row["teacher_name"].'</td>
                                 
-                                <td><h6><span class="badge bg-'. $row["project_status_class"].'">'. $row["project_status_name"].'</span></h6></td>
-                              
-                                   <td>
-                                    
-                                        <a type="button" href="project_detail.php?act=show&ID=' . $row["sp_project_id"].'"
-                                            class="btn btn-info btn-xs"
-                                           >
-                                            <span class="icon icon-sm">
-                                                <span class="fas fa-eye icon-dark"></span>
-                                            </span>
-                                            
-                                        </a>
+                                <td>'. $row["teacher_email"].'</td>
+                                <td>'. $row["teacher_type_name"].'</td>
+                                <td>
+                                
+                                       
 
-                                        <a type="button" href="project_edit.php?act=show&ID=' . $row["sp_project_id"].'&IDR=' . $id_section_room.'"
+                                        <a type="button" href="teacher_edit.php?act=edit&ID=' . $row["teacher_id"].'"
                                         class="btn btn-warning btn-xs"
                                        >
                                         <span class="icon icon-sm">
@@ -270,7 +258,7 @@ $id_section_room =$_REQUEST["ID"];
                                         
                                     </a>
 
-                                    <a type="button" href="javascript: delete_project(' . $row["sp_id"].')"
+                                    <a type="button" href="javascript: delete_teacher(' . $row["teacher_id"].')"
                                         class="btn btn-danger btn-xs"
                                        >
                                         <span class="icon icon-sm">
@@ -278,6 +266,9 @@ $id_section_room =$_REQUEST["ID"];
                                         </span>
                                         
                                     </a>
+
+
+                                    
                                        
 
                                        
@@ -302,9 +293,10 @@ $id_section_room =$_REQUEST["ID"];
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>รหัสโครงงาน</th>
-                            <th>ชื่อโครงงาน</th>
-                            <th>สถานะ</th>
+                        <th>รหัสอาจารย์</th>
+                            <th>ชื่อ - นามสกุล</th>
+                            <th>อีเมลล์</th>
+                            <th>บทบาท</th>
                             <th>เพิ่มเติม</th>
 
 

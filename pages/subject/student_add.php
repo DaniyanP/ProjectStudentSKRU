@@ -18,7 +18,7 @@ $id_class  = $_POST['id_class'];
 		
         if($result1->num_rows > 0)   		
         {
-//ถ้ามี username นี้อยู่ในระบบแล้วให้แจ้งเตือน
+//ถ้ามี โครงงาน นี้อยู่ในระบบแล้วให้แจ้งเตือน
              echo "<script>";
 			 echo "alert('ไม่สามารถบันทึกได้ เนื่องจากนักศึกษาคนนี้อยู่ในกลุ่มเรียนนี้แล้ว');";
 			 echo "window.location= history.back(1);";

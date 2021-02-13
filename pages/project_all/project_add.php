@@ -82,31 +82,8 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
         <div class="card border-light shadow-sm mb-4">
             <div class="card-body">
             
-                <form action="project_edit_ac.php" method="post">
+                <form action="project_add_ac.php" method="post">
 
-                <?php
-
-$project_idd = $_REQUEST["ID"];
-$class_idd = $_REQUEST["IDR"];
-
-
-$sql = "SELECT
-project.project_id,
-project.project_name,
-project.project_type,
-project.project_adviser1,
-project.project_adviser2,
-project.project_status,
-project.project_record
-FROM
-project
-
-WHERE
-project.project_id = '$project_idd'";
-$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
-$row = mysqli_fetch_array($result);
-extract($row);
-?>
 
                     <div class="row">
 
@@ -114,7 +91,7 @@ extract($row);
                             <div class="form-group">
                                 <label for="project_id">รหัสโครงงาน</label>
                                 <input class="form-control" id="project_id" name="project_id" type="number"
-                                    placeholder="กรอกรหัสโครงงาน" required value="<?php echo $project_id ?>" readonly>
+                                    placeholder="กรอกรหัสโครงงาน" required autofocus>
                             </div>
                         </div>
 
@@ -122,7 +99,7 @@ extract($row);
                             <div class="form-group">
                                 <label for="project_name">ชื่อโครงงาน</label>
                                 <input class="form-control" id="project_name" name="project_name" type="text"
-                                    placeholder="กรอกชื่อโครงงาน" required value="<?php echo $project_name ?>">
+                                    placeholder="กรอกชื่อโครงงาน" required>
                             </div>
                         </div>
 
@@ -147,16 +124,13 @@ extract($row);
                                     ?>
 
                                     <select class="form-select" id="project_type" name="project_type" aria-label="Default select example">
-                                                 <option selected>เลือกประเภทโครงงาน</option>
+                                                 <option selected>เลือกประเถทโครงงาน</option>
                        
-                                                 <?php foreach($result as $results){
-                                            if( $results["p_id"] == $project_type ){
-                                               echo' <option value="'.$results["p_id"].'" selected="true">'.$results["p_type"].'</option>';
-                                            }else{
-                                                echo' <option value="'.$results["p_id"].'" >'.$results["p_type"].'</option>';
-                                            }
-                                        }
-                                        ?>
+                                                    <?php foreach($result as $results){?>
+                                <option value="<?php echo $results["p_id"];?>">
+                                  <?php echo $results["p_type"]; ?>
+                                  </option>
+                                <?php } ?>
                     </select>
                             </div>
                         </div>
@@ -181,15 +155,12 @@ extract($row);
 
                                     <select class="form-select" id="project_adviser1" name="project_adviser1" aria-label="Default select example">
                                                  <option selected>เลือกอาจารย์</option>
-                                                 
-                                                 <?php foreach($result11 as $results1){
-                                            if( $results1["t1_id"] == $project_adviser1 ){
-                                               echo' <option value="'.$results1["t1_id"].'" selected="true">'.$results1["t1_name"].'</option>';
-                                            }else{
-                                                echo' <option value="'.$results1["t1_id"].'" >'.$results1["t1_name"].'</option>';
-                                            }
-                                        }
-                                        ?>
+                       
+                                                    <?php foreach($result11 as $results1){?>
+                                <option value="<?php echo $results1["t1_id"];?>">
+                                  <?php echo $results1["t1_name"]; ?>
+                                  </option>
+                                <?php } ?>
                     </select>
                             </div>
                         </div>
@@ -215,44 +186,11 @@ extract($row);
                                     <select class="form-select" id="project_adviser2" name="project_adviser2" aria-label="Default select example">
                                                  <option selected>เลือกอาจารย์</option>
                        
-                                                 <?php foreach($result12 as $results2){
-                                            if( $results2["t2_id"] == $project_adviser2 ){
-                                               echo' <option value="'.$results2["t2_id"].'" selected="true">'.$results2["t2_name"].'</option>';
-                                            }else{
-                                                echo' <option value="'.$results2["t2_id"].'" >'.$results2["t2_name"].'</option>';
-                                            }
-                                        }
-                                        ?>
-                    </select>
-                            </div>
-                        </div>
-
-                        <div class="col-md-3 mb-3">
-                            <div class="form-group">
-                                <label for="project_status">สถานะโครงงาน</label>
-                                <?php 
-                                    $query13 = "SELECT
-                                    project_status.project_status_id as p_id3,
-                                    project_status.project_status_name as  p_name3
-                                    FROM
-                                    project_status
-                                    ORDER BY
-                                    project_status.project_status_id ASC";
-                                    $result13 = mysqli_query($con, $query13);
-
-                                    ?>
-
-                                    <select class="form-select" id="project_status" name="project_status" aria-label="Default select example">
-                                                 <option selected>เลือกสถานะโครงงาน</option>
-                                                 
-                                                 <?php foreach($result13 as $results3){
-                                            if( $results3["p_id3"] == $project_status ){
-                                               echo' <option value="'.$results3["p_id3"].'" selected="true">'.$results3["p_name3"].'</option>';
-                                            }else{
-                                                echo' <option value="'.$results3["p_id3"].'" >'.$results3["p_name3"].'</option>';
-                                            }
-                                        }
-                                        ?>
+                                                    <?php foreach($result12 as $results2){?>
+                                <option value="<?php echo $results2["t2_id"];?>">
+                                  <?php echo $results2["t2_name"]; ?>
+                                  </option>
+                                <?php } ?>
                     </select>
                             </div>
                         </div>
@@ -267,7 +205,6 @@ extract($row);
                    
                     <div class="mt-3">
             <button type="submit" class="btn btn-primary">บันทึก</button>
-            <a type="button" class="btn btn-info" href="project.php?act=show&ID=<?php echo $class_idd ?>">กลับ</a>
         </div>
 
 

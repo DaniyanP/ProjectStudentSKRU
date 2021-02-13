@@ -30,7 +30,7 @@ $sql ="INSERT INTO student
     
     if($result){
       echo "<script>";
-      echo "alert('เพิ่มข้อมูลเช็คอินสำเร็จ');";
+      echo "alert('สมัครสมาชิกสำเร็จเข้าสู่ระบบได้เลย');";
       echo "window.location ='login.php'; ";
       echo "</script>";
     } else {

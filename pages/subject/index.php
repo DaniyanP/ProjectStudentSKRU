@@ -26,8 +26,16 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
         <link type="text/css" href="../../css/volt.css" rel="stylesheet">
     
         <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
+       
+   
+       
+       
+       
+       
+       
         <?php include '../dateth.php';?>
 
+        
         
   
 
@@ -286,16 +294,19 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                                                 </span>
                                                 <span class="sr-only">Toggle Dropdown</span>
                                             </button>
+
+                                         
+
                                             <div class="dropdown-menu">
                                             <a class="dropdown-item" href="project.php?act=show&ID='. $row["subject_id"].'"><span
                                                         class="fas fa-eye mr-2"></span>โครงงาน</a>
                                                         <a class="dropdown-item" href="student.php?act=show&ID='. $row["subject_id"].'"><span
                                                         class="fas fa-eye mr-2"></span>รายชื่อนักศึกษา</a>
-                                                <a class="dropdown-item" href="com05_edit.php?act=edit&ID=' . $row["subject_id"].'"><span
-                                                        class="fas fa-edit mr-2"></span>แก้ไข</a>
-                                                <a class="dropdown-item text-danger" href="com05_del.php?ID=' . $row["subject_id"].'"><span
+                                                <a class="dropdown-item" href="classroom_edit.php?act=edit&ID=' . $row["subject_id"].'"><span
+                                                        class="fas fa-edit mr-2"></span>แก้ไข</a>'; ?>
+                                                <a class="dropdown-item text-danger" href="classroom_del.php?ID=<?php echo $row["subject_id"]; ?>" onclick="return confirm('คุณต้องการลบรายวิชานี้ออกใช่ไหม')"><span
                                                         class="fas fa-trash-alt mr-2"></span>ลบ</a>
-                                            </div>                                       
+                                       <?php     echo'</div>                                       
                                         </div>                                 
                                     </td>
                                     </tr>';       

@@ -5,7 +5,7 @@
 if ($_SESSION["Teacherlevel"]=="2"){?>
 
 <?php include '../../conn.php';
-$id_section_room =$_REQUEST["ID"];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -129,19 +129,15 @@ $id_section_room =$_REQUEST["ID"];
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
-                            <form action="project_add.php" method="post">
-                                <label for="projec_id">เพิ่มโครงงาน</label>
-                                <input type="text" name="projec_id" id="projec_id" placeholder="กรอกรหัสโครงงาน"
-                                    required>
-                                <input type="text" name="id_class" id="id_class" value="<?php echo $id_section_room ?>"
-                                    hidden>
-                                <button type="submit" class="btn btn-primary btn-sm">บันทึก</button>
-                            </form>
+                        <a class="btn btn-info btn-sm " href="project_add.php"
+                                role="button">เพิ่มโครงงาน</a>
+                                <a class="btn btn-success btn-sm " data-toggle="modal" data-target="#exampleModalCenter"
+                                role="button">เพิ่มด้วย Excel</a>
+                           
                         </div>
 
                         <div class="col-lg-6 col-md-6">
-                            <a class="btn btn-success btn-sm " data-toggle="modal" data-target="#exampleModalCenter"
-                                role="button">เพิ่มด้วย Excel</a>
+                            ---------
 
                         </div>
                     </div>
@@ -153,7 +149,7 @@ $id_section_room =$_REQUEST["ID"];
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มโครงงานเข้ากลุ่มเรียน</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มโครงงาน</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -211,6 +207,7 @@ $id_section_room =$_REQUEST["ID"];
                         <tr>
                             <th scope="col">รหัสโครงงาน</th>
                             <th scope="col">ชื่อโครงงาน</th>
+                            <th scope="col">ประเภท</th>
                             <th scope="col">สถานะ</th>
                             <th scope="col">เพิ่มเติม</th>
 
@@ -225,34 +222,30 @@ $id_section_room =$_REQUEST["ID"];
                        
                         
 					$sql = "SELECT
-                    subject_hash_project.sp_id,
-                    subject_hash_project.sp_subject_id,
-                    subject_hash_project.sp_project_id,
+                    project.project_id,
                     project.project_name,
+                    project_type.project_type_name,
                     project_status.project_status_name,
                     project_status.project_status_class
                     FROM
-                    subject_hash_project
-                    INNER JOIN project ON subject_hash_project.sp_project_id = project.project_id
-                    INNER JOIN project_status ON project.project_status = project_status.project_status_id
-                    WHERE
-                    subject_hash_project.sp_subject_id = '$id_section_room'
-                    ORDER BY
-                    subject_hash_project.sp_project_id ASC";
+                    project
+                    INNER JOIN project_type ON project.project_type = project_type.project_type_id
+                    INNER JOIN project_status ON project.project_status = project_status.project_status_id";
 					$result = $con->query($sql);
 					if ($result->num_rows > 0) {
 
 						while($row = $result->fetch_assoc()) {
                          
                             echo '<tr>
-                                <td>'. $row["sp_project_id"].'</td>
-                                <td>'. mb_substr($row["project_name"],0,65,'UTF-8').'</td>
+                                <td>'. $row["project_id"].'</td>
+                                <td>'. mb_substr($row["project_name"],0,50,'UTF-8').'</td>
+                                <td>'. $row["project_type_name"].'</td>
                                 
                                 <td><h6><span class="badge bg-'. $row["project_status_class"].'">'. $row["project_status_name"].'</span></h6></td>
                               
                                    <td>
                                     
-                                        <a type="button" href="project_detail.php?act=show&ID=' . $row["sp_project_id"].'"
+                                        <a type="button" href="project_show.php?act=show&ID=' . $row["project_id"].'"
                                             class="btn btn-info btn-xs"
                                            >
                                             <span class="icon icon-sm">
@@ -261,7 +254,7 @@ $id_section_room =$_REQUEST["ID"];
                                             
                                         </a>
 
-                                        <a type="button" href="project_edit.php?act=show&ID=' . $row["sp_project_id"].'&IDR=' . $id_section_room.'"
+                                        <a type="button" href="project_edit.php?act=show&ID=' . $row["project_id"].'"
                                         class="btn btn-warning btn-xs"
                                        >
                                         <span class="icon icon-sm">
@@ -270,7 +263,7 @@ $id_section_room =$_REQUEST["ID"];
                                         
                                     </a>
 
-                                    <a type="button" href="javascript: delete_project(' . $row["sp_id"].')"
+                                    <a type="button" href="javascript: delete_project(' . $row["project_id"].')"
                                         class="btn btn-danger btn-xs"
                                        >
                                         <span class="icon icon-sm">
@@ -304,6 +297,7 @@ $id_section_room =$_REQUEST["ID"];
                         <tr>
                             <th>รหัสโครงงาน</th>
                             <th>ชื่อโครงงาน</th>
+                            <th>ประเภท</th>
                             <th>สถานะ</th>
                             <th>เพิ่มเติม</th>
 

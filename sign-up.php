@@ -1,20 +1,5 @@
-<!--
-
-=========================================================
-* Volt Pro - Premium Bootstrap 5 Dashboard
-=========================================================
-
-* Product Page: https://themesberg.com/product/admin-dashboard/volt-premium-bootstrap-5-dashboard
-* Copyright 2020 Themesberg (https://www.themesberg.com)
-* License (https://themesberg.com/licensing)
-
-* Designed and coded by https://themesberg.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. Please contact us to request a removal.
-
--->
+<?php include 'conn.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -109,11 +94,35 @@
                                     </div>  
                                 </div>
 
+
+                                <?php 
+$query = "SELECT
+major.student_major_id as major_id,
+major.student_major_name as major_name
+FROM
+major
+ORDER BY
+major.student_major_id ASC";
+$result = mysqli_query($con, $query);
+
+?>
+
                                 <div class="form-group mb-4">
                                     <label for="major">สาขาวิชา</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><span class="fas fa-envelope"></span></span>
-                                        <input type="text" class="form-control" placeholder="เลือกสาขาวิชา" id="major" name="major" required>
+                                        
+
+                                        <select class="form-select" id="major" name="major" aria-label="Default select example" required>
+                        <option selected>เลือกสาขาวิชา</option>
+                       
+                        <?php foreach($result as $results){?>
+    <option value="<?php echo $results["major_id"];?>">
+      <?php echo $results["major_name"]; ?>
+      </option>
+    <?php } ?>
+                    </select>
+
                                     </div>  
                                 </div>
                                 <!-- End of Form -->
@@ -123,7 +132,7 @@
                                     <label for="email">อีเมลล์</label>
                                     <div class="input-group">
                                         <span class="input-group-text" ><span class="fas fa-envelope"></span></span>
-                                        <input type="email" class="form-control" placeholder="594235XXX@parichat.skru.ac.th" id="email"  name="email"  required>
+                                        <input type="email" class="form-control" placeholder="594235XXX@parichat.skru.ac.th" value="@parichat.skru.ac.th" id="email"  name="email"  required>
                                     </div>  
                                 </div>
                                 <!-- End of Form -->
@@ -139,21 +148,25 @@
                                     </div>
                                     <!-- End of Form -->
                                     <!-- Form -->
-                                    <div class="form-group mb-4">
+                                    <!-- <div class="form-group mb-4">
                                         <label for="confirm_password">ยืนยันรหัสผ่าน</label>
                                         <div class="input-group">
                                             <span class="input-group-text" ><span class="fas fa-unlock-alt"></span></span>
                                             <input type="password" placeholder="กรอกรหัสผ่านอีกครั้ง" class="form-control" id="confirm_password"  name="confirm_password" required>
                                         </div>  
-                                    </div>
+                                    </div> -->
                                     <!-- End of Form -->
                                      <!-- Form -->
                                 <div class="form-group mb-4">
-                                    <label for="id_project">รหัสโครงงาน</label>
+                                    <label for="id_project">รหัสโครงงาน </label>
                                     <div class="input-group">
                                         <span class="input-group-text" ><span class="fas fa-envelope"></span></span>
-                                        <input type="text" class="form-control" placeholder="00000" id="id_project"  name="id_project" required>
+                                        <input type="text" class="form-control" placeholder="00000" id="id_project"  name="id_project" required  aria-describedby="id_project-describ" >
+                                
+                               
                                     </div>  
+                                    <small id="id_project-describ"
+                                    class="form-text text-muted">หากไม่ทราบรหัสโครงงานให้กรอก 1111</small>
                                 </div>
                                 <!-- End of Form -->
 

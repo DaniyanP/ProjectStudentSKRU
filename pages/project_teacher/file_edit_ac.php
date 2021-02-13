@@ -25,7 +25,7 @@ file_link='$filee_url'
 
 
 
-$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
+$result = mysqli_query($con, $sql);
 mysqli_close($con); //ปิดการเชื่อมต่อ database 
 
 //จาวาสคริปแสดงข้อความเมื่อบันทึกเสร็จและกระโดดกลับไปหน้าแรก

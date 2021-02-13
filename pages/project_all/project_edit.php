@@ -87,7 +87,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                 <?php
 
 $project_idd = $_REQUEST["ID"];
-$class_idd = $_REQUEST["IDR"];
+
 
 
 $sql = "SELECT
@@ -227,36 +227,6 @@ extract($row);
                             </div>
                         </div>
 
-                        <div class="col-md-3 mb-3">
-                            <div class="form-group">
-                                <label for="project_status">สถานะโครงงาน</label>
-                                <?php 
-                                    $query13 = "SELECT
-                                    project_status.project_status_id as p_id3,
-                                    project_status.project_status_name as  p_name3
-                                    FROM
-                                    project_status
-                                    ORDER BY
-                                    project_status.project_status_id ASC";
-                                    $result13 = mysqli_query($con, $query13);
-
-                                    ?>
-
-                                    <select class="form-select" id="project_status" name="project_status" aria-label="Default select example">
-                                                 <option selected>เลือกสถานะโครงงาน</option>
-                                                 
-                                                 <?php foreach($result13 as $results3){
-                                            if( $results3["p_id3"] == $project_status ){
-                                               echo' <option value="'.$results3["p_id3"].'" selected="true">'.$results3["p_name3"].'</option>';
-                                            }else{
-                                                echo' <option value="'.$results3["p_id3"].'" >'.$results3["p_name3"].'</option>';
-                                            }
-                                        }
-                                        ?>
-                    </select>
-                            </div>
-                        </div>
-
                         
                         <input type="text" name="project_record" id="project_record"
                             value="<?php echo  $_SESSION["TeacherID"]; ?>" hidden>
@@ -267,7 +237,6 @@ extract($row);
                    
                     <div class="mt-3">
             <button type="submit" class="btn btn-primary">บันทึก</button>
-            <a type="button" class="btn btn-info" href="project.php?act=show&ID=<?php echo $class_idd ?>">กลับ</a>
         </div>
 
 
