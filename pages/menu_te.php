@@ -23,7 +23,7 @@
 
 
         <ul class="nav flex-column">
-
+        <h6><span class="badge bg-success">อาจารย์ที่ปรึกษาโครงงาน</span></h6>
             <li class="nav-item ">
                 <a href="../../pages/teacher" class="nav-link">
                     <span class="sidebar-icon"><span class="fas fa-home"></span></span>
@@ -66,7 +66,8 @@
             <?php 
         
         if($_SESSION["Teacherlevel"]==2){
-echo'<li class="nav-item ">
+            echo'<h6><span class="badge bg-info">อาจารย์ประจำวิชา</span></h6>
+<li class="nav-item ">
 <a href="../../pages/subject" class="nav-link">
     <span class="sidebar-icon"><span class="fas fa-file"></span></span>
     <span>รายวิชา</span>

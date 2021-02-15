@@ -2,7 +2,7 @@
 
 <?php 
 
-if ($_SESSION["Teacherlevel"]=="2"){?>
+if ($_SESSION["Teacherlevel"]=="3"){?>
 
 <?php include '../../conn.php';?>
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
         </div>
     </nav>
 
-    <?php include '../menu_te.php';?>
+    <?php include '../menu_admin.php';?>
 
 
     <main class="content">
@@ -55,10 +55,10 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                            <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="index.php">ข้อมูลอาจารย์</a></li>
+                            <li class="breadcrumb-item"><a href="../admin"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="index.php">ข้อมูลผู้ดูแลระบบ</a></li>
                                 
-                                    <li class="breadcrumb-item active" aria-current="page">เพิ่มข้อมูลอาจารย์</li>
+                                    <li class="breadcrumb-item active" aria-current="page">เพิ่มข้อมูผู้ดูแลระบบ</li>
                             </ol>
                         </nav>
                     </div>
@@ -72,7 +72,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">เพิ่มข้อมูลอาจารย์</h1>
+                    <h1 class="h4">เพิ่มข้อมูลผู้ดูแลระบบ</h1>
 
                 </div>
 
@@ -89,9 +89,9 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
-                                <label for="teacher_id">รหัสอาจารย์</label>
+                                <label for="teacher_id">รหัสผู้ดูแลระบบ</label>
                                 <input class="form-control" id="teacher_id" name="teacher_id" type="number"
-                                    placeholder="กรอกรหัสอาจารย์" required autofocus>
+                                    placeholder="กรอกรหัสผู้ดูแลระบบ" required autofocus>
                             </div>
                         </div>
 
@@ -112,7 +112,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                             <div class="form-group">
                                 <label for="teacher_email">อีเมลล์</label>
                                 <input class="form-control" id="teacher_email" name="teacher_email" type="email"
-                                    placeholder="กรอกอีเมลล์อาจารย์" required >
+                                    placeholder="กรอกอีเมลล์ผู้ดูแลระบบ" required >
                             </div>
                         </div>
 

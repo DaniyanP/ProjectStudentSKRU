@@ -4,7 +4,8 @@
 
 if ($_SESSION["Teacherlevel"]=="2"){?>
 
-<?php include '../../conn.php';?>
+<?php include '../../conn.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,10 +56,10 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span
-                                            class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Bootstrap tables</li>
+                            <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="../subject">ข้อมูลรายวิชา</a></li>
+                                <li class="breadcrumb-item"><a href="#">ข้อมูลโครงงาน</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">แก้ไขข้อมูลโครงงาน</li>
                             </ol>
                         </nav>
                     </div>
@@ -72,7 +73,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">เพิ่มข้อมูลรายวิชาที่สอน</h1>
+                    <h1 class="h4">แก้ไขข้อมูลโครงงาน</h1>
 
                 </div>
 
@@ -87,8 +88,8 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                 <?php
 
 $project_idd = $_REQUEST["ID"];
-$class_idd = $_REQUEST["IDR"];
 
+$class_idd = $_REQUEST["IDR"];
 
 $sql = "SELECT
 project.project_id,

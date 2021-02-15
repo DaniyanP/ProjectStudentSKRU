@@ -7,8 +7,9 @@
 
 $student_id = $_REQUEST["student_id"];
 $password = $_REQUEST["password"];
+$password02 = $_REQUEST["password02"];
 $set_password = md5($password);
-
+if($password==$password02){
   
   $sql = "UPDATE student SET
 
@@ -37,5 +38,14 @@ mysqli_close($con);
   echo "<script type='text/javascript'>";
   echo "alert('Error back to Update again');";
   echo "</script>";
+}
+}else{
+
+  echo "<script>";
+  echo "alert('รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน');";
+  echo "window.location= history.back(1);";
+        echo "</script>";
+
+
 }
 ?>

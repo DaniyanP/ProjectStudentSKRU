@@ -55,10 +55,13 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span
-                                            class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Bootstrap tables</li>
+                                
+                                
+                                
+                                <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="../subject">ข้อมูลรายวิชา</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">เพิ่มรายวิชา</li>
+                           
                             </ol>
                         </nav>
                     </div>
@@ -162,8 +165,8 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
                     <div class="mt-3">
             <button type="submit" class="btn btn-primary">บันทึก</button>
+            <a type="button" class="btn btn-info" href="../subject">กลับ</a>
         </div>
-
 
 
 

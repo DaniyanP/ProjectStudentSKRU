@@ -56,10 +56,10 @@ $teacher_id = $_REQUEST["ID"];?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span
-                                            class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Bootstrap tables</li>
+                            <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="index.php">ข้อมูลอาจารย์</a></li>
+                                
+                                    <li class="breadcrumb-item active" aria-current="page">แก้ไขข้อมูลอาจารย์</li>
                             </ol>
                         </nav>
                     </div>
@@ -73,7 +73,7 @@ $teacher_id = $_REQUEST["ID"];?>
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">เพิ่มข้อมูลรายวิชาที่สอน</h1>
+                    <h1 class="h4">แก้ไขข้อมูลอาจารย์</h1>
 
                 </div>
 

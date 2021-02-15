@@ -142,12 +142,22 @@ extract($row);
                         </form>
                     </div>
                     <div class="card card-body bg-white border-light shadow-sm mb-4">
+                    <h2 class="h5 mb-4">เปลี่ยนรหัสผ่าน</h2>
                         <form action="reset_password.php" method="post">
                             <div class="row">
+                            <div class="col-md-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="password">รหัสผ่าน</label>
+                                        <input class="form-control" id="password" type="password" name="password" placeholder="กรอกรหัสผ่าน"   required>
+                                        
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
-                                        <label for="password">เปลี่ยนรหัสผ่าน</label>
-                                        <input class="form-control" id="password" type="password" name="password" placeholder="กรอกรหัสผ่าน"   required>
+                                        <label for="password02">ยืนยันรหัสผ่าน</label>
+                                        
+                                        <input class="form-control" id="password02" type="password" name="password02" placeholder="ยืนยันรหัสผ่าน"   required>
                                     </div>
                                 </div>
                                 <input type="text" name="student_id" id="student_id" value="<?php echo  $_SESSION["UserID"]; ?>" hidden>

@@ -2,7 +2,7 @@
 
 <?php 
 
-if ($_SESSION["Teacherlevel"]=="2"){?>
+if ($_SESSION["Teacherlevel"]=="3"){?>
 
 <?php include '../../conn.php';?>
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
         </div>
     </nav>
 
-    <?php include '../menu_te.php';?>
+    <?php include '../menu_admin.php';?>
 
 
     <main class="content">
@@ -55,7 +55,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                            <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
+                            <li class="breadcrumb-item"><a href="../admin"><span class="fas fa-home"></span></a></li>
                                 <li class="breadcrumb-item"><a href="index.php">ข้อมูลอาจารย์</a></li>
                                 
                                     <li class="breadcrumb-item active" aria-current="page">เพิ่มข้อมูลอาจารย์</li>

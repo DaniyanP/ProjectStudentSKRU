@@ -55,10 +55,10 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span
-                                            class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Bootstrap tables</li>
+                            <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="index.php">ข้อมูลโครงงาน</a></li>
+                                
+                                    <li class="breadcrumb-item active" aria-current="page">แก้ไขข้อมูลโครงงาน</li>
                             </ol>
                         </nav>
                     </div>

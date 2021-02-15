@@ -5,7 +5,8 @@
 if ($_SESSION["Teacherlevel"]=="2"){?>
 <?php include '../../conn.php';
 
-$id_project = $_REQUEST["ID"];?>
+$id_project = $_REQUEST["ID"];
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,10 +63,10 @@ $id_project = $_REQUEST["ID"];?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span
-                                            class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="../project_teacher">ข้อมูลโครงงานที่ดูแล</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">รายละเอียดโครงงาน</li>
+                            <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="../subject">ข้อมูลรายวิชา</a></li>
+                                <li class="breadcrumb-item"><a href="#">ข้อมูลโครงงาน</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page"><?php echo $id_project ?></li>
                             </ol>
                         </nav>
                     </div>

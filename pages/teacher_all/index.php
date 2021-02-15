@@ -98,10 +98,10 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span
-                                            class="fas fa-home"></span></a></li>
-
-                                <li class="breadcrumb-item active" aria-current="page">ประวัติการนัดพบ</li>
+                            <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
+                                <!-- <li class="breadcrumb-item"><a href="index.php">ข้อมูลอาจารย์</a></li>
+                                <li class="breadcrumb-item"><a href="#">ข้อมูลโครงงาน</a></li> -->
+                                    <li class="breadcrumb-item active" aria-current="page">ข้อมูลอาจารย์</li>
                             </ol>
                         </nav>
                     </div>
@@ -115,8 +115,8 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">ประวัติการนัดพบอาจารย์ที่ปรึกษา</h1>
-                    <p class="mb-0">ข้อมูลประวัติการนัดพบอาจารย์ที่ปรึกษาทั้งหมด
+                    <h1 class="h4">ข้อมูลอาจารย์</h1>
+                    <p class="mb-0">แสดงข้อมูลอาจารย์ที่ปรึกษาโครงงานและอาจารย์ประจำวิชา
                     </p>
                 </div>
 

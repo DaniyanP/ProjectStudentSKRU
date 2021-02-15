@@ -2,9 +2,10 @@
 
 <?php 
 
-if ($_SESSION["Teacherlevel"]=="2"){?>
+if ($_SESSION["Teacherlevel"]=="3"){?>
 
-<?php include '../../conn.php';?>
+<?php include '../../conn.php';
+$teacher_id = $_REQUEST["ID"];?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +45,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
         </div>
     </nav>
 
-    <?php include '../menu_te.php';?>
+    <?php include '../menu_admin.php';?>
 
 
     <main class="content">
@@ -55,10 +56,10 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                            <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="index.php">ข้อมูลอาจารย์</a></li>
+                            <li class="breadcrumb-item"><a href="../admin"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="index.php">ข้อมูลผู้ดูแลระบบ</a></li>
                                 
-                                    <li class="breadcrumb-item active" aria-current="page">เพิ่มข้อมูลอาจารย์</li>
+                                    <li class="breadcrumb-item active" aria-current="page">แก้ไขผู้ดูแลระบบ</li>
                             </ol>
                         </nav>
                     </div>
@@ -72,7 +73,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">เพิ่มข้อมูลอาจารย์</h1>
+                    <h1 class="h4">แก้ไขข้อมูลผู้ดูแลระบบ</h1>
 
                 </div>
 
@@ -81,17 +82,38 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
         <div class="card border-light shadow-sm mb-4">
             <div class="card-body">
-            
-                <form action="teacher_add_ac.php" method="post">
+            <?php
+
+
+
+
+
+$sql = "SELECT
+teacher.teacher_id,
+teacher.teacher_name,
+teacher.teacher_email,
+teacher.teacher_password,
+teacher.teacher_photo,
+teacher.teacher_type
+FROM
+teacher
+WHERE
+teacher.teacher_id= '$teacher_id'";
+$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
+$row = mysqli_fetch_array($result);
+extract($row);
+?>
+
+                <form action="teacher_edit_ac.php" method="post">
 
 
                     <div class="row">
 
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
-                                <label for="teacher_id">รหัสอาจารย์</label>
+                                <label for="teacher_id">รหัสผู้ดูแลระบบ</label>
                                 <input class="form-control" id="teacher_id" name="teacher_id" type="number"
-                                    placeholder="กรอกรหัสอาจารย์" required autofocus>
+                                    placeholder="กรอกรหัสผู้ดูแลระบบ" required value="<?php echo $teacher_id ?>" readonly>
                             </div>
                         </div>
 
@@ -99,7 +121,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                             <div class="form-group">
                                 <label for="teacher_name">ชื่อ - นามสกุล</label>
                                 <input class="form-control" id="teacher_name" name="teacher_name" type="text"
-                                    placeholder="กรอกชื่อ - นามสกุล" required>
+                                    placeholder="กรอกชื่อ - นามสกุล" required value="<?php echo $teacher_name ?>">
                             </div>
                         </div>
 
@@ -112,13 +134,13 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                             <div class="form-group">
                                 <label for="teacher_email">อีเมลล์</label>
                                 <input class="form-control" id="teacher_email" name="teacher_email" type="email"
-                                    placeholder="กรอกอีเมลล์อาจารย์" required >
+                                    placeholder="กรอกอีเมลล์ผู้ดูแลระบบ" required  value="<?php echo $teacher_email ?>">
                             </div>
                         </div>
 
 
-                       
-
+                    
+  
                  
                             
 

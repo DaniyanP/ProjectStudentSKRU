@@ -98,10 +98,8 @@ $id_section_room =$_REQUEST["ID"];
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span
-                                            class="fas fa-home"></span></a></li>
-
-                                <li class="breadcrumb-item active" aria-current="page">ประวัติการนัดพบ</li>
+                            <li class="breadcrumb-item"><a href="../subject">ข้อมูลรายวิชา</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">ข้อมูลนักศึกษา</li>
                             </ol>
                         </nav>
                     </div>
@@ -115,8 +113,35 @@ $id_section_room =$_REQUEST["ID"];
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">ประวัติการนัดพบอาจารย์ที่ปรึกษา</h1>
-                    <p class="mb-0">ข้อมูลประวัติการนัดพบอาจารย์ที่ปรึกษาทั้งหมด
+                    <h1 class="h4">ข้อมูลนักศึกษาในรายวิชา</h1>
+                    <p class="mb-0"> <?php
+                       
+                        
+                       $sql01 = "SELECT
+                       subject_project.subject_id,
+                       subject_project.subject_name,
+                       subject_project.subject_semester,
+                       subject_project.subject_year,
+                       subject_project.subject_sec,
+                       subject_project.subject_id2
+                       FROM
+                       subject_project
+                       WHERE
+                       subject_project.subject_id = '$id_section_room'
+                       ";
+                       $result01 = $con->query($sql01);
+                       if ($result01->num_rows > 0) {
+   
+                           while($row01 = $result01->fetch_assoc()) {
+                               echo 'รหัสวิชา'. $row01["subject_id2"].' Sec. '. $row01["subject_sec"].'  '. $row01["subject_name"].'  ภาคการเรียน'. $row01["subject_semester"].'  ปีการศึกษา '. $row01["subject_year"].' ';
+                                                      
+   
+                                   
+                                
+                           }
+                       }
+                       $con->close();
+                       ?>
                     </p>
                 </div>
 
@@ -225,7 +250,7 @@ $id_section_room =$_REQUEST["ID"];
                     <tbody>
 
                         <?php
-                       
+                       include '../../conn.php';
                         
 					$sql = "SELECT
                     subject_hash_student.ss_id,

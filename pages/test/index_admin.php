@@ -3,7 +3,7 @@
 
 <?php 
 
-if ($_SESSION["Teacherlevel"]=="2"){?>
+if ($_SESSION["Teacherlevel"]=="3"){?>
 
 <?php include '../../conn.php';?>
     <!DOCTYPE html>
@@ -45,7 +45,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
             </div>
         </nav>
     
-        <?php include '../menu_te.php';?>
+        <?php include '../menu_admin.php';?>
     
     
         <main class="content">
@@ -56,10 +56,9 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                         <div class="d-flex">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="index.php">ข้อมูลโครงงาน</a></li>
-                                
-                                    <li class="breadcrumb-item active" aria-current="page">รายละเอียดโครงงาน</li>
+                                    <li class="breadcrumb-item"><a href="../student_index"><span class="fas fa-home"></span></a></li>
+                                    <li class="breadcrumb-item"><a href="#">Tables</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Bootstrap tables</li>
                                 </ol>
                             </nav>
                         </div>
@@ -82,82 +81,8 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
     
             <div class="card border-light shadow-sm mb-4">
                     <div class="card-body">
-                    <?php
-
-$project_idd = $_REQUEST["ID"];
-
-
-
-$sql = "SELECT
-project.project_id,
-project.project_name,
-project_type.project_type_name,
-project_status.project_status_name
-FROM
-project
-INNER JOIN project_type ON project.project_type = project_type.project_type_id
-INNER JOIN project_status ON project.project_status = project_status.project_status_id
-WHERE
-project.project_id = '$project_idd'";
-$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
-$row = mysqli_fetch_array($result);
-extract($row);
-?>
+                       dddd
                         
-
-                         รหัสโครงงาน : <?php echo $project_id ?>
-                         <br>โครงงาน : <?php echo $project_name ?>
-                         <br>ประเภทโครงงาน : <?php echo $project_type_name ?>
-                         <br>สถานะ : <?php echo $project_status_name ?>
-
-
-                         <?php
-           include '../../conn.php';
-           $id_ptojrct = $project_id;
-               
-					$sql = "SELECT
-                    project.project_id,
-                    project.project_adviser1,
-                    teacher.teacher_name
-                    FROM
-                    project
-                    INNER JOIN teacher ON project.project_adviser1 = teacher.teacher_id 
-                    WHERE
-                    project.project_id ='$id_ptojrct'";
-					$result = $con->query($sql);
-					if ($result->num_rows > 0) {
-
-						while($row = $result->fetch_assoc()) {
-                            echo '<br>อาจารย์ที่ปรึกษาหลัก : ' . $row["teacher_name"].'';       
-                        }
-                        }
-                        $con->close();
-                        ?> 
-
-
-
-<?php
-           include '../../conn.php';
-           $id_ptojrct = $project_id;
-               
-					$sql = "SELECT
-                    project.project_id,
-                    project.project_adviser2,
-                    teacher.teacher_name
-                    FROM
-                    project
-                    INNER JOIN teacher ON project.project_adviser2 = teacher.teacher_id 
-                    WHERE
-                    project.project_id ='$id_ptojrct'";
-					$result = $con->query($sql);
-					if ($result->num_rows > 0) {
-
-						while($row = $result->fetch_assoc()) {
-                            echo '<br>อาจารย์ที่ปรึกษาร่วม : ' . $row["teacher_name"].'';       
-                        }
-                        }
-                        $con->close();
-                        ?> 
                     </div>
                 </div>
             
