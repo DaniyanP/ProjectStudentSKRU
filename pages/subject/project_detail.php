@@ -578,7 +578,7 @@ appoint.appoint_id DESC";
 
                                               
                                            
-                                              echo'<h5 class="modal-title">พบเลขการนัดพบ : ' . $row["appoint_id"].' </h5>
+                                              echo'<h5 class="modal-title">หมายเลขการนัดพบ : ' . $row["appoint_id"].' </h5>
                                               <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             </div>
                                             <div class="modal-body">

@@ -26,19 +26,19 @@
         <h6><span class="badge bg-success">ผู้ดูแลระบบ</span></h6>
             <li class="nav-item ">
                 <a href="../../pages/admin" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-home"></span></span>
+                    <span class="sidebar-icon"><span class="fas  fa-volume-up"></span></span>
                     <span>ข่าวประชาสัมพันธ์</span>
                 </a>
             </li>
             <li class="nav-item ">
                 <a href="../../pages/admin_teacher" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-calendar-alt"></span></span>
+                    <span class="sidebar-icon"><span class="fas fa-user"></span></span>
                     <span>ข้อมูลอาจารย์</span>
                 </a>
             </li>
             <li class="nav-item ">
                 <a href="../../pages/admin_admin" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-calendar-alt"></span></span>
+                    <span class="sidebar-icon"><span class="fas fa-address-card"></span></span>
                     <span>ข้อมูลผู้ดูแลระบบ</span>
                 </a>
             </li>

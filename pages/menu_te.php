@@ -69,22 +69,32 @@
             echo'<h6><span class="badge bg-info">อาจารย์ประจำวิชา</span></h6>
 <li class="nav-item ">
 <a href="../../pages/subject" class="nav-link">
-    <span class="sidebar-icon"><span class="fas fa-file"></span></span>
+    <span class="sidebar-icon"><span class="fas fa-book"></span></span>
     <span>รายวิชา</span>
 </a>
 </li>
+
 <li class="nav-item ">
-<a href="../../pages/teacher_all" class="nav-link">
-    <span class="sidebar-icon"><span class="fas fa-file"></span></span>
-    <span>จัดการข้อมูลอาจารย์</span>
+<a href="../../pages/student_all" class="nav-link">
+    <span class="sidebar-icon"><span class="fas fa-graduation-cap"></span></span>
+    <span>จัดการข้อมูลนักศึกษา</span>
 </a>
 </li>
+
 <li class="nav-item ">
 <a href="../../pages/project_all" class="nav-link">
-    <span class="sidebar-icon"><span class="fas fa-file"></span></span>
+    <span class="sidebar-icon"><span class="fas fa-folder-open"></span></span>
     <span>จัดการข้อมูลโครงงาน</span>
 </a>
 </li>
+
+<li class="nav-item ">
+<a href="../../pages/teacher_all" class="nav-link">
+    <span class="sidebar-icon"><span class="fas fa-user"></span></span>
+    <span>จัดการข้อมูลอาจารย์</span>
+</a>
+</li>
+
 ';
         }
         

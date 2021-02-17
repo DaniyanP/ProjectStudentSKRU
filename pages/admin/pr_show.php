@@ -3,7 +3,7 @@
 
 <?php 
 
-if ($_SESSION["Teacherlevel"]=="2"){?>
+if ($_SESSION["Teacherlevel"]=="3"){?>
 
 <?php include '../../conn.php';?>
     <!DOCTYPE html>
@@ -45,7 +45,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
             </div>
         </nav>
     
-        <?php include '../menu_te.php';?>
+        <?php include '../menu_admin.php';?>
     
     
         <main class="content">
@@ -56,10 +56,10 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                         <div class="d-flex">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
-                                <li class="breadcrumb-item"><a href="index.php">ข้อมูลโครงงาน</a></li>
+                                <li class="breadcrumb-item"><a href="../admin"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="index.php">ข้อมูลข่าวประชาสัมพันธ์</a></li>
                                 
-                                    <li class="breadcrumb-item active" aria-current="page">รายละเอียดโครงงาน</li>
+                                    <li class="breadcrumb-item active" aria-current="page">รายละเอียดข่าวประชาสัมพันธ์</li>
                                 </ol>
                             </nav>
                         </div>
@@ -73,94 +73,56 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
     
                 <div class="d-flex justify-content-between w-100 flex-wrap">
                     <div class="mb-3 mb-lg-0">
-                        <h1 class="h4">รายละเอียดโครงงาน</h1>
+                        <h1 class="h4">รายละเอียดข่าวประชาสัมพันธ์</h1>
                         
                     </div>
                     
                 </div>
             </div>
     
+
+            <div class="row">
+                <div class="col-12 col-xl-6">
+
             <div class="card border-light shadow-sm mb-4">
                     <div class="card-body">
                     <?php
 
-$project_idd = $_REQUEST["ID"];
+$pr_idd = $_REQUEST["ID"];
 
 
 
 $sql = "SELECT
-project.project_id,
-project.project_name,
-project_type.project_type_name,
-project_status.project_status_name
+pr.pr_id,
+pr.pr_header,
+pr.pr_content,
+pr.pr_date,
+pr.pr_record
 FROM
-project
-INNER JOIN project_type ON project.project_type = project_type.project_type_id
-INNER JOIN project_status ON project.project_status = project_status.project_status_id
+pr
 WHERE
-project.project_id = '$project_idd'";
+pr.pr_id = '$pr_idd'";
 $result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
 $row = mysqli_fetch_array($result);
 extract($row);
+$strDate = $row["pr_date"];
 ?>
                         
 
-                         รหัสโครงงาน : <?php echo $project_id ?>
-                         <br>โครงงาน : <?php echo $project_name ?>
-                         <br>ประเภทโครงงาน : <?php echo $project_type_name ?>
-                         <br>สถานะ : <?php echo $project_status_name ?>
+                         <b> หัวข้อข่าประชาสัมพันธ์ : </b>
+                         <br> <?php echo $pr_header ?>
+
+                         <br><b>รายละเอียด : </b>
+                         <br><?php echo $pr_content ?></b>
+                         <br><b>ประกาศเมื่อ</b> : <?php echo DateThai($strDate) ?>
+                        
 
 
-                         <?php
-           include '../../conn.php';
-           $id_ptojrct = $project_id;
-               
-					$sql = "SELECT
-                    project.project_id,
-                    project.project_adviser1,
-                    teacher.teacher_name
-                    FROM
-                    project
-                    INNER JOIN teacher ON project.project_adviser1 = teacher.teacher_id 
-                    WHERE
-                    project.project_id ='$id_ptojrct'";
-					$result = $con->query($sql);
-					if ($result->num_rows > 0) {
-
-						while($row = $result->fetch_assoc()) {
-                            echo '<br>อาจารย์ที่ปรึกษาหลัก : ' . $row["teacher_name"].'';       
-                        }
-                        }
-                        $con->close();
-                        ?> 
-
-
-
-<?php
-           include '../../conn.php';
-           $id_ptojrct = $project_id;
-               
-					$sql = "SELECT
-                    project.project_id,
-                    project.project_adviser2,
-                    teacher.teacher_name
-                    FROM
-                    project
-                    INNER JOIN teacher ON project.project_adviser2 = teacher.teacher_id 
-                    WHERE
-                    project.project_id ='$id_ptojrct'";
-					$result = $con->query($sql);
-					if ($result->num_rows > 0) {
-
-						while($row = $result->fetch_assoc()) {
-                            echo '<br>อาจารย์ที่ปรึกษาร่วม : ' . $row["teacher_name"].'';       
-                        }
-                        }
-                        $con->close();
-                        ?> 
+                        
                     </div>
                 </div>
-            
+                </div>
+                </div>
     
     
             <?php include '../footer.php';?>

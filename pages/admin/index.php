@@ -55,24 +55,24 @@ $admin_id = $_SESSION["TeacherID"];
                         "sLast": "สุดท้าย"
                     }
                 }
+                
+
+                
+                
             });
         });
     </script>
 
 
     <script type="text/javascript">
-        function delete_teacher(teacher_id) {
+        function delete_pr(pr_id) {
             if (confirm('คุณต้องการลบใช่ไหม')) {
-                window.location.href = 'teacher_del.php?&ID=' + teacher_id;
+                window.location.href = 'pr_del.php?&ID=' + pr_id;
             }
         }
 
 
-        function setpass_teacher(teacher_id) {
-            if (confirm('คุณต้องการรีเซ็ตรหัสผ่านใช่ไหม')) {
-                window.location.href = 'teacher_setpass.php?&ID=' + teacher_id;
-            }
-        }
+       
     </script>
 
     <?php include '../dateth.php';?>
@@ -136,7 +136,7 @@ $admin_id = $_SESSION["TeacherID"];
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
-                        <a class="btn btn-info btn-sm " href="teacher_add.php"
+                        <a class="btn btn-info btn-sm " href="pr_add.php"
                                 role="button">เพิ่มข่าวประชาสัมพันธ์</a>
                                
                         </div>
@@ -159,22 +159,18 @@ $admin_id = $_SESSION["TeacherID"];
 
 
             <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered" width="100%"
+                <table id="example" class="table table-striped table-bordered" width="100%" data-order="[[ 0, &quot;desc&quot; ]]" id="tableId"
                     >
-                    <col style="width:5%">
-                    <col style="width:17%">
-                    <col style="width:18%">
-                    <col style="width:50%">
-                    <col style="width:5%">
-                    <col style="width:5%">
+                    
 
                     <thead>
                         <tr>
-                            <th scope="col">รหัสผู้ดูแลระบบ</th>
-                            <th scope="col">ชื่อ - นามสกุล</th>
-                            <th scope="col">อีเมลล์</th>
-                            <th scope="col">บทบาท</th>
-                            <th scope="col">เพิ่มเติม</th>
+                            <th scope="col">#</th>
+                            <th scope="col">หัวข้อข่าวสาร</th>
+                           
+                            <th scope="col">ผู้ประกาศ</th>
+                            <th scope="col">ประกาศเมื่อ</th>
+                            <th scope="col">จัดการ</th>
 
 
 
@@ -187,49 +183,47 @@ $admin_id = $_SESSION["TeacherID"];
                        
                         
 					$sql = "SELECT
-                    teacher.teacher_id,
-                    teacher.teacher_name,
-                    teacher.teacher_email,
-                    teacher.teacher_password,
-                    teacher.teacher_photo,
-                    teacher.teacher_type,
-                    teacher_type.teacher_type_name
+                    pr.pr_id,
+                    pr.pr_header,
+                    pr.pr_content,
+                    pr.pr_date,
+                    pr.pr_record,
+                    teacher.teacher_name
                     FROM
-                    teacher
-                    INNER JOIN teacher_type ON teacher.teacher_type = teacher_type.teacher_type_id
-                    WHERE
-                    teacher.teacher_type NOT IN(1,2) and teacher.teacher_id NOT IN($admin_id) ;
+                    pr
+                    INNER JOIN teacher ON pr.pr_record = teacher.teacher_id
+                    ORDER BY
+                    pr.pr_id DESC ;
                     ";
 					$result = $con->query($sql);
 					if ($result->num_rows > 0) {
 
 						while($row = $result->fetch_assoc()) {
-                         
+                            $strDate = $row["pr_date"];
                             echo '<tr>
-                                <td>'. $row["teacher_id"].'</td>
-                                <td>'. $row["teacher_name"].'</td>
+                                <td>'. $row["pr_id"].'</td>
+                                <td>'. mb_substr($row["pr_header"],0,45,'UTF-8').'...</td>
                                 
-                                <td>'. $row["teacher_email"].'</td>
-                                <td>'. $row["teacher_type_name"].'</td>
+                                <td>'. $row["teacher_name"].'</td>
+                                <td>'.DateThai($strDate).'</td>
                                 <td>
                                 
                                        
-                                
+                                <a type="button" href="pr_show.php?act=show&ID=' . $row["pr_id"].'"
+                                            class="btn btn-info btn-xs"
+                                           >
+                                            <span class="icon icon-sm">
+                                                <span class="fas fa-eye icon-dark"></span>
+                                            </span>
+                                            
+                                        </a>
 
 
 
-                            <a type="button" href="javascript: setpass_teacher(' . $row["teacher_id"].')"
-                                        class="btn btn-success btn-xs"
-                                       >
-                                        <span class="icon icon-sm">
-                                            <span class="fas fa-key"></span>
-                                        </span>
-                                        
-                                    </a>
 
 
 
-                                        <a type="button" href="teacher_edit.php?act=edit&ID=' . $row["teacher_id"].'"
+                                        <a type="button" href="pr_edit.php?act=edit&ID=' . $row["pr_id"].'"
                                         class="btn btn-warning btn-xs"
                                        >
                                         <span class="icon icon-sm">
@@ -238,7 +232,7 @@ $admin_id = $_SESSION["TeacherID"];
                                         
                                     </a>
 
-                                    <a type="button" href="javascript: delete_teacher(' . $row["teacher_id"].')"
+                                    <a type="button" href="javascript: delete_pr(' . $row["pr_id"].')"
                                         class="btn btn-danger btn-xs"
                                        >
                                         <span class="icon icon-sm">
@@ -273,10 +267,11 @@ $admin_id = $_SESSION["TeacherID"];
                     </tbody>
                     <tfoot>
                         <tr>
-                        <th>รหัสผู้ดูแลระบบ</th>
-                            <th>ชื่อ - นามสกุล</th>
-                            <th>อีเมลล์</th>
-                            <th>บทบาท</th>
+                        <th>#</th>
+                            <th>หัวข้อข่าวสาร</th>
+                           
+                            <th>ผู้ประกาศ</th>
+                            <th>ประกาศเมือ</th>
                             <th>เพิ่มเติม</th>
 
 

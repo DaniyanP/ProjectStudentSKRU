@@ -149,7 +149,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 						while($row = $result->fetch_assoc()) {
                             echo '<tr>  
                                         <td >
-                                        ' . $row["subject_id"].'
+                                        ' . $row["subject_id2"].'
                                         </td>
                                         <td >
                                         ' . $row["subject_semester"].'/' . $row["subject_year"].'
@@ -302,6 +302,13 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                                                         class="fas fa-eye mr-2"></span>โครงงาน</a>
                                                         <a class="dropdown-item" href="student.php?act=show&ID='. $row["subject_id"].'"><span
                                                         class="fas fa-eye mr-2"></span>รายชื่อนักศึกษา</a>
+
+                                                       
+                                                                                                            
+
+                                                        
+
+
                                                 <a class="dropdown-item" href="classroom_edit.php?act=edit&ID=' . $row["subject_id"].'"><span
                                                         class="fas fa-edit mr-2"></span>แก้ไข</a>'; ?>
                                                 <a class="dropdown-item text-danger" href="classroom_del.php?ID=<?php echo $row["subject_id"]; ?>" onclick="return confirm('คุณต้องการลบรายวิชานี้ออกใช่ไหม')"><span

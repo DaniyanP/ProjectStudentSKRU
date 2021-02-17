@@ -164,7 +164,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                                
                                 <div class="col-md-6">
                                     <input name="result_file" required="" type="file">
-                                    <input name="id_room" type="text" value="<?php echo $id_section_room ?>" hidden>
+                                    <input name="record_id" type="text" value="<?php echo $_SESSION["TeacherID"] ?>" hidden>
                                 </div>
                             </div>
                         </div>

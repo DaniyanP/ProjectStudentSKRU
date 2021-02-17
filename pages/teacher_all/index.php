@@ -232,7 +232,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     teacher
                     INNER JOIN teacher_type ON teacher.teacher_type = teacher_type.teacher_type_id
                     WHERE
-                    teacher.teacher_type NOT IN(3);
+                    teacher.teacher_type NOT IN(3) and teacher.teacher_id NOT IN(1111,3);
                     ";
 					$result = $con->query($sql);
 					if ($result->num_rows > 0) {

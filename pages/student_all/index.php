@@ -5,7 +5,7 @@
 if ($_SESSION["Teacherlevel"]=="2"){?>
 
 <?php include '../../conn.php';
-$id_section_room =$_REQUEST["ID"];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,13 +61,17 @@ $id_section_room =$_REQUEST["ID"];
 
 
     <script type="text/javascript">
-        function delete_student(student_id) {
-            if (confirm('ต้องการลบนักศึกษาคนนี้ออกจากกลุ่มนี้ใช่ไหม')) {
+        function delete_teacher(student_id) {
+            if (confirm('คุณต้องการลบใช่ไหม')) {
                 window.location.href = 'student_del.php?&ID=' + student_id;
             }
         }
 
-        
+        function setpass_student(student_id) {
+            if (confirm('คุณต้องการรีเซ็ตรหัสผ่านใช่ไหม')) {
+                window.location.href = 'student_setpass.php?&ID=' + student_id;
+            }
+        }
     </script>
 
     <?php include '../dateth.php';?>
@@ -100,7 +104,9 @@ $id_section_room =$_REQUEST["ID"];
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                            <li class="breadcrumb-item"><a href="../subject">ข้อมูลรายวิชา</a></li>
+                            <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
+                                <!-- <li class="breadcrumb-item"><a href="index.php">ข้อมูลอาจารย์</a></li>
+                                <li class="breadcrumb-item"><a href="#">ข้อมูลโครงงาน</a></li> -->
                                     <li class="breadcrumb-item active" aria-current="page">ข้อมูลนักศึกษา</li>
                             </ol>
                         </nav>
@@ -115,35 +121,8 @@ $id_section_room =$_REQUEST["ID"];
 
             <div class="d-flex justify-content-between w-100 flex-wrap">
                 <div class="mb-3 mb-lg-0">
-                    <h1 class="h4">ข้อมูลนักศึกษาในรายวิชา</h1>
-                    <p class="mb-0"> <?php
-                       
-                        
-                       $sql01 = "SELECT
-                       subject_project.subject_id,
-                       subject_project.subject_name,
-                       subject_project.subject_semester,
-                       subject_project.subject_year,
-                       subject_project.subject_sec,
-                       subject_project.subject_id2
-                       FROM
-                       subject_project
-                       WHERE
-                       subject_project.subject_id = '$id_section_room'
-                       ";
-                       $result01 = $con->query($sql01);
-                       if ($result01->num_rows > 0) {
-   
-                           while($row01 = $result01->fetch_assoc()) {
-                               echo 'รหัสวิชา'. $row01["subject_id2"].' Sec. '. $row01["subject_sec"].'  '. $row01["subject_name"].'  ภาคการเรียน'. $row01["subject_semester"].'  ปีการศึกษา '. $row01["subject_year"].' ';
-                                                      
-   
-                                   
-                                
-                           }
-                       }
-                       $con->close();
-                       ?>
+                    <h1 class="h4">ข้อมูลนักศึกษา</h1>
+                    <p class="mb-0">แสดงข้อมูลนักศึกษาทั้งหมดในระบบ
                     </p>
                 </div>
 
@@ -156,19 +135,14 @@ $id_section_room =$_REQUEST["ID"];
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
-                            <form action="student_add.php" method="post">
-                                <label for="student_id">เพิ่มนักศึกษา</label>
-                                <input type="text" name="projec_id" id="student_id" placeholder="กรอกรหัสนักศึกษา"
-                                    required>
-                                <input type="text" name="id_class" id="id_class" value="<?php echo $id_section_room ?>"
-                                    hidden>
-                                <button type="submit" class="btn btn-primary btn-sm">บันทึก</button>
-                            </form>
+                        <a class="btn btn-info btn-sm " href="student_add.php"
+                                role="button">เพิ่มนักศึกษา</a>
+                                <a class="btn btn-success btn-sm " data-toggle="modal" data-target="#exampleModalCenter"
+                                role="button">เพิ่มด้วย Excel</a>
                         </div>
 
                         <div class="col-lg-6 col-md-6">
-                            <a class="btn btn-success btn-sm " data-toggle="modal" data-target="#exampleModalCenter"
-                                role="button">เพิ่มด้วย Excel</a>
+                           ------
 
                         </div>
                     </div>
@@ -180,7 +154,7 @@ $id_section_room =$_REQUEST["ID"];
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มโครงงานเข้ากลุ่มเรียน</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มนักศึกษา</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -188,14 +162,14 @@ $id_section_room =$_REQUEST["ID"];
                             <div class="modal-body">
 
                                 <!-- frm_add str -->
-                                <form method="post" action="excel-student-ac.php" enctype="multipart/form-data" class="form-horizontal">
+                                <form method="post" action="excel-ac.php" enctype="multipart/form-data" class="form-horizontal">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="row">
                                
                                 <div class="col-md-6">
                                     <input name="result_file" required="" type="file">
-                                    <input name="id_room" type="text" value="<?php echo $id_section_room ?>" hidden>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -225,24 +199,23 @@ $id_section_room =$_REQUEST["ID"];
 
 
             <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered" width="100%"
-                    >
+            <table id="example" class="table table-striped table-bordered" width="100%" data-order="[[ 0, &quot;desc&quot; ]]" id="tableId">
                     <col style="width:5%">
-                    <col style="width:7%">
-                    <col style="width:7%">
-                    <col style="width:71%">
+                    <col style="width:17%">
+                    <col style="width:18%">
+                    <col style="width:50%">
                     <col style="width:5%">
                     <col style="width:5%">
 
                     <thead>
                         <tr>
                             <th scope="col">รหัสนักศึกษา</th>
-                            <th scope="col">ชื่อ - สกุล</th>
-                            <th scope="col">สาขา</th>
+                            <th scope="col">ชื่อ - นามสกุล</th>
+                            <th scope="col">เบอร์ติดต่อ</th>
+                            <th scope="col">สาขาวิชา</th>
+                           
                             
-                            <th scope="col">อีเมลล์</th>
-                            <th scope="col">สถานะ</th>
-                            <th scope="col">จัดการ</th>
+                            <th scope="col">เพิ่มเติม</th>
 
 
 
@@ -252,28 +225,18 @@ $id_section_room =$_REQUEST["ID"];
                     <tbody>
 
                         <?php
-                       include '../../conn.php';
+                       
                         
 					$sql = "SELECT
-                    subject_hash_student.ss_id,
-                    subject_hash_student.ss_subject_id,
-                    subject_hash_student.ss_student_id,
+                    student.student_id,
                     student.student_name,
                     student.student_major,
                     student.student_phone,
-                    student.student_email,
-                    project_status.project_status_name,
-                    project_status.project_status_class,
                     major.student_major_name,
-                    student.student_project
+                    student.student_email
                     FROM
-                    subject_hash_student
-                    INNER JOIN student ON subject_hash_student.ss_student_id = student.student_id
-                    INNER JOIN project ON student.student_project = project.project_id
-                    INNER JOIN project_status ON project.project_status = project_status.project_status_id
-                    INNER JOIN major ON student.student_major = major.student_major_id
-                    WHERE
-                    subject_hash_student.ss_subject_id = '$id_section_room'
+                    student
+                    INNER JOIN major ON student.student_major = major.student_major_id;
                     ";
 					$result = $con->query($sql);
 					if ($result->num_rows > 0) {
@@ -281,27 +244,25 @@ $id_section_room =$_REQUEST["ID"];
 						while($row = $result->fetch_assoc()) {
                          
                             echo '<tr>
-                                <td>'. $row["ss_student_id"].'</td>
+                                <td>'. $row["student_id"].'</td>
                                 <td>'. $row["student_name"].'</td>
-                                <td>'. $row["student_major_name"].'</td>
-                                <td>'. $row["student_email"].'</td>
                                 
-                                <td><h6><span class="badge bg-'. $row["project_status_class"].'">'. $row["project_status_name"].'</span></h6></td>
-                              
-                                   <td>
+                                
+                               
+                                <td>'. $row["student_phone"].'</td>
+                                <td>'. $row["student_major_name"].'</td>
+                                <td>
+                                
+                                <a type="button" href="javascript: setpass_student(' . $row["student_id"].')"
+                                class="btn btn-success btn-xs"
+                               >
+                                <span class="icon icon-sm">
+                                    <span class="fas fa-key"></span>
+                                </span>
+                                
+                            </a>
 
-                                  
-                                    
-                                        <a type="button" href="project_detail.php?act=show&ID=' . $row["student_project"].'"
-                                            class="btn btn-info btn-xs"
-                                           >
-                                            <span class="icon icon-sm">
-                                                <span class="fas fa-eye icon-dark"></span>
-                                            </span>
-                                            
-                                        </a>
-
-                                        <a type="button" href="student_edit.php?act=show&ID=' . $row["ss_student_id"].'"
+                                        <a type="button" href="student_edit.php?act=edit&ID=' . $row["student_id"].'"
                                         class="btn btn-warning btn-xs"
                                        >
                                         <span class="icon icon-sm">
@@ -310,7 +271,7 @@ $id_section_room =$_REQUEST["ID"];
                                         
                                     </a>
 
-                                    <a type="button" href="javascript: delete_student(' . $row["ss_id"].')"
+                                    <a type="button" href="javascript: delete_teacher(' . $row["student_id"].')"
                                         class="btn btn-danger btn-xs"
                                        >
                                         <span class="icon icon-sm">
@@ -318,6 +279,9 @@ $id_section_room =$_REQUEST["ID"];
                                         </span>
                                         
                                     </a>
+
+
+                                    
                                        
 
                                        
@@ -342,11 +306,12 @@ $id_section_room =$_REQUEST["ID"];
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>รหัสนักศึกษา</th>
-                            <th>ชื่อ - สกุล</th>
-                            <th>สาขา</th>
-                            <th>อีเมลล์</th>
-                            <th>สถานะ</th>
+                        <th>รหัสนักศึกษา</th>
+                            <th>ชื่อ - นามสกุล</th>
+                            <th>เบอร์ติดต่อ</th>
+                            <th>สาขาวิชา</th>
+                            
+                            
                             <th>เพิ่มเติม</th>
 
 
