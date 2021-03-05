@@ -111,11 +111,12 @@ if (!$_SESSION["TeacherID"]){
 					$sql = "SELECT
                     project.project_id,
                     project.project_name,
-                    project.project_adviser1
+                    project.project_adviser1,
+                    project.project_adviser2
                     FROM
                     project
                     WHERE
-                    project.project_adviser1 = '$id_teacher'
+                    project.project_adviser1 = '$id_teacher' or project.project_adviser2 = '$id_teacher'
                     ORDER BY
                     project.project_id DESC";
 					$result = $con->query($sql);
@@ -123,8 +124,19 @@ if (!$_SESSION["TeacherID"]){
 
 						while($row = $result->fetch_assoc()) {
                             echo '
-                            <tr>                                
-                                <td>'. $row["project_id"].'</td>
+                            <tr>    
+                            
+                            
+                             <td>'. $row["project_id"].'&nbsp;&nbsp;';  
+                             
+                             if ($row["project_adviser1"]==$id_teacher) {
+                                echo '<span class="badge bg-success">หลัก</span>';
+                                 
+                             }else if ($row["project_adviser2"]==$id_teacher) {
+                                echo '<span class="badge bg-info ">ร่วม</span>';
+                             }
+                             
+                             echo '</td>
                                 <td>'. mb_substr($row["project_name"],0,80,'UTF-8').'</td>
                                 <td><a class="btn btn-warning btn-sm" type="button" href="project_adviser.php?act=show&ID=' . $row["project_id"].'"><span class="fas fa-eye mr-2" herf="#"></span>เพิ่มเติม</a></td>
                             </tr>';       

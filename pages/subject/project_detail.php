@@ -327,40 +327,38 @@ com05.project_id
                         <div class="d-flex align-items-center justify-content-between pt-3">
                             <div>
                                 <h6 class="mb-0"><span class="icon icon-xs mr-3"><span
-                                            class="fas fa-calendar-times"></span></span>มาสาย</h6>
+                                            class="fas fa-calendar-times"></span></span>ผิดนัด</h6>
 
                             </div>
                             <div>
                                 <a href="#" class="text-primary font-weight-bold">
                                 <a href="#" class="text-primary font-weight-bold">
-                            <?php
+                                <?php
            include '../../conn.php';
            $id_project = $_REQUEST["ID"];
                
-					$sql3 = "SELECT
-                    com05.project_id,
-                    Count(com05.com05_id) as C_Com_21,
-                    com05.meet_check
+					$sql2 = "SELECT
+                    Count(appoint.appoint_id) AS C_appoint01,
+                    appoint.project_id
                     FROM
-                    com05
+                    appoint
                     WHERE
-                    com05.project_id = '$id_project' AND
-                    com05.meet_check = 2
+                    appoint.project_id = '$id_project' AND
+                    appoint.appoint_status = 6
                     GROUP BY
-                    com05.meet_check,
-                    com05.project_id ";
-					$result3 = $con->query($sql3);
+                    appoint.project_id";
+					$result = $con->query($sql2);
 					if ($result->num_rows > 0) {
 
-						while($row = $result3->fetch_assoc()) {
-                            echo $row["C_Com_21"];       
+						while($row = $result->fetch_assoc()) {
+                            echo $row["C_appoint01"];       
                         }
                         }else{
 
                             echo '0';
                         }
                         $con->close();
-                        ?> <span
+                        ?>  <span
                                         class="fas fa-chart-line ml-2"></span></a>
                             </div>
                         </div>

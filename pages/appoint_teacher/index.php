@@ -290,6 +290,8 @@ if (!$_SESSION["TeacherID"]){
                                         <div class="dropdown-menu">
                                             <a class="dropdown-item" href="com05_frm.php?act=show&ID='. $row["appoint_id"].'"><span
                                                     class="fas fa-comment mr-2"></span>บันทึก COM-05</a>
+                                                    <a class="dropdown-item text-danger" href="appoint_reject.php?act=show&ID='. $row["appoint_id"].'"><span
+                                                    class="fas fa-ban mr-2"></span>ผิดนัด</a>
                                         
                                         </div>
 

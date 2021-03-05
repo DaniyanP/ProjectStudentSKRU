@@ -126,6 +126,7 @@ if (!$_SESSION["TeacherID"]){
                             $strDateTime = $row["appoint_recorder"];
                             echo '<p> หมายเลขการนัดหมาย : ' . $row["appoint_id"].'    สถานะ: ' . $row["appoint_status_name"].'
            <p>ต้องการเข้าพบ : '.DateThai($strDate).'   เวลา '. HourMinute($strDatetoHourMinute).'  - '. HourMinute1($strDatetoHourMinute1).' น.
+           <p> ชื่อโครงงาน : ' . $row["project_name"].'
            <p> อาจารย์ที่ปรึกษา : ' . $row["teacher_name"].'
            <p> รายละเอียด : ' . $row["appoint_comment"].'
            <p> นัดหมายโดย : ' . $row["student_name"].'
