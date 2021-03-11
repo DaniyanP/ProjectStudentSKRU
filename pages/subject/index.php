@@ -134,11 +134,14 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     subject_project.subject_semester,
                     subject_project.subject_year,
                     subject_project.subject_sec,
-                    subject_project.subject_time,
+                    subject_project.subject_day,
                     subject_project.subject_teacher,
-                    subject_project.subject_record
+                    subject_project.subject_record,
+                    subject_project.subject_day, 
+	subject_day.day_name
                     FROM
                     subject_project
+                    INNER JOIN	subject_day ON subject_project.subject_day = subject_day.day_id
                     WHERE
                     subject_project.subject_teacher = '$teacher_id'
                     ORDER BY
@@ -185,20 +188,25 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                                         
                                         $row_id = $row["subject_id"];
                                         $query02 = "SELECT
-                                        Count(subject_hash_project.sp_id) as project_total,
-                                        subject_hash_project.sp_subject_id,
-                                        subject_hash_project.sp_project_id
-                                        FROM
-                                        subject_hash_project
-                                        WHERE
-                                        subject_hash_project.sp_subject_id = '$row_id'
-                                        GROUP BY
-                                        
-                                        subject_hash_project.sp_subject_id";
+                                        subject_hash_student.ss_id,
+                                        subject_hash_student.ss_subject_id,
+                                        subject_hash_student.ss_student_id,
+                                        student.student_project,
+                                        project.project_name,
+                                        project_status.project_status_name 
+                                    FROM
+                                        subject_hash_student
+                                        INNER JOIN student ON subject_hash_student.ss_student_id = student.student_id
+                                        INNER JOIN project ON student.student_project = project.project_id
+                                        INNER JOIN project_status ON project.project_status = project_status.project_status_id 
+                                    WHERE
+                                        subject_hash_student.ss_subject_id = '$row_id' 
+                                    GROUP BY
+                                        student.student_project";
                                         $result02 = $con->query($query02);
                                         $count_project = $result02->fetch_assoc();
                                         if($result02->num_rows > 0){
-                                            echo $count_project["project_total"];
+                                            echo $result02->num_rows;
                                         }else{
                                             echo '0';
                                         }
@@ -210,22 +218,36 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                                         
                                         $row_id = $row["subject_id"];
                                         $query033 = "SELECT
-                                        Count(subject_hash_project.sp_id) as project_total,
-                                        subject_hash_project.sp_subject_id,
-                                        subject_hash_project.sp_project_id,
+                                        subject_hash_student.ss_id, 
+                                        subject_hash_student.ss_subject_id, 
+                                        subject_hash_student.ss_student_id, 
+                                        student.student_project, 
+                                        project.project_name, 
+                                        project_status.project_status_name, 
                                         project.project_status
-                                        FROM
-                                        subject_hash_project
-                                        INNER JOIN project ON subject_hash_project.sp_project_id = project.project_id
-                                        WHERE
-                                        subject_hash_project.sp_subject_id = '$row_id' AND project.project_status = 1
-                                        GROUP BY
-                                        
-                                        subject_hash_project.sp_subject_id";
+                                    FROM
+                                        subject_hash_student
+                                        INNER JOIN
+                                        student
+                                        ON 
+                                            subject_hash_student.ss_student_id = student.student_id
+                                        INNER JOIN
+                                        project
+                                        ON 
+                                            student.student_project = project.project_id
+                                        INNER JOIN
+                                        project_status
+                                        ON 
+                                            project.project_status = project_status.project_status_id
+                                    WHERE
+                                        subject_hash_student.ss_subject_id = '$row_id' AND
+                                        project.project_status = 1
+                                    GROUP BY
+                                        student.student_project";
                                         $result033 = $con->query($query033);
                                         $count_project33 = $result033->fetch_assoc();
                                         if($result033->num_rows > 0){
-                                            echo $count_project33["project_total"];
+                                            echo $result033->num_rows;
                                         }else{
                                             echo '0';
                                         }
@@ -236,22 +258,36 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                                         
                                         $row_id = $row["subject_id"];
                                         $query033 = "SELECT
-                                        Count(subject_hash_project.sp_id) as project_total,
-                                        subject_hash_project.sp_subject_id,
-                                        subject_hash_project.sp_project_id,
+                                        subject_hash_student.ss_id, 
+                                        subject_hash_student.ss_subject_id, 
+                                        subject_hash_student.ss_student_id, 
+                                        student.student_project, 
+                                        project.project_name, 
+                                        project_status.project_status_name, 
                                         project.project_status
-                                        FROM
-                                        subject_hash_project
-                                        INNER JOIN project ON subject_hash_project.sp_project_id = project.project_id
-                                        WHERE
-                                        subject_hash_project.sp_subject_id = '$row_id' AND project.project_status = 2
-                                        GROUP BY
-                                        
-                                        subject_hash_project.sp_subject_id";
+                                    FROM
+                                        subject_hash_student
+                                        INNER JOIN
+                                        student
+                                        ON 
+                                            subject_hash_student.ss_student_id = student.student_id
+                                        INNER JOIN
+                                        project
+                                        ON 
+                                            student.student_project = project.project_id
+                                        INNER JOIN
+                                        project_status
+                                        ON 
+                                            project.project_status = project_status.project_status_id
+                                    WHERE
+                                        subject_hash_student.ss_subject_id = '$row_id' AND
+                                        project.project_status = 2
+                                    GROUP BY
+                                        student.student_project";
                                         $result033 = $con->query($query033);
                                         $count_project33 = $result033->fetch_assoc();
                                         if($result033->num_rows > 0){
-                                            echo $count_project33["project_total"];
+                                            echo $result033->num_rows;
                                         }else{
                                             echo '0';
                                         }
@@ -262,22 +298,36 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                                         
                                         $row_id = $row["subject_id"];
                                         $query033 = "SELECT
-                                        Count(subject_hash_project.sp_id) as project_total,
-                                        subject_hash_project.sp_subject_id,
-                                        subject_hash_project.sp_project_id,
+                                        subject_hash_student.ss_id, 
+                                        subject_hash_student.ss_subject_id, 
+                                        subject_hash_student.ss_student_id, 
+                                        student.student_project, 
+                                        project.project_name, 
+                                        project_status.project_status_name, 
                                         project.project_status
-                                        FROM
-                                        subject_hash_project
-                                        INNER JOIN project ON subject_hash_project.sp_project_id = project.project_id
-                                        WHERE
-                                        subject_hash_project.sp_subject_id = '$row_id' AND project.project_status = 3
-                                        GROUP BY
-                                        
-                                        subject_hash_project.sp_subject_id";
+                                    FROM
+                                        subject_hash_student
+                                        INNER JOIN
+                                        student
+                                        ON 
+                                            subject_hash_student.ss_student_id = student.student_id
+                                        INNER JOIN
+                                        project
+                                        ON 
+                                            student.student_project = project.project_id
+                                        INNER JOIN
+                                        project_status
+                                        ON 
+                                            project.project_status = project_status.project_status_id
+                                    WHERE
+                                        subject_hash_student.ss_subject_id = '$row_id' AND
+                                        project.project_status = 3
+                                    GROUP BY
+                                        student.student_project";
                                         $result033 = $con->query($query033);
                                         $count_project33 = $result033->fetch_assoc();
                                         if($result033->num_rows > 0){
-                                            echo $count_project33["project_total"];
+                                            echo $result033->num_rows;
                                         }else{
                                             echo '0';
                                         }
@@ -298,10 +348,11 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                                          
 
                                             <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="student.php?act=show&ID='. $row["subject_id"].'"><span
+                                            class="fas fa-eye mr-2"></span>รายชื่อนักศึกษา</a>
                                             <a class="dropdown-item" href="project.php?act=show&ID='. $row["subject_id"].'"><span
                                                         class="fas fa-eye mr-2"></span>โครงงาน</a>
-                                                        <a class="dropdown-item" href="student.php?act=show&ID='. $row["subject_id"].'"><span
-                                                        class="fas fa-eye mr-2"></span>รายชื่อนักศึกษา</a>
+                                                       
 
                                                        
                                                                                                             

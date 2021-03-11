@@ -29,8 +29,10 @@ $subject_name  = $_POST['subject_name'];
 $subject_semester  = $_POST['subject_semester'];
 $subject_year  = $_POST['subject_year'];
 $subject_sec  = $_POST['subject_sec'];
-$subject_time  = $_POST['subject_time'];
+$subject_day  = $_POST['subject_day'];
 $subject_teacher  = $_POST['subject_teacher'];
+$subject_time_start  = $_POST['subject_time_start'];
+$subject_time_end  = $_POST['subject_time_end'];
 
 
 
@@ -38,11 +40,11 @@ $subject_teacher  = $_POST['subject_teacher'];
 
 $sql ="INSERT INTO subject_project
 
-  ( `subject_id`, `subject_id2`, `subject_classroom`, `subject_name`, `subject_semester`, `subject_year`, `subject_sec`, `subject_time`, `subject_teacher`)
+  ( `subject_id`, `subject_id2`, `subject_classroom`, `subject_name`, `subject_semester`, `subject_year`, `subject_sec`, `subject_day`, `subject_teacher`, `subject_time_start`, `subject_time_end`)
 
     VALUES 
 
-    ('$subject_id','$subject_id2','$subject_classroom','$subject_name','$subject_semester','$subject_year','$subject_sec','$subject_time','$subject_teacher')";
+    ('$subject_id','$subject_id2','$subject_classroom','$subject_name','$subject_semester','$subject_year','$subject_sec','$subject_day','$subject_teacher','$subject_time_start','$subject_time_end')";
     
     $result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
     mysqli_close($con);

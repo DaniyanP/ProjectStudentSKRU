@@ -208,15 +208,14 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <col style="width:5%">
 
                     <thead>
-                        <tr>
-                            <th scope="col">รหัสนักศึกษา</th>
-                            <th scope="col">ชื่อ - นามสกุล</th>
-                            <th scope="col">เบอร์ติดต่อ</th>
-                            <th scope="col">สาขาวิชา</th>
-                           
+                    <tr>
+                        <th>รหัสนักศึกษา</th>
+                            <th>ชื่อ - นามสกุล</th>
+                            <th>เบอร์ติดต่อ</th>
+                            <th>สาขาวิชา</th>
                             
-                            <th scope="col">เพิ่มเติม</th>
-
+                            
+                            <th>เพิ่มเติม</th>
 
 
 
@@ -304,7 +303,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
 
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                         <tr>
                         <th>รหัสนักศึกษา</th>
                             <th>ชื่อ - นามสกุล</th>
@@ -317,7 +316,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
 
                         </tr>
-                    </tfoot>
+                    </tfoot> -->
                 </table>
 
             </div>

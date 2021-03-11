@@ -55,13 +55,14 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                
-                                
-                                
-                                <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
+
+
+
+                                <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a>
+                                </li>
                                 <li class="breadcrumb-item"><a href="../subject">ข้อมูลรายวิชา</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">เพิ่มรายวิชา</li>
-                           
+                                <li class="breadcrumb-item active" aria-current="page">เพิ่มรายวิชา</li>
+
                             </ol>
                         </nav>
                     </div>
@@ -84,7 +85,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
         <div class="card border-light shadow-sm mb-4">
             <div class="card-body">
-            
+
                 <form action="classroom_add_ac.php" method="post">
 
 
@@ -114,7 +115,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label for="subject_sec">กลุ่มเรียน</label>
-                                <input class="form-control" id="subject_sec" name="subject_sec" type="number"
+                                <input class="form-control" id="subject_sec" name="subject_sec" type="text"
                                     placeholder="กรอกกลุ่มเรียน" required>
                             </div>
                         </div>
@@ -151,22 +152,67 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
-                                <label for="subject_time">วัน เวลา</label>
-                                <input class="form-control" id="subject_time" name="subject_time" type="text"
-                                    placeholder="กรอกวัน เวลา" required>
+                                <label for="subject_day">วันทำการสอน</label>
+
+                                <?php 
+                                    $query11 = "SELECT
+                                    subject_day.day_id as t1_day_id,
+                                    subject_day.day_name as t1_day_name
+                                    FROM
+                                    subject_day
+                                    
+                                    ORDER BY
+                                    subject_day.day_id ASC";
+                                    $result11 = mysqli_query($con, $query11);
+
+                                    ?>
+
+                                <select class="form-select" id="subject_day" name="subject_day"
+                                    aria-label="Default select example">
+                                    <option selected>เลือกวันทำการสอน</option>
+
+                                    <?php foreach($result11 as $results1){?>
+                                    <option value="<?php echo $results1["t1_day_id"];?>">
+                                        <?php echo $results1["t1_day_name"]; ?>
+                                    </option>
+                                    <?php } ?>
+                                </select>
+
                             </div>
+
+
                         </div>
 
                         <input type="text" name="subject_teacher" id="subject_teacher"
                             value="<?php echo  $_SESSION["TeacherID"]; ?>" hidden>
-                            
+
+
+
+                            <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label for="subject_time_start">เวลาสอน(เริ่มต้น)</label>
+                                <input class="form-control" id="subject_time_start" name="subject_time_start" type="time"
+                                    placeholder="กรอกปีการศึกษา" required>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label for="subject_time_end">เวลาสอน(สิ้นสุด)</label>
+                                <input class="form-control" id="subject_time_end" name="subject_time_end" type="time"
+                                    placeholder="กรอกปีการศึกษา" required>
+                            </div>
+                        </div>
+
+
 
                     </div>
 
                     <div class="mt-3">
-            <button type="submit" class="btn btn-primary">บันทึก</button>
-            <a type="button" class="btn btn-info" href="../subject">กลับ</a>
-        </div>
+                        <button type="submit" class="btn btn-primary">บันทึก</button>
+                        <a type="button" class="btn btn-info" href="../subject">กลับ</a>
+                    </div>
 
 
 
@@ -182,7 +228,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
 
 
-        
+
         </form>
 
         </div>

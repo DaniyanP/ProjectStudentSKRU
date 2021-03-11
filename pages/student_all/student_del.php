@@ -7,6 +7,11 @@
 
 $student_id = $_REQUEST["ID"];
 
+
+
+$sql2 = "DELETE FROM subject_hash_student  WHERE ss_student_id='$student_id' ";
+$result2 = mysqli_query($con, $sql2);
+
 $sql = "DELETE FROM student  WHERE student_id='$student_id' ";
 $result = mysqli_query($con, $sql);
 

@@ -156,7 +156,7 @@ $id_section_room =$_REQUEST["ID"];
         <div class="card border-light shadow-sm mb-4">
             <div class="card-body">
 
-                <div class="container">
+               <!--  <div class="container">
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <form action="project_add.php" method="post">
@@ -175,7 +175,7 @@ $id_section_room =$_REQUEST["ID"];
 
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -238,12 +238,11 @@ $id_section_room =$_REQUEST["ID"];
                     <col style="width:5%">
 
                     <thead>
-                        <tr>
-                            <th scope="col">รหัสโครงงาน</th>
-                            <th scope="col">ชื่อโครงงาน</th>
-                            <th scope="col">สถานะ</th>
-                            <th scope="col">เพิ่มเติม</th>
-
+                    <tr>
+                            <th>รหัสโครงงาน</th>
+                            <th>ชื่อโครงงาน</th>
+                            <th>สถานะ</th>
+                            <th>เพิ่มเติม</th>
 
 
 
@@ -255,34 +254,47 @@ $id_section_room =$_REQUEST["ID"];
                        
                        include '../../conn.php';
 					$sql = "SELECT
-                    subject_hash_project.sp_id,
-                    subject_hash_project.sp_subject_id,
-                    subject_hash_project.sp_project_id,
-                    project.project_name,
+                    subject_hash_student.ss_id, 
+                    subject_hash_student.ss_subject_id, 
+                    subject_hash_student.ss_student_id, 
+                    student.student_project, 
+                    project.project_name, 
                     project_status.project_status_name,
                     project_status.project_status_class
-                    FROM
-                    subject_hash_project
-                    INNER JOIN project ON subject_hash_project.sp_project_id = project.project_id
-                    INNER JOIN project_status ON project.project_status = project_status.project_status_id
-                    WHERE
-                    subject_hash_project.sp_subject_id = '$id_section_room'
-                    ORDER BY
-                    subject_hash_project.sp_project_id ASC";
+                FROM
+                    subject_hash_student
+                    INNER JOIN
+                    student
+                    ON 
+                        subject_hash_student.ss_student_id = student.student_id
+                    INNER JOIN
+                    project
+                    ON 
+                        student.student_project = project.project_id
+                    INNER JOIN
+                    project_status
+                    ON 
+                        project.project_status = project_status.project_status_id
+                WHERE
+                    subject_hash_student.ss_subject_id = '$id_section_room'
+                GROUP BY
+                    student.student_project
+                   
+                    ";
 					$result = $con->query($sql);
 					if ($result->num_rows > 0) {
 
 						while($row = $result->fetch_assoc()) {
                          
                             echo '<tr>
-                                <td>'. $row["sp_project_id"].'</td>
+                                <td>'. $row["student_project"].'</td>
                                 <td>'. mb_substr($row["project_name"],0,65,'UTF-8').'</td>
                                 
                                 <td><h6><span class="badge bg-'. $row["project_status_class"].'">'. $row["project_status_name"].'</span></h6></td>
                               
                                    <td>
                                     
-                                        <a type="button" href="project_detail.php?act=show&ID=' . $row["sp_project_id"].'&IDT=' . $id_section_room.'"
+                                        <a type="button" href="project_detail.php?act=show&ID=' . $row["student_project"].'&IDT=' . $id_section_room.'"
                                             class="btn btn-info btn-xs"
                                            >
                                             <span class="icon icon-sm">
@@ -291,7 +303,7 @@ $id_section_room =$_REQUEST["ID"];
                                             
                                         </a>
 
-                                        <a type="button" href="project_edit.php?act=show&ID=' . $row["sp_project_id"].'&IDR=' . $id_section_room.'"
+                                        <a type="button" href="project_edit.php?act=show&ID=' . $row["student_project"].'&IDR=' . $id_section_room.'"
                                         class="btn btn-warning btn-xs"
                                        >
                                         <span class="icon icon-sm">
@@ -300,14 +312,7 @@ $id_section_room =$_REQUEST["ID"];
                                         
                                     </a>
 
-                                    <a type="button" href="javascript: delete_project(' . $row["sp_id"].')"
-                                        class="btn btn-danger btn-xs"
-                                       >
-                                        <span class="icon icon-sm">
-                                            <span class="fas fa-trash-alt icon-dark"></span>
-                                        </span>
-                                        
-                                    </a>
+                                  
                                        
 
                                        
@@ -330,7 +335,7 @@ $id_section_room =$_REQUEST["ID"];
 
 
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                         <tr>
                             <th>รหัสโครงงาน</th>
                             <th>ชื่อโครงงาน</th>
@@ -340,7 +345,7 @@ $id_section_room =$_REQUEST["ID"];
 
 
                         </tr>
-                    </tfoot>
+                    </tfoot> -->
                 </table>
 
             </div>

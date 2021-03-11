@@ -23,11 +23,23 @@ session_start();
 
                      
 
-                      if ($_SESSION["Userlevel"]=="A"){  
-
+                      if ($_SESSION["ProjectID"]=="1111"){  
+                        echo "<script>";
+                        echo "alert(\" ให้นักศึกษาติดต่ออาจารย์ประจำวิชาเพื่อทำการแก้ไขรหัสโครงงาน\");"; 
+                        echo "window.history.back()";
+                    echo "</script>";
+                       
+                      }else if ($_SESSION["Userlevel"]=="1") {
                         Header("Location: pages/student_index");
 
+                      }else if($_SESSION["Userlevel"]=="2"){
+                        echo "<script>";
+                            echo "alert(\" ไม่สารถใช้งานได้เนื่องจากสถานะโครงงานของนักศึกษาถูกยกเลิก ติดต่ออาจารย์ประจำวิชา!!!\");"; 
+                            echo "window.history.back()";
+                        echo "</script>";
+    
                       }
+                      
 
                   }else{
                     echo "<script>";

@@ -9,8 +9,8 @@ if (!$_SESSION["TeacherID"]){
 <?php
 	//เรียกใช้ไฟล์ autoload.php ที่อยู่ใน Folder vendor
 	require_once __DIR__ . '../vendor/autoload.php';
-	$project_id = $_REQUEST["ID"];
-	include './pages/dateth.php';
+	
+	//ตั้งค่าการเชื่อมต่อฐานข้อมูล
 	
     include("conn.php");
 	
@@ -20,43 +20,20 @@ if (!$_SESSION["TeacherID"]){
 		die("Connection failed: " . mysqli_connect_error());
 	}
 
-	$sql = "SELECT
-	appoint.appoint_id, 
-	appoint.project_id, 
-	appoint.appoint_date_start, 
-	appoint.appoint_date_end, 
-	teacher.teacher_name, 
-	appoint_status.appoint_status_name
-FROM
-	appoint
-	INNER JOIN
-	teacher
-	ON 
-		appoint.teacher_id = teacher.teacher_id
-	INNER JOIN
-	appoint_status
-	ON 
-		appoint.appoint_status = appoint_status.appoint_status_id
-WHERE
-	appoint.project_id = '$project_id'
-ORDER BY
-	appoint.appoint_id ASC";
+	$sql = "SELECT * FROM items";
 	
 	$result = mysqli_query($con, $sql);
 	$content = "";
 	if (mysqli_num_rows($result) > 0) {
 		$i = 1;
 		while($row = mysqli_fetch_assoc($result)) {
-			$strDate = $row["appoint_date_start"];
-			$strDatetoHourMinute = $row["appoint_date_start"];
-			$strDatetoHourMinute1 = $row["appoint_date_end"];
 			$content .= '<tr style="border:1px solid #000;">
 				<td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$i.'</td>
-				<td style="border-right:1px solid #000;padding:3px;text-align:center;" >'.DateThai($strDate).' </td>
-				<td style="border-right:1px solid #000;padding:3px;"  >'. HourMinute($strDatetoHourMinute).'  - '. HourMinute1($strDatetoHourMinute1).' น.</td>
-				<td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$row['teacher_name'].'</td>
+				<td style="border-right:1px solid #000;padding:3px;text-align:center;" >14 มกราคม 2564</td>
+				<td style="border-right:1px solid #000;padding:3px;"  >10.00 - 13.25 น.</td>
+				<td style="border-right:1px solid #000;padding:3px;text-align:center;"  >ผศ.แสงรัศมี พัฒนพิบูลกัลญามิตร</td>
               
-				<td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$row['appoint_status_name'].'</td>
+				<td style="border-right:1px solid #000;padding:3px;text-align:center;"  >'.$row['units'].'</td>
 			</tr>';
 			$i++;
 		}
@@ -65,7 +42,6 @@ ORDER BY
 	mysqli_close($con);
 	
     $mpdf = new \Mpdf\Mpdf();
-
 
 $head = '
 <style>
@@ -84,8 +60,7 @@ $head = '
 
 	<tr style="border:0px solid #000;padding:4px;">
 	<td  style="border-right:0px solid #000;padding:4px;"   width="20%">ผู้จัดทำโครงงาน</td>       
-    <td  style="border-right:0px solid #000;padding:4px;" width="80%">
-</td>
+    <td  style="border-right:0px solid #000;padding:4px;" width="80%">kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk </td>
 	</tr>
 
 	</table>

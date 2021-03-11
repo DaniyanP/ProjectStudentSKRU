@@ -55,9 +55,10 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                            <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="../subject"><span class="fas fa-home"></span></a>
+                                </li>
                                 <li class="breadcrumb-item"><a href="../subject">ข้อมูลรายวิชา</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">แก้ไขรายวิชา</li>
+                                <li class="breadcrumb-item active" aria-current="page">แก้ไขรายวิชา</li>
                             </ol>
                         </nav>
                     </div>
@@ -80,7 +81,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
         <div class="card border-light shadow-sm mb-4">
             <div class="card-body">
-            <?php
+                <?php
 
 $classroom_id = $_REQUEST["ID"];
 
@@ -94,9 +95,11 @@ subject_project.subject_name,
 subject_project.subject_semester,
 subject_project.subject_year,
 subject_project.subject_sec,
-subject_project.subject_time,
+subject_project.subject_day,
 subject_project.subject_teacher,
-subject_project.subject_record
+subject_project.subject_record,
+subject_project.subject_time_end,
+subject_project.subject_time_start
 FROM
 subject_project
 WHERE
@@ -114,7 +117,7 @@ extract($row);
                             <div class="form-group">
                                 <label for="subject_id2">รหัสวิชา</label>
                                 <input class="form-control" id="subject_id2" name="subject_id2" type="text"
-                                    placeholder="กรอกรหัสวิชา" required  value="<?php echo $subject_id2?>">
+                                    placeholder="กรอกรหัสวิชา" required value="<?php echo $subject_id2?>">
                             </div>
                         </div>
 
@@ -134,7 +137,7 @@ extract($row);
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label for="subject_sec">กลุ่มเรียน</label>
-                                <input class="form-control" id="subject_sec" name="subject_sec" type="number"
+                                <input class="form-control" id="subject_sec" name="subject_sec" type="text"
                                     placeholder="กรอกกลุ่มเรียน" required value="<?php echo $subject_sec?>">
                             </div>
                         </div>
@@ -150,6 +153,9 @@ extract($row);
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
                                 <label for="subject_semester">ภาคการเรียน</label>
+
+
+
                                 <input class="form-control" id="subject_semester" name="subject_semester" type="number"
                                     placeholder="กรอกภาคการเรียน" required value="<?php echo $subject_semester?>">
                             </div>
@@ -169,26 +175,76 @@ extract($row);
 
                     <div class="row">
 
+
                         <div class="col-md-3 mb-3">
                             <div class="form-group">
-                                <label for="subject_time">วัน เวลา สอน</label>
-                                <input class="form-control" id="subject_time" name="subject_time" type="text"
-                                    placeholder="กรอกวัน เวลา" required value="<?php echo $subject_time?>">
+                                <label for="subject_day">วันทำการสอน</label>
+
+
+                                <?php 
+                                    $query = "SELECT
+                                    subject_day.day_id as t1_day_id,
+                                    subject_day.day_name as t1_day_name
+                                    FROM
+                                    subject_day
+                                    
+                                    ORDER BY
+                                    subject_day.day_id ASC";
+                                    $result = mysqli_query($con, $query);
+
+                                    ?>
+
+                                <select class="form-select" id="subject_day" name="subject_day"
+                                    aria-label="Default select example">
+                                    <option selected>เลือกวันทำการสอน</option>
+
+                                    <?php foreach($result as $results){
+                                            if( $results["t1_day_id"] == $subject_day ){
+                                               echo' <option value="'.$results["t1_day_id"].'" selected="true">'.$results["t1_day_name"].'</option>';
+                                            }else{
+                                                echo' <option value="'.$results["t1_day_id"].'" >'.$results["t1_day_name"].'</option>';
+                                            }
+                                        }
+                                        ?>
+ </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label for="subject_time_start">เวลาสอน(เริ่มต้น)</label>
+                                <input class="form-control" id="subject_time_start" name="subject_time_start" type="time"
+                                    value="<?php echo $subject_time_start?>" required>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3 mb-3">
+                            <div class="form-group">
+                                <label for="subject_time_end">เวลาสอน(สิ้นสุด)</label>
+                                <input class="form-control" id="subject_time_end" name="subject_time_end" type="time"
+                                    value="<?php echo $subject_time_end?>" required>
                             </div>
                         </div>
 
                         <input type="text" name="subject_teacher" id="subject_teacher"
                             value="<?php echo  $_SESSION["TeacherID"]; ?>" hidden>
 
-                            <input type="text" name="subject_id" id="subject_id"
-                            value="<?php echo  $subject_id ?>" hidden>
-                            
+                        <input type="text" name="subject_id" id="subject_id" value="<?php echo  $subject_id ?>" hidden>
+
+
+
+
+
+
+
 
                     </div>
 
                     <div class="mt-3">
-            <button type="submit" class="btn btn-primary">บันทึก</button>
-        </div>
+                        <button type="submit" class="btn btn-primary">บันทึก</button>
+                    </div>
 
 
 
@@ -205,7 +261,7 @@ extract($row);
 
 
 
-        
+
         </form>
 
         </div>

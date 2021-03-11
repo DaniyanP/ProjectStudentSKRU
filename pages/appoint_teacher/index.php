@@ -141,13 +141,13 @@ if (!$_SESSION["TeacherID"]){
                         <col style="width:5%">
 
                         <thead>
-                            <tr>
-                                <th scope="col">#ID</th>
-                                <th scope="col">วันที่เข้าพบ</th>
-                                <th scope="col">เวลา</th>
-                                <th scope="col">โครงงาน</th>
-                                <th scope="col">สถานะ</th>
-                                <th scope="col">จัดการ </th>
+                        <tr>
+                                <th>#ID</th>
+                                <th>วันที่เข้าพบ</th>
+                                <th>เวลา</th>
+                                <th>โครงงาน</th>
+                                <th>สถานะ</th>
+                                <th>จัดการ</th>
 
                             </tr>
                         </thead>
@@ -337,7 +337,7 @@ if (!$_SESSION["TeacherID"]){
 
 
                         </tbody>
-                        <tfoot>
+                        <!-- <tfoot>
                             <tr>
                                 <th>#ID</th>
                                 <th>วันที่เข้าพบ</th>
@@ -347,7 +347,7 @@ if (!$_SESSION["TeacherID"]){
                                 <th>จัดการ</th>
 
                             </tr>
-                        </tfoot>
+                        </tfoot> -->
                     </table>
 
                 </div>

@@ -204,13 +204,12 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
                     <col style="width:5%">
 
                     <thead>
-                        <tr>
-                            <th scope="col">รหัสโครงงาน</th>
-                            <th scope="col">ชื่อโครงงาน</th>
-                            <th scope="col">ประเภท</th>
-                            <th scope="col">สถานะ</th>
-                            <th scope="col">เพิ่มเติม</th>
-
+                    <tr>
+                            <th>รหัสโครงงาน</th>
+                            <th>ชื่อโครงงาน</th>
+                            <th>ประเภท</th>
+                            <th>สถานะ</th>
+                            <th>เพิ่มเติม</th>
 
 
 
@@ -293,7 +292,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
 
                     </tbody>
-                    <tfoot>
+                   <!--  <tfoot>
                         <tr>
                             <th>รหัสโครงงาน</th>
                             <th>ชื่อโครงงาน</th>
@@ -304,7 +303,7 @@ if ($_SESSION["Teacherlevel"]=="2"){?>
 
 
                         </tr>
-                    </tfoot>
+                    </tfoot> -->
                 </table>
 
             </div>

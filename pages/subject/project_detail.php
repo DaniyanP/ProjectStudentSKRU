@@ -863,12 +863,13 @@ student.student_id ASC";
                     filee.project_id,
                     file_type.file_type_name,
                     filee.file_link,
-                    file_type.file_type_icon
+                    file_type.file_type_icon,
+                    filee.file_apporve
                     FROM
                     filee
                     INNER JOIN file_type ON filee.file_type = file_type.file_type_id
                     WHERE
-                    filee.project_id = '$id_ptojrct'
+                    filee.project_id = '$id_ptojrct' and filee.file_apporve = 2
                     ORDER BY
                     file_type.file_type_id ASC";
 					$result = $con->query($sql);
@@ -883,6 +884,11 @@ student.student_id ASC";
                         }
                         $con->close();
                         ?>     
+
+<div class="btn-group mr-2 mb-2"> 
+                            <a href="../../pdf.php?act=show&ID=<?php echo $id_ptojrct ?>" type="button" class="btn btn-danger"><span class="fas fa-file-pdf mr-2"></span>รายงานประวัติการเข้าพบ</a>
+                            
+                        </div>
                                    
                             </div>
                         </div>

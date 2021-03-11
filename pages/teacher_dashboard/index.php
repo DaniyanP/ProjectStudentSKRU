@@ -1,4 +1,3 @@
-
 <?php session_start();?>
 <?php 
 
@@ -58,7 +57,8 @@ if (!$_SESSION["TeacherID"]){
                     <div class="d-flex">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
-                                <li class="breadcrumb-item"><a href="../student_index"><span class="fas fa-home"></span></a></li>
+                                <li class="breadcrumb-item"><a href="../student_index"><span
+                                            class="fas fa-home"></span></a></li>
                                 <li class="breadcrumb-item"><a href="#">Tables</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Bootstrap tables</li>
                             </ol>
@@ -78,38 +78,37 @@ if (!$_SESSION["TeacherID"]){
                     <p class="mb-0">อธิบายหัวข้อ
                     </p>
                 </div>
-                
+
             </div>
         </div>
 
-        <div class="card border-light shadow-sm mb-4">
-            <div class="card-body">
-           <?php
-           function random_password($len)
-           {
-               srand((double)microtime()*10000000);
-               $chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-               $ret_str = "";
-               $num = strlen($chars);
-               for($i = 0; $i < $len; $i++)
-               {
-                   $ret_str.= $chars[rand()%$num];
-                   $ret_str.=""; 
-               }
-               return $ret_str; 
-           }
-           // echo random_password(8); 
-           $passw = random_password(6); 
-           echo $passw;
-           ?>
-               
+        <div class="row">
+
+
+            <div class="col-12 col-xl-6">
+                <div class="card border-light shadow-sm mb-4">
+                    <div class="card-body">
+                        ดดดดด
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-12 col-xl-6">
+                <div class="card border-light shadow-sm mb-4">
+                    <div class="card-body">
+                        ดดดดด
+
+                    </div>
+                </div>
             </div>
         </div>
-        
 
 
         <?php include '../footer.php';?>
-        
+
     </main>
 
     <!-- Core -->

@@ -180,7 +180,7 @@ $id_section_room =$_REQUEST["ID"];
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มโครงงานเข้ากลุ่มเรียน</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">เพิ่มนักศึกษาเข้ากลุ่มเรียน</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -235,15 +235,13 @@ $id_section_room =$_REQUEST["ID"];
                     <col style="width:5%">
 
                     <thead>
-                        <tr>
-                            <th scope="col">รหัสนักศึกษา</th>
-                            <th scope="col">ชื่อ - สกุล</th>
-                            <th scope="col">สาขา</th>
-                            
-                            <th scope="col">อีเมลล์</th>
-                            <th scope="col">สถานะ</th>
-                            <th scope="col">จัดการ</th>
-
+                    <tr>
+                            <th>รหัสนักศึกษา</th>
+                            <th>ชื่อ - สกุล</th>
+                            <th>สาขา</th>
+                            <th>อีเมลล์</th>
+                            <th>สถานะ</th>
+                            <th>เพิ่มเติม</th>
 
 
 
@@ -340,7 +338,7 @@ $id_section_room =$_REQUEST["ID"];
 
 
                     </tbody>
-                    <tfoot>
+                    <!-- <tfoot>
                         <tr>
                             <th>รหัสนักศึกษา</th>
                             <th>ชื่อ - สกุล</th>
@@ -352,7 +350,7 @@ $id_section_room =$_REQUEST["ID"];
 
 
                         </tr>
-                    </tfoot>
+                    </tfoot> -->
                 </table>
 
             </div>

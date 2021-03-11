@@ -10,8 +10,9 @@ $subject_name  = $_POST['subject_name'];
 $subject_semester  = $_POST['subject_semester'];
 $subject_year  = $_POST['subject_year'];
 $subject_sec  = $_POST['subject_sec'];
-$subject_time  = $_POST['subject_time'];
-
+$subject_day  = $_POST['subject_day'];
+$subject_time_start  = $_POST['subject_time_start'];
+$subject_time_end  = $_POST['subject_time_end'];
 
 
   
@@ -24,7 +25,9 @@ subject_name='$subject_name',
 subject_semester='$subject_semester',
 subject_year='$subject_year',
 subject_sec='$subject_sec',
-subject_time='$subject_time'
+subject_day='$subject_day',
+subject_time_start='$subject_time_start',
+subject_time_end='$subject_time_end'
 
 
 

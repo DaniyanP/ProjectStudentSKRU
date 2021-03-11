@@ -842,7 +842,7 @@ student.student_id ASC";
 
 
                             <div role="tabpanel" class="tab-pane fade" id="Section3">
-                          
+                           
                             <div class="btn-group mr-2 mb-2">
 <a class="btn btn-warning" type="button" data-toggle="modal" data-target="#exampleModalCenter"><span class="fas fa-plus mr-2"> เพิ่มเอกสาร</a>
 </div>
@@ -903,6 +903,7 @@ student.student_id ASC";
         </div>
 
     </div>
+    
     <div class="row">
 
         <div class="form-group">
@@ -927,6 +928,7 @@ student.student_id ASC";
 </div>
 <!-- ฟอร์มเพิ่มไฟล์ สิ้นสุด -->
 
+
                             <?php
            include '../../conn.php';
            $id_ptojrct =$_REQUEST["ID"];
@@ -936,12 +938,13 @@ student.student_id ASC";
                     filee.project_id,
                     file_type.file_type_name,
                     filee.file_link,
-                    file_type.file_type_icon
+                    file_type.file_type_icon,
+                    filee.file_apporve
                     FROM
                     filee
                     INNER JOIN file_type ON filee.file_type = file_type.file_type_id
                     WHERE
-                    filee.project_id = '$id_ptojrct'
+                    filee.project_id = '$id_ptojrct' and filee.file_apporve = 2
                     ORDER BY
                     file_type.file_type_id ASC";
 					$result = $con->query($sql);
@@ -964,7 +967,11 @@ student.student_id ASC";
                         }
                         $con->close();
                         ?>     
-                                   
+                                   <div class="btn-group mr-2 mb-2"> 
+                            <a href="../../pdf.php?act=show&ID=<?php echo $id_ptojrct ?>" type="button" class="btn btn-danger"><span class="fas fa-file-pdf mr-2"></span>รายงานประวัติการนัดพบ</a>
+                            
+                        </div>
+
                             </div>
                         </div>
                     </div>
@@ -972,7 +979,7 @@ student.student_id ASC";
             </div>
         </div>
         <!--  nav end -->
-
+        
 
 
         <?php include '../footer.php';?>

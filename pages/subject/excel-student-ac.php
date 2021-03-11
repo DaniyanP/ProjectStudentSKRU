@@ -12,6 +12,23 @@ include '../../conn.php';
         $objReader	= PHPExcel_IOFactory::createReader($file_type);
         $objPHPExcel = $objReader->load($file_directory . $new_file_name);
         $sheet_data	= $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+        $sheet_data2	= $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
+
+
+        foreach ($sheet_data2 as $row2)
+        {
+            if(!empty($row2['A']))
+            {
+                $password  = $row2['A'];
+                $setpassword = md5($password);
+                $checkemail2 = mysqli_query($con,'SELECT * FROM `student` WHERE student_id = "'.$row2['A'].'" ');
+                if(mysqli_num_rows($checkemail2) == '0')
+                {
+                    mysqli_query($con,'INSERT INTO `student` (student_id,student_name,student_major,student_project,student_password,student_email) VALUES ("'.$row2['A'].'","'.$row2['B'].'" ,"'.$row2['C'].'","'.$row2['D'].'","'.$setpassword.'","'.$row2['A'].'@parichat.skru.ac.th" ) ');
+                }
+                
+            }
+        }
 
         foreach ($sheet_data as $row)
         {

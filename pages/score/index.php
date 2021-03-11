@@ -175,7 +175,34 @@ appoint.appoint_date_start
                 </table>
                 </div>
                 <br>
-                <p>คะแนนรวม <b>5</b>  คะแนน</p>
+                <p>คะแนนรวม <b>
+                <?php
+           include '../../conn.php';
+          
+					$sql2 = "SELECT
+                    com05.project_id,
+                    Sum(score.score_score) as s_sum
+                    FROM
+                    com05
+                    INNER JOIN score ON com05.score = score.score_id
+                    WHERE
+                    com05.project_id = '$id_ptojrct'
+                    GROUP BY
+com05.project_id
+                    ";
+					$result = $con->query($sql2);
+					if ($result->num_rows > 0) {
+
+						while($row = $result->fetch_assoc()) {
+                            echo $row["s_sum"];       
+                        }
+                        }else{
+
+                            echo '0';
+                        }
+                        $con->close();
+                        ?> 
+                </b>  คะแนน</p>
                 
 
             </div>
