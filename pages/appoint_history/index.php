@@ -142,13 +142,13 @@ if (!$_SESSION["UserID"]){  //check session
                         <col style="width:5%">
 
                         <thead>
-                            <tr>
-                                <th scope="col">#ID</th>
-                                <th scope="col">วันที่เข้าพบ</th>
-                                <th scope="col">เวลา</th>
-                                <th scope="col">สิ่งที่นำเสนอ</th>
-                                <th scope="col">สถานะ</th>
-                                <th scope="col">จัดการ </th>
+                        <tr>
+                                <th>#ID</th>
+                                <th>วันที่เข้าพบ</th>
+                                <th>เวลา</th>
+                                <th>สิ่งที่นำเสนอ</th>
+                                <th>สถานะ</th>
+                                <th>จัดการ</th>
 
                             </tr>
                         </thead>
@@ -273,7 +273,7 @@ if (!$_SESSION["UserID"]){  //check session
 
 
                         </tbody>
-                        <tfoot>
+                        <!-- <tfoot>
                             <tr>
                                 <th>#ID</th>
                                 <th>วันที่เข้าพบ</th>
@@ -283,7 +283,7 @@ if (!$_SESSION["UserID"]){  //check session
                                 <th>จัดการ</th>
 
                             </tr>
-                        </tfoot>
+                        </tfoot> -->
                     </table>
 
                 </div>
